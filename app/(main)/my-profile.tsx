@@ -1,9 +1,9 @@
 import { ScrollView, Text } from "react-native";
 
-export default function MinistryCategory() {
+export default function MyProfile() {
   return (
     <ScrollView>
-      <Text>MinistryCategory</Text>
+      <Text>MyProfile</Text>
     </ScrollView>
   );
 }

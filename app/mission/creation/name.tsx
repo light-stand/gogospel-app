@@ -1,9 +1,9 @@
 import { ScrollView, Text } from "react-native";
 
-export default function MinistryDetails() {
+export default function MissionName() {
   return (
     <ScrollView>
-      <Text>MinistryDetails</Text>
+      <Text>MissionName</Text>
     </ScrollView>
   );
 }

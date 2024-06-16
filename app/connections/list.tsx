@@ -1,9 +1,9 @@
 import { ScrollView, Text } from "react-native";
 
-export default function Explore() {
+export default function ConnectionnList() {
   return (
     <ScrollView>
-      <Text>Explore</Text>
+      <Text>ConnectionnList</Text>
     </ScrollView>
   );
 }

@@ -1,9 +1,9 @@
 import { ScrollView, Text } from "react-native";
 
-export default function Explore() {
+export default function MissionCategory() {
   return (
     <ScrollView>
-      <Text>Explore</Text>
+      <Text>MissionCategory</Text>
     </ScrollView>
   );
 }
