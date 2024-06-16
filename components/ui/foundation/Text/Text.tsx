@@ -1,9 +1,9 @@
-import React from 'react';
-import { Text as RNText, TextProps as RNTextProps } from 'react-native';
-import classNames from 'classnames';
+import React from "react";
+import { Text as RNText, TextProps as RNTextProps } from "react-native";
+import clsx from "clsx";
 
 export interface TextProps extends RNTextProps {
-  size?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'h7';
+  size?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "h7";
   bold?: boolean;
   children: React.ReactNode;
   className?: string;
@@ -11,7 +11,7 @@ export interface TextProps extends RNTextProps {
 }
 
 const Text: React.FC<TextProps> = ({
-  size = 'h6',
+  size = "h6",
   bold,
   children,
   style,
@@ -19,18 +19,18 @@ const Text: React.FC<TextProps> = ({
 }) => {
   return (
     <RNText
-      className={classNames(
+      className={clsx(
         {
-          'text-h1': size === 'h1',
-          'text-h2': size === 'h2',
-          'text-h3': size === 'h3',
-          'text-h4': size === 'h4',
-          'text-h5': size === 'h5',
-          'text-h6': size === 'h6',
-          'text-h7': size === 'h7'
+          "text-h1": size === "h1",
+          "text-h2": size === "h2",
+          "text-h3": size === "h3",
+          "text-h4": size === "h4",
+          "text-h5": size === "h5",
+          "text-h6": size === "h6",
+          "text-h7": size === "h7",
         },
-        bold ? 'font-sans-bold' : 'font-sans',
-        'text-white'
+        bold ? "font-sans-bold" : "font-sans",
+        "text-white"
       )}
       style={style}
       {...props}

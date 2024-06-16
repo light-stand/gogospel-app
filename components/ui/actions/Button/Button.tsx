@@ -23,7 +23,7 @@ const Button: React.FC<ButtonProps> = ({
   disabled = false,
   icon,
   label,
-  block = false,
+  block = true,
   onPress = () => {},
   style,
 }) => {
@@ -62,11 +62,11 @@ const Button: React.FC<ButtonProps> = ({
   }[size][icon && label ? "labelIcon" : "label"];
 
   const lightColorHex = {
-    primary: "",
-    secondary: "",
-    success: "",
-    warning: "",
-    danger: "",
+    primary: "bg-rose-400",
+    secondary: "bg-stone-400",
+    success: "bg-lime-400",
+    warning: "bg-yellow-400",
+    danger: "bg-red-400",
   }[variant];
 
   return (
@@ -77,7 +77,7 @@ const Button: React.FC<ButtonProps> = ({
       className={clsx(
         containedStyling,
         containedPaddingStyling,
-        "rounded-full",
+        "rounded-lg",
         "flex",
         "justify-center",
         "flex-row",

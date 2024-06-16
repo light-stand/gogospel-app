@@ -1,3 +1,2 @@
-export * from './Icon';
-export * from './Logo';
-export * from './Text';
+export * from "./Icon";
+export * from "./Text";

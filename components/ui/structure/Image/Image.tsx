@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Image as RNImage,
   View,
   ImageSourcePropType,
-  ViewStyle
-} from 'react-native';
-import classNames from 'classnames';
-import { Skeleton } from '../Skeleton';
+  ViewStyle,
+} from "react-native";
+import clsx from "clsx";
+import { Skeleton } from "../Skeleton";
 
 export interface ImageProps {
   source: ImageSourcePropType;
@@ -20,17 +20,17 @@ const Image: React.FC<ImageProps> = ({
   source,
   blurRadius = undefined,
   onError,
-  style
+  style,
 }) => {
   const [loaded, setLoaded] = useState(false);
 
   return (
-    <View style={style} className={classNames('overflow-hidden')}>
+    <View style={style} className={clsx("overflow-hidden")}>
       {!loaded && <Skeleton />}
       <RNImage
         source={source}
         onLoadEnd={() => setLoaded(true)}
-        className={classNames('w-full h-full')}
+        className={clsx("w-full h-full")}
         onError={onError}
         blurRadius={blurRadius}
       />
