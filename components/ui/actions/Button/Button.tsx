@@ -1,5 +1,5 @@
 import React from "react";
-import { TouchableHighlight } from "react-native";
+import { TouchableOpacity } from "react-native";
 import Text from "../../foundation/Text/Text";
 import Icon, { MaterialIconType } from "../../foundation/Icon/Icon";
 
@@ -61,19 +61,11 @@ const Button: React.FC<ButtonProps> = ({
     },
   }[size][icon && label ? "labelIcon" : "label"];
 
-  const lightColorHex = {
-    primary: "bg-rose-400",
-    secondary: "bg-stone-400",
-    success: "bg-lime-400",
-    warning: "bg-yellow-400",
-    danger: "bg-red-400",
-  }[variant];
-
   return (
-    <TouchableHighlight
+    <TouchableOpacity
+      activeOpacity={0.8}
       onPress={onPress}
       disabled={disabled}
-      underlayColor={lightColorHex}
       className={clsx(
         containedStyling,
         containedPaddingStyling,
@@ -88,11 +80,10 @@ const Button: React.FC<ButtonProps> = ({
     >
       <>
         <Text
-          size="h5"
           bold
           className={clsx(
-            disabled && "text-background",
-            variant === "warning" && "text-background"
+            disabled && "text-white text-base",
+            variant === "warning" && "text-white"
           )}
         >
           {label}
@@ -101,14 +92,14 @@ const Button: React.FC<ButtonProps> = ({
           <Icon
             name={icon}
             className={clsx(
-              disabled && "text-background",
-              "ml-2 text-h3",
-              variant === "warning" && "text-background"
+              disabled && "text-white",
+              "ml-2 text-2xl",
+              variant === "warning" && "text-white"
             )}
           />
         )}
       </>
-    </TouchableHighlight>
+    </TouchableOpacity>
   );
 };
 

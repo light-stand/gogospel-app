@@ -1,5 +1,5 @@
 import React from "react";
-import { TextStyle, TouchableHighlight } from "react-native";
+import { TextStyle, TouchableOpacity } from "react-native";
 import Icon, { MaterialIconType } from "../../foundation/Icon/Icon";
 
 import clsx from "clsx";
@@ -8,7 +8,6 @@ export interface ButtonIconProps {
   variant?:
     | "primary"
     | "secondary"
-    | "tertiary"
     | "success"
     | "warning"
     | "danger"
@@ -31,28 +30,24 @@ const ButtonIcon: React.FC<ButtonIconProps> = ({
 }) => {
   const containedStyling = {
     primary: {
-      disabled: "bg-primary-dark-1",
-      enabled: "bg-primary",
+      disabled: "bg-rose-950",
+      enabled: "bg-rose-500",
     },
     secondary: {
-      disabled: "bg-gray-1",
-      enabled: "bg-gray-1 border border-gray-4",
-    },
-    tertiary: {
-      disabled: "bg-gray-1",
-      enabled: "bg-gray-1 opacity-80",
+      disabled: "bg-stone-950",
+      enabled: "bg-stone-500",
     },
     success: {
-      disabled: "bg-success-dark",
-      enabled: "bg-success",
+      disabled: "bg-lime-950",
+      enabled: "bg-lime-500",
     },
     warning: {
-      disabled: "bg-warning-dark",
-      enabled: "bg-warning",
+      disabled: "bg-yellow-950",
+      enabled: "bg-yellow-500",
     },
     danger: {
-      disabled: "bg-danger-dark",
-      enabled: "bg-danger",
+      disabled: "bg-red-950",
+      enabled: "bg-red-500",
     },
     transparent: {
       disabled: "bg-tranparent",
@@ -60,26 +55,16 @@ const ButtonIcon: React.FC<ButtonIconProps> = ({
     },
   }[variant][disabled ? "disabled" : "enabled"];
 
-  const underlayColor = {
-    primary: "bg-rose-400",
-    secondary: "bg-stone-400",
-    success: "bg-lime-400",
-    warning: "bg-yellow-400",
-    danger: "bg-red-400",
-    tertiary: "bg-gray-400",
-    transparent: "bg-[#00000030]",
-  }[variant];
-
   const containedPaddingStyling = {
     small: "p-2",
     medium: "p-4",
   }[size];
 
   return (
-    <TouchableHighlight
+    <TouchableOpacity
       onPress={onPress}
       disabled={disabled}
-      underlayColor={underlayColor}
+      activeOpacity={0.8}
       className={clsx(
         containedStyling,
         containedPaddingStyling,
@@ -96,12 +81,12 @@ const ButtonIcon: React.FC<ButtonIconProps> = ({
         name={icon}
         style={style?.find((e) => e.color)}
         className={clsx(
-          disabled && "text-background",
-          size === "medium" ? "text-h1" : "text-h3",
-          variant === "warning" && "text-background"
+          disabled && "text-white",
+          size === "medium" ? "text-3xl" : "text-2xl",
+          variant === "warning" && "text-white"
         )}
       />
-    </TouchableHighlight>
+    </TouchableOpacity>
   );
 };
 
