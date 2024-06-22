@@ -12,6 +12,9 @@ import {
 } from "react-native-safe-area-context";
 
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { IconButton } from "@/components/ui/actions/IconButton";
+
+import { useRouter } from "expo-router";
 
 export interface ContainerProps extends SafeAreaViewProps, ScrollViewProps {
   safeArea?: "all" | "none" | "ios" | "android";
@@ -19,17 +22,32 @@ export interface ContainerProps extends SafeAreaViewProps, ScrollViewProps {
   keyboardAware?: boolean;
   scroll?: boolean;
   style?: object[];
+  showBack?: boolean;
   className?: string;
   children?: React.ReactNode;
 }
 
+const BackButton = () => {
+  const router = useRouter();
+
+  return (
+    <IconButton
+      icon="chevron-left"
+      onPress={router.back}
+      size="medium"
+      className="p-0 mr-auto mb-4"
+    />
+  );
+};
+
 const Container: React.FC<ContainerProps> = ({
   safeArea = "all",
-  avoidKeyboard = false,
+  avoidKeyboard = true,
   keyboardAware = true,
   scroll = false,
   style,
   children,
+  showBack,
   ...props
 }) => {
   if (scroll) {
@@ -44,6 +62,7 @@ const Container: React.FC<ContainerProps> = ({
         contentContainerStyle={style}
         {...props}
       >
+        {showBack && <BackButton />}
         {children}
       </ScrollViewComponent>
     );
@@ -61,9 +80,10 @@ const Container: React.FC<ContainerProps> = ({
     <WrapperComponent className="flex-1 bg-background" behavior="padding">
       <ViewComponent
         style={style}
-        className="flex-1 bg-background p-4"
+        className={"flex-1 bg-background p-4 flex"}
         {...props}
       >
+        {showBack && <BackButton />}
         {children}
       </ViewComponent>
     </WrapperComponent>

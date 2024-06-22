@@ -4,7 +4,7 @@ import Icon, { MaterialIconType } from "../../foundation/Icon/Icon";
 
 import clsx from "clsx";
 
-export interface ButtonIconProps {
+export interface IconButtonProps {
   variant?:
     | "primary"
     | "secondary"
@@ -20,7 +20,7 @@ export interface ButtonIconProps {
   className?: string;
 }
 
-const ButtonIcon: React.FC<ButtonIconProps> = ({
+const IconButton: React.FC<IconButtonProps> = ({
   variant = "transparent",
   size = "small",
   disabled = false,
@@ -64,7 +64,7 @@ const ButtonIcon: React.FC<ButtonIconProps> = ({
     <TouchableOpacity
       onPress={onPress}
       disabled={disabled}
-      activeOpacity={0.8}
+      activeOpacity={0.5}
       className={clsx(
         containedStyling,
         containedPaddingStyling,
@@ -90,4 +90,4 @@ const ButtonIcon: React.FC<ButtonIconProps> = ({
   );
 };
 
-export default ButtonIcon;
+export default IconButton;

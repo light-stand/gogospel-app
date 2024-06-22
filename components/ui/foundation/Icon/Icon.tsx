@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 //@ts-ignore
-import IconComponent from 'react-native-vector-icons/MaterialCommunityIcons';
-import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
-import { Icon as VectorIconsIconType } from '@expo/vector-icons/build/createIconSet';
+import IconComponent from "react-native-vector-icons/MaterialCommunityIcons";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { Icon as VectorIconsIconType } from "@expo/vector-icons/build/createIconSet";
 
 type ExtractIconType<T> = T extends VectorIconsIconType<infer U, any>
   ? U
@@ -20,12 +20,12 @@ export interface IconProps {
 const Icon: React.FC<IconProps> = ({ style, name, onPress }) => {
   const defaultStyles = {
     fontSize: 24,
-    color: 'white'
+    color: "black",
   };
   const parsedStyle = {
     ...defaultStyles,
     ...(style &&
-      (style.flat(Infinity) as object[]).reduce((a, b) => ({ ...a, ...b })))
+      (style.flat(Infinity) as object[]).reduce((a, b) => ({ ...a, ...b }))),
   };
 
   return <IconComponent onPress={onPress} name={name} style={parsedStyle} />;
