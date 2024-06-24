@@ -5,15 +5,18 @@ import {
   KeyboardTypeOptions,
   InputModeOptions,
   Platform,
+  TextInputProps,
 } from "react-native";
 import clsx from "clsx";
 import Text from "../../foundation/Text/Text";
 import Icon, { MaterialIconType } from "../../foundation/Icon/Icon";
+import { Control, UseFormRegisterReturn, useController } from "react-hook-form";
 
-export interface InputProps {
+export type InputProps = Omit<TextInputProps, "onChange"> & {
   type?: "text" | "textarea";
   label?: string;
-  value: string;
+  value?: string;
+  name: string;
   onChange?: (text: string) => void;
   placeholder?: string | null;
   maxLength?: number;
@@ -21,38 +24,53 @@ export interface InputProps {
   keyboardType?: KeyboardTypeOptions;
   disabled?: boolean;
   helperText?: string | null;
-  error?: boolean | null;
   icon?: MaterialIconType;
   onLayout?: () => void;
   onFocus?: () => void;
   onBlur?: () => void;
+  isValid?: boolean;
+  control: Control<any, any>;
   className?: string;
   style?: object[];
-}
+};
 
 const Input: React.FC<InputProps> = ({
   type = "text",
   label,
   value,
+  name,
   onChange,
-  placeholder,
-  maxLength,
-  inputMode,
-  keyboardType,
   disabled,
   helperText,
-  error,
   icon,
   onLayout,
-  onFocus,
-  onBlur,
+  control,
   style,
+  ...props
 }) => {
   const [textInputHeight, setTextInputHeight] = useState(0);
+
+  const { field, fieldState, formState } = useController({
+    control,
+    defaultValue: "",
+    name,
+  });
+
+  const { error, isDirty, invalid, isTouched } = fieldState;
+  const valid = formState.isSubmitted && isDirty && !invalid;
+
   return (
     <View style={style}>
       {label && (
-        <Text className="text-xs text-gray-500 mb-1 font-medium">{label}</Text>
+        <Text
+          className={clsx(
+            "text-xs text-gray-500 mb-1 font-medium",
+            invalid && "text-red-500",
+            valid && "text-green-600"
+          )}
+        >
+          {label}
+        </Text>
       )}
       <View
         className={clsx(
@@ -63,7 +81,9 @@ const Input: React.FC<InputProps> = ({
           "focus:border-gray-500",
           error && "border-danger",
           "flex-row items-center",
-          type === "textarea" && "rounded-3xl h-22 items-start max-h-32"
+          type === "textarea" && "rounded-3xl h-22 items-start max-h-32",
+          invalid && "border-red-500",
+          valid && "border-green-600"
         )}
       >
         {icon && <Icon name={icon as any} className="absolute left-3" />}
@@ -75,20 +95,18 @@ const Input: React.FC<InputProps> = ({
             "py-3 px-4",
             icon && "pl-10",
             "w-full",
-            type === "textarea" && "h-full"
+            type === "textarea" && "h-full",
+            invalid && "text-red-600",
+            valid && "text-green-600"
           )}
-          onChangeText={onChange}
-          value={value}
+          onChangeText={onChange || field.onChange}
+          value={field.value}
           multiline={type === "textarea"}
           numberOfLines={type === "textarea" ? 4 : undefined}
-          maxLength={maxLength}
-          placeholder={placeholder as string}
           // placeholderTextColor={theme?.colors?.gray[3]}
           underlineColorAndroid="transparent"
           autoCorrect={false}
           spellCheck={false}
-          inputMode={inputMode}
-          keyboardType={keyboardType}
           editable={!disabled}
           onLayout={(event) => {
             if (textInputHeight === 0) {
@@ -104,20 +122,20 @@ const Input: React.FC<InputProps> = ({
             Platform.OS === "android" &&
             type === "textarea" && { height: textInputHeight }
           }
-          onFocus={onFocus}
-          onBlur={onBlur}
+          onBlur={field.onBlur}
+          {...props}
         />
       </View>
 
-      {helperText && (
+      {(helperText || error) && (
         <Text
           className={clsx(
             "mt-1 text-xs",
             "text-gray-2",
-            error && "text-danger"
+            error && "text-red-500"
           )}
         >
-          {helperText}
+          {helperText || error?.message}
         </Text>
       )}
     </View>
