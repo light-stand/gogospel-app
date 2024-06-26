@@ -3,35 +3,16 @@ import { Text as RNText, TextProps as RNTextProps } from "react-native";
 import clsx from "clsx";
 
 export interface TextProps extends RNTextProps {
-  size?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "h7";
   bold?: boolean;
   children: React.ReactNode;
   className?: string;
   style?: object;
 }
 
-const Text: React.FC<TextProps> = ({
-  size = "h6",
-  bold,
-  children,
-  style,
-  ...props
-}) => {
+const Text: React.FC<TextProps> = ({ bold, children, style, ...props }) => {
   return (
     <RNText
-      className={clsx(
-        {
-          "text-h1": size === "h1",
-          "text-h2": size === "h2",
-          "text-h3": size === "h3",
-          "text-h4": size === "h4",
-          "text-h5": size === "h5",
-          "text-h6": size === "h6",
-          "text-h7": size === "h7",
-        },
-        bold ? "font-sans-bold" : "font-sans",
-        "text-white"
-      )}
+      className={clsx(bold ? "font-sans-bold" : "font-sans", "text-black")}
       style={style}
       {...props}
     >

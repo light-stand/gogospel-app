@@ -81,10 +81,7 @@ const Button: React.FC<ButtonProps> = ({
       <>
         <Text
           bold
-          className={clsx(
-            disabled && "text-white text-base",
-            variant === "warning" && "text-white"
-          )}
+          className={clsx(disabled && "text-base", "text-white font-bold")}
         >
           {label}
         </Text>
