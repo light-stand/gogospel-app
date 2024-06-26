@@ -16,7 +16,8 @@ export default function useAppSetup() {
 
   const checkToken = async () => {
     const token = await AsyncStorage.getItem("token");
-    router.push(token ? "/(main)" : "/onboarding/welcome");
+    // router.push(token ? "/(main)" : "/onboarding/welcome");
+    router.push("/onboarding/profiling/type");
     setTokenChecked(true);
   };
 

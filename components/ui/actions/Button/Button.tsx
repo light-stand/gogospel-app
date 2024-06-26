@@ -7,7 +7,7 @@ import clsx from "clsx";
 
 export interface ButtonProps {
   variant?: "primary" | "secondary" | "success" | "warning" | "danger";
-  size?: "medium" | "small";
+  size?: "medium" | "small" | "large";
   disabled?: boolean;
   icon?: MaterialIconType | null;
   label: string | null;
@@ -59,6 +59,10 @@ const Button: React.FC<ButtonProps> = ({
       label: "px-9 py-3",
       labelIcon: "pl-9 pr-7 py-3",
     },
+    large: {
+      label: "px-9 py-3",
+      labelIcon: "pl-9 pr-7 py-3",
+    },
   }[size][icon && label ? "labelIcon" : "label"];
 
   return (
@@ -81,7 +85,10 @@ const Button: React.FC<ButtonProps> = ({
       <>
         <Text
           bold
-          className={clsx(disabled && "text-base", "text-white font-bold")}
+          className={clsx(
+            "text-base text-white font-bold",
+            size === "large" && "text-lg"
+          )}
         >
           {label}
         </Text>
