@@ -1,11 +1,10 @@
-import { useRouter } from "expo-router";
+import { AxiosError } from "axios";
 import { useForm, SubmitHandler } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { useMutation } from "@/hooks";
-import { AxiosError } from "axios";
+import { AuthResponse, useAuth } from "./useAuth";
 
 const schema = z.object({
   email: z.string().email(),
@@ -14,36 +13,23 @@ const schema = z.object({
 
 type LoginFields = z.infer<typeof schema>;
 
-type AuthResponse = {
-  access_token: string;
-  refresh_token: string;
-};
-
 type AuthErrorResponse = {
   error_description: string;
 };
 
 export const useLogin = () => {
-  const router = useRouter();
-
   const form = useForm<LoginFields>({
     resolver: zodResolver(schema),
   });
 
-  const onLoginSuccess = async (data: AuthResponse) => {
-    AsyncStorage.multiSet([
-      ["token", data.access_token],
-      ["refresh", data.refresh_token],
-    ]);
-    router.push("/(main)");
-  };
+  const { onAuth } = useAuth();
 
   const { mutate: login, error } = useMutation<
     AuthResponse,
     AxiosError<AuthErrorResponse>,
     LoginFields
   >("auth/v1/token?grant_type=password", {
-    onSuccess: onLoginSuccess,
+    onSuccess: (data) => onAuth(data, "/(main)"),
   });
 
   const onSubmit: SubmitHandler<LoginFields> = (data) => login(data);

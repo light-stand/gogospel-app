@@ -1,12 +1,11 @@
-import { useRouter } from "expo-router";
+import { AxiosError } from "axios";
 import { useForm, SubmitHandler } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { password } from "@/utils/regex";
 import { useMutation } from "@/hooks";
-import { AxiosError } from "axios";
+import { AuthResponse, useAuth } from "./useAuth";
 
 const schema = z
   .object({
@@ -24,35 +23,24 @@ const schema = z
 
 type SignupFields = z.infer<typeof schema>;
 
-type AuthResponse = {
-  access_token: string;
-  refresh_token: string;
-};
-
 type AuthErrorResponse = {
   msg: string;
 };
 
 export const useSignup = () => {
-  const router = useRouter();
-
   const form = useForm<SignupFields>({
     resolver: zodResolver(schema),
   });
 
-  const onSignupSuccess = async (data: AuthResponse) => {
-    AsyncStorage.multiSet([
-      ["token", data.access_token],
-      ["refresh", data.refresh_token],
-    ]);
-    router.push("/(main)");
-  };
+  const { onAuth } = useAuth();
 
   const { mutate: signup, error } = useMutation<
     AuthResponse,
     AxiosError<AuthErrorResponse>,
     SignupFields
-  >("auth/v1/signup", { onSuccess: onSignupSuccess });
+  >("auth/v1/signup", {
+    onSuccess: (data) => onAuth(data, "/onboarding/profiling/type"),
+  });
 
   const onSubmit: SubmitHandler<SignupFields> = (data) => signup(data);
 
