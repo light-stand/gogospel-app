@@ -6,6 +6,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { password } from "@/utils/regex";
 import { useMutation } from "@/hooks";
+import { AxiosError } from "axios";
 
 const schema = z
   .object({
@@ -28,6 +29,10 @@ type AuthResponse = {
   refresh_token: string;
 };
 
+type AuthErrorResponse = {
+  msg: string;
+};
+
 export const useSignup = () => {
   const router = useRouter();
 
@@ -40,22 +45,20 @@ export const useSignup = () => {
       ["token", data.access_token],
       ["refresh", data.refresh_token],
     ]);
-    router.push("/main");
+    router.push("/(main)");
   };
 
-  const {
-    isError,
-    isLoading,
-    error,
-    mutate: signup,
-  } = useMutation<AuthResponse, unknown, SignupFields>("auth/v1/signup", {
-    onSuccess: onSignupSuccess,
-  });
+  const { mutate: signup, error } = useMutation<
+    AuthResponse,
+    AxiosError<AuthErrorResponse>,
+    SignupFields
+  >("auth/v1/signup", { onSuccess: onSignupSuccess });
 
   const onSubmit: SubmitHandler<SignupFields> = (data) => signup(data);
 
   return {
     form,
     onSubmit: form.handleSubmit(onSubmit),
+    error: error?.response?.data.msg,
   };
 };
