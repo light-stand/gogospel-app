@@ -29,6 +29,7 @@ export type InputProps = Omit<TextInputProps, "onChange"> & {
   onFocus?: () => void;
   onBlur?: () => void;
   isValid?: boolean;
+  error?: string;
   control: Control<any, any>;
   className?: string;
   style?: object[];
@@ -44,6 +45,7 @@ const Input: React.FC<InputProps> = ({
   helperText,
   icon,
   onLayout,
+  error: globalError,
   control,
   style,
   ...props
@@ -56,8 +58,9 @@ const Input: React.FC<InputProps> = ({
     name,
   });
 
-  const { error, isDirty, invalid, isTouched } = fieldState;
-  const valid = formState.isSubmitted && isDirty && !invalid;
+  const { error: fieldError, isDirty, invalid, isTouched } = fieldState;
+  const error = fieldError?.message || globalError;
+  const valid = formState.isSubmitted && isDirty && !invalid && !error;
 
   return (
     <View style={style}>
@@ -65,8 +68,8 @@ const Input: React.FC<InputProps> = ({
         <Text
           className={clsx(
             "text-xs text-gray-500 mb-1 font-medium",
-            invalid && "text-red-500",
-            valid && "text-green-600"
+            valid && "text-green-600",
+            error && "text-red-500"
           )}
         >
           {label}
@@ -82,8 +85,8 @@ const Input: React.FC<InputProps> = ({
           error && "border-danger",
           "flex-row items-center",
           type === "textarea" && "rounded-3xl h-22 items-start max-h-32",
-          invalid && "border-red-500",
-          valid && "border-green-600"
+          valid && "border-green-600",
+          error && "border-red-500"
         )}
       >
         {icon && <Icon name={icon as any} className="absolute left-3" />}
@@ -96,8 +99,8 @@ const Input: React.FC<InputProps> = ({
             icon && "pl-10",
             "w-full",
             type === "textarea" && "h-full",
-            invalid && "text-red-600",
-            valid && "text-green-600"
+            valid && "text-green-600",
+            error && "text-red-600"
           )}
           onChangeText={onChange || field.onChange}
           value={field.value}
@@ -127,7 +130,7 @@ const Input: React.FC<InputProps> = ({
         />
       </View>
 
-      {(helperText || error) && (
+      {(helperText || fieldError?.message) && (
         <Text
           className={clsx(
             "mt-1 text-xs",
@@ -135,7 +138,7 @@ const Input: React.FC<InputProps> = ({
             error && "text-red-500"
           )}
         >
-          {helperText || error?.message}
+          {helperText || fieldError?.message}
         </Text>
       )}
     </View>
