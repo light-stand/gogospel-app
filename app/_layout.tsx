@@ -5,6 +5,7 @@ import { queryClient } from "@/utils/http";
 import useAppSetup from "@/hooks/setup/useAppSetup";
 
 import "react-native-reanimated";
+import { AppProvider } from "@/context/AppContext";
 
 export default function RootLayout() {
   const { loaded } = useAppSetup();
@@ -13,11 +14,14 @@ export default function RootLayout() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Stack>
-        <Stack.Screen name="(main)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-        <Stack.Screen name="onboarding" options={{ headerShown: false }} />
-      </Stack>
+      <AppProvider>
+        <Stack>
+          <Stack.Screen name="index" options={{ headerShown: false }} />
+          <Stack.Screen name="(main)" options={{ headerShown: false }} />
+          <Stack.Screen name="+not-found" />
+          <Stack.Screen name="onboarding" options={{ headerShown: false }} />
+        </Stack>
+      </AppProvider>
     </QueryClientProvider>
   );
 }
