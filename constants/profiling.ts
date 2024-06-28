@@ -1,8 +1,8 @@
 import { Option } from "@/components/ui/forms/Select/Select";
 
 export const profilingFlow = {
-  misionary: ["name", "bio", "picture", "interests"],
-  ministery: ["name", "bio", "picture"],
+  missionary: ["type", "name", "bio", "picture", "interests"],
+  ministry: ["type", "name", "bio", "picture"],
 };
 
 export const profileTypeOptions: Option[] = [
