@@ -84,7 +84,7 @@ const Input: React.FC<InputProps> = ({
           "focus:border-gray-500",
           error && "border-danger",
           "flex-row items-center",
-          type === "textarea" && "rounded-3xl h-22 items-start max-h-32",
+          type === "textarea" && "h-28 items-start max-h-32",
           valid && "border-green-600",
           error && "border-red-500"
         )}
