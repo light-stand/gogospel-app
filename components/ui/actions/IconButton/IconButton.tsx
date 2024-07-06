@@ -56,24 +56,20 @@ const IconButton: React.FC<IconButtonProps> = ({
   }[variant][disabled ? "disabled" : "enabled"];
 
   const containedPaddingStyling = {
-    small: "p-2",
-    medium: "p-4",
+    small: "h-12 w-12",
+    medium: "h-14 w-14",
   }[size];
 
   return (
     <TouchableOpacity
       onPress={onPress}
       disabled={disabled}
-      activeOpacity={0.5}
+      activeOpacity={0.8}
       className={clsx(
         containedStyling,
         containedPaddingStyling,
-        "rounded-full",
-        "flex",
-        "justify-center",
-        "flex-row",
-        "items-center",
-        "self-center"
+        "rounded-full aspect-square",
+        "flex justify-center flex-row items-center self-center"
       )}
       style={style}
     >
@@ -81,9 +77,8 @@ const IconButton: React.FC<IconButtonProps> = ({
         name={icon}
         style={style?.find((e) => e.color)}
         className={clsx(
-          disabled && "text-white",
           size === "medium" ? "text-3xl" : "text-2xl",
-          variant === "warning" && "text-white"
+          variant === "primary" && "text-white"
         )}
       />
     </TouchableOpacity>

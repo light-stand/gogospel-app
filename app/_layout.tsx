@@ -6,6 +6,7 @@ import useAppSetup from "@/hooks/setup/useAppSetup";
 
 import "react-native-reanimated";
 import { AppProvider } from "@/context/AppContext";
+import { ActionSheetProvider } from "@expo/react-native-action-sheet";
 
 export default function RootLayout() {
   const { loaded } = useAppSetup();
@@ -13,15 +14,17 @@ export default function RootLayout() {
   if (!loaded) return null;
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <AppProvider>
-        <Stack>
-          <Stack.Screen name="index" options={{ headerShown: false }} />
-          <Stack.Screen name="(main)" options={{ headerShown: false }} />
-          <Stack.Screen name="+not-found" />
-          <Stack.Screen name="onboarding" options={{ headerShown: false }} />
-        </Stack>
-      </AppProvider>
-    </QueryClientProvider>
+    <ActionSheetProvider>
+      <QueryClientProvider client={queryClient}>
+        <AppProvider>
+          <Stack>
+            <Stack.Screen name="index" options={{ headerShown: false }} />
+            <Stack.Screen name="(main)" options={{ headerShown: false }} />
+            <Stack.Screen name="+not-found" />
+            <Stack.Screen name="onboarding" options={{ headerShown: false }} />
+          </Stack>
+        </AppProvider>
+      </QueryClientProvider>
+    </ActionSheetProvider>
   );
 }
