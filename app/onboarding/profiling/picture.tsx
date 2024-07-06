@@ -1,5 +1,5 @@
 import { Container, ImagePicker, Text, Button } from "@/components";
-import { useProfilingScreen } from "@/hooks";
+import { useProfilingScreen } from "@/profiling/hooks/useProfilingScreen";
 
 export default function Picture() {
   const { form, onNext } = useProfilingScreen("name");

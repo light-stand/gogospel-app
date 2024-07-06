@@ -1,6 +1,6 @@
 import { View } from "react-native";
 import { Button, Container, Input, Text } from "@/components";
-import { useProfilingScreen } from "@/hooks";
+import { useProfilingScreen } from "@/profiling/hooks/useProfilingScreen";
 
 export default function Bio() {
   const { form, onNext } = useProfilingScreen("bio");
