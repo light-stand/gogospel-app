@@ -1,25 +1,24 @@
-import { useRouter } from "expo-router";
-import { useFormContext } from "react-hook-form";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { profilingFlow } from "@/constants/profiling";
+import { UserType } from "@/constants/profiling";
 
-type ProfilingFlowTypes = keyof typeof profilingFlow;
+const schema = z.object({
+  type: z.nativeEnum(UserType),
+  firstName: z.string().min(3),
+  lastName: z.string().min(3),
+  bio: z.string().min(60),
+  image: z.string().min(64),
+});
 
-export const getNextStep = (
-  current: string,
-  flowType: ProfilingFlowTypes
-): string => {
-  const steps = profilingFlow[flowType];
-  return steps[steps.indexOf(current) + 1];
-};
+type ProfilingFields = z.infer<typeof schema>;
 
-export const useProfiling = (currentField: string) => {
-  const router = useRouter();
-  const form = useFormContext();
+export const useProfiling = () => {
+  const form = useForm({
+    resolver: zodResolver(schema),
+    mode: "all",
+  });
 
-  const onNext = () => {
-    const nextStep = getNextStep(currentField, form.getValues("type"));
-    router.push(`/onboarding/profiling/${nextStep}`);
-  };
-
-  return { form, onNext };
+  return { form };
 };
