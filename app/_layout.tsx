@@ -2,6 +2,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { Stack } from "expo-router";
 
 import "@/utils/axios";
+import "@/utils/i18n";
 import useAppSetup from "@/common/hooks/setup/useAppSetup";
 
 import "react-native-reanimated";
