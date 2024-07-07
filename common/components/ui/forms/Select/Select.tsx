@@ -54,7 +54,7 @@ const Select: React.FC<SelectProps> = ({
               "p-6",
               "border  border-gray-400",
               "bg-gray-1",
-              selected && "bg-rose-200 border-rose-500 shadow",
+              selected && "bg-indigo-200 border-indigo-500 shadow",
               "flex-col items-center justify-between"
             )}
           >
@@ -63,7 +63,7 @@ const Select: React.FC<SelectProps> = ({
                 name={item.icon}
                 className={clsx(
                   "my-2 text-gray-600",
-                  selected && "text-rose-500"
+                  selected && "text-indigo-500"
                 )}
               />
             )}
@@ -71,7 +71,7 @@ const Select: React.FC<SelectProps> = ({
               bold={selected}
               className={clsx(
                 "font-semibold text-lg text-gray-600",
-                selected && "text-rose-500"
+                selected && "text-indigo-500"
               )}
             >
               {item.title}

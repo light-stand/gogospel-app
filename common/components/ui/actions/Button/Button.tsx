@@ -29,8 +29,8 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
   const containedStyling = {
     primary: {
-      disabled: "bg-rose-950",
-      enabled: "bg-rose-500",
+      disabled: "bg-indigo-950",
+      enabled: "bg-indigo-500",
     },
     secondary: {
       disabled: "bg-stone-950",
