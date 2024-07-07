@@ -26,7 +26,7 @@ export default function useAppSetup() {
   }, [loaded]);
 
   useEffect(() => {
-    !tokenChecked && navigationState.key && checkToken();
+    !tokenChecked && navigationState?.key && checkToken();
   }, [tokenChecked, navigationState]);
 
   return { loaded };
