@@ -1,5 +1,6 @@
 import { Button, Container, Text, Select } from "@/components";
 import { useProfilingScreen } from "@/profiling/hooks/useProfilingScreen";
+import { profileTypeOptions } from "@/profiling/domain/ProfileType";
 import { Option } from "@/components/ui/forms/Select/Select";
 
 export const profileTypeOptions: Option[] = [
@@ -20,6 +21,13 @@ export const profileTypeOptions: Option[] = [
 
 export default function Type() {
   const { form, onNext } = useProfilingScreen("type");
+
+  const options = profileTypeOptions.map((option) => ({
+    ...option,
+    title: t(option.title),
+    description: t(option.description),
+  }));
+
   return (
     <Container>
       <Text className="font-bold text-3xl mb-10">Soy...</Text>
