@@ -1,12 +1,14 @@
 import { View } from "react-native";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Button, Input, Text } from "@/components";
+import { useTranslation } from "react-i18next";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import { Button, Input, Text } from "@/components";
 import { useSignup } from "../application/useSignup";
 import { SignupFields, signupSchema } from "../domain/Signup";
 
 export const SignupForm = () => {
+  const { t } = useTranslation();
   const { error, mutate: signup } = useSignup();
 
   const { control, handleSubmit } = useForm<SignupFields>({
@@ -19,7 +21,7 @@ export const SignupForm = () => {
     <>
       <View className="gap-y-2">
         <Input
-          label="Email"
+          label={t("auth.fields.email")}
           name="email"
           inputMode="email"
           autoCapitalize="none"
@@ -27,7 +29,7 @@ export const SignupForm = () => {
           error={!!error}
         />
         <Input
-          label="Contraseña"
+          label={t("auth.fields.password")}
           name="password"
           autoCapitalize="none"
           secureTextEntry
@@ -36,7 +38,7 @@ export const SignupForm = () => {
         />
         <Input
           className="mb-3"
-          label="Confirmar contraseña"
+          label={t("auth.fields.confirmPassword")}
           name="confirmPassword"
           autoCapitalize="none"
           secureTextEntry
@@ -46,12 +48,12 @@ export const SignupForm = () => {
       </View>
       {error && (
         <Text className="text-red-500 my-4">
-          {error.message || "Error desconocido"}
+          {error.message || t("error.unknown")}
         </Text>
       )}
       <Button
         className="mt-3"
-        label={"Continuar"}
+        label={t("action.next")}
         onPress={handleSubmit(onSubmit)}
       />
     </>
