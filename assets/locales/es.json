@@ -1,0 +1,50 @@
+{
+  "translation": {
+    "auth": {
+      "fields": {
+        "email": "Email",
+        "password": "Contraseña",
+        "confirmPassword": "Confirmar contraseña"
+      },
+      "titles": {
+        "login": "Iniciar sesión",
+        "register": "Registrarse"
+      }
+    },
+    "profiling": {
+      "fields": {
+        "bio": "Sobre mí",
+        "firstName": "Nombre",
+        "lastName": "Apellido",
+        "types": {
+          "missionary": {
+            "title": "Misionero",
+            "description": "Soy misionero y busco a un ministerio donde servir a Dios."
+          },
+          "ministry": {
+            "title": "Ministerio",
+            "description": "Soy un ministerio que busca misioneros para llevar a cabo su misión."
+          }
+        }
+      },
+      "titles": {
+        "bio": "Un poco más sobre ti",
+        "name": "Mi nombre es",
+        "image": "Una foto",
+        "type": "Soy..."
+      }
+    },
+    "action": {
+      "next": "Continuar",
+      "save": "Guardar"
+    },
+    "error": {
+      "unknown": "Error desconocido"
+    },
+    "screen": {
+      "explore": "Inicio",
+      "connections": "Conexiones",
+      "profile": "Perfil"
+    }
+  }
+}
