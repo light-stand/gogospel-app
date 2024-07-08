@@ -55,16 +55,19 @@ const IconButton: React.FC<IconButtonProps> = ({
     },
   }[variant][disabled ? "disabled" : "enabled"];
 
-  const containedPaddingStyling = {
-    small: "h-12 w-12",
-    medium: "h-14 w-14",
-  }[size];
+  const containedPaddingStyling =
+    variant === "transparent"
+      ? "h-8 w-8"
+      : {
+          small: "h-12 w-12",
+          medium: "h-14 w-14",
+        }[size];
 
   return (
     <TouchableOpacity
       onPress={onPress}
       disabled={disabled}
-      activeOpacity={0.8}
+      activeOpacity={0.6}
       className={clsx(
         containedStyling,
         containedPaddingStyling,
