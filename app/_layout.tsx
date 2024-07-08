@@ -1,12 +1,15 @@
-import { QueryClientProvider } from "react-query";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { Stack } from "expo-router";
 
-import { queryClient } from "@/utils/http";
-import useAppSetup from "@/hooks/setup/useAppSetup";
+import "@/utils/axios";
+import "@/utils/i18n";
+import useAppSetup from "@/common/hooks/setup/useAppSetup";
 
 import "react-native-reanimated";
-import { AppProvider } from "@/context/AppContext";
+import { UserProvider } from "@/modules/user/context/UserContext";
 import { ActionSheetProvider } from "@expo/react-native-action-sheet";
+
+export const queryClient = new QueryClient();
 
 export default function RootLayout() {
   const { loaded } = useAppSetup();
@@ -16,14 +19,14 @@ export default function RootLayout() {
   return (
     <ActionSheetProvider>
       <QueryClientProvider client={queryClient}>
-        <AppProvider>
+        <UserProvider>
           <Stack>
             <Stack.Screen name="index" options={{ headerShown: false }} />
             <Stack.Screen name="(main)" options={{ headerShown: false }} />
             <Stack.Screen name="+not-found" />
             <Stack.Screen name="onboarding" options={{ headerShown: false }} />
           </Stack>
-        </AppProvider>
+        </UserProvider>
       </QueryClientProvider>
     </ActionSheetProvider>
   );

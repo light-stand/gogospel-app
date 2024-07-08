@@ -1,0 +1,50 @@
+{
+  "translation": {
+    "auth": {
+      "fields": {
+        "email": "Email",
+        "password": "Password",
+        "confirmPassword": "Confirm Password"
+      },
+      "titles": {
+        "login": "Log In",
+        "register": "Register"
+      }
+    },
+    "profiling": {
+      "fields": {
+        "bio": "About Me",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "types": {
+          "missionary": {
+            "title": "Missionary",
+            "description": "I am a missionary looking for a ministry where I can serve God."
+          },
+          "ministry": {
+            "title": "Ministry",
+            "description": "I am a ministry looking for missionaries to fulfill our mission."
+          }
+        }
+      },
+      "titles": {
+        "bio": "A Little More About You",
+        "name": "My Name Is",
+        "image": "A Photo",
+        "type": "I Am..."
+      }
+    },
+    "action": {
+      "next": "Continue",
+      "save": "Save"
+    },
+    "error": {
+      "unknown": "Unknown Error"
+    },
+    "screen": {
+      "explore": "Home",
+      "connections": "Connections",
+      "profile": "Profile"
+    }
+  }
+}
