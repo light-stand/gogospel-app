@@ -6,7 +6,3 @@ export const loginSchema = z.object({
 });
 
 export type LoginFields = z.infer<typeof loginSchema>;
-
-export type LoginErrorResponse = {
-  error_description: string;
-};

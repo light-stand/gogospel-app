@@ -9,7 +9,7 @@ import { useQuery } from "react-query";
 export default function Explore() {
   const router = useRouter();
   const { data, isLoading } = useQuery("auth/v1/user");
-  const { logout } = useLogout();
+  const { mutate: logout } = useLogout();
 
   return (
     <Container>
