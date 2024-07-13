@@ -14,8 +14,6 @@ export interface ImagePickerProps {
   image?: string;
   name?: string;
   icon?: MaterialIconType;
-  onItemSelect?: (image: string) => void;
-  onItemDelete?: (image: string) => void;
   helperText?: string | null;
   error?: boolean | null;
   control?: Control<any, any>;
@@ -27,10 +25,8 @@ const ImagePicker: React.FC<ImagePickerProps> = ({
   image,
   name,
   icon,
-  onItemSelect,
-  onItemDelete,
   helperText,
-  error,
+  error: globalError,
   control,
   style,
 }) => {
@@ -40,6 +36,9 @@ const ImagePicker: React.FC<ImagePickerProps> = ({
     defaultValue: "",
     name: name || "",
   });
+
+  const { error: fieldError, isDirty, invalid, isTouched } = fieldState;
+  const error = fieldError?.message || globalError;
 
   const handlePress = async () => {
     const url = await pickImage(field.value);
@@ -53,10 +52,7 @@ const ImagePicker: React.FC<ImagePickerProps> = ({
 
   return (
     <>
-      <View
-        className={clsx("flex-1 max-w-[50%] aspect-square self-center shadow")}
-        style={style}
-      >
+      <View className={clsx("max-w-[50%] aspect-square self-center shadow")} style={style}>
         {field.value ? (
           <UserPhoto
             source={{ uri: field.value }}
@@ -79,25 +75,16 @@ const ImagePicker: React.FC<ImagePickerProps> = ({
             {icon && !isLoading && (
               <Icon
                 name={icon}
-                className={clsx(
-                  "text-4xl text-gray-600",
-                  error && "text-red-500"
-                )}
+                className={clsx("text-4xl text-gray-600", error && "text-red-500")}
               />
             )}
             {isLoading && <Spinner />}
           </TouchableOpacity>
         )}
       </View>
-      {helperText && (
-        <Text
-          className={clsx(
-            "text-sm mt-1",
-            "text-gray-2",
-            error && "text-danger"
-          )}
-        >
-          {helperText}
+      {(helperText || error) && (
+        <Text className={clsx("text-sm mt-1 text-center", error && "text-red-500")}>
+          {helperText || error}
         </Text>
       )}
     </>
