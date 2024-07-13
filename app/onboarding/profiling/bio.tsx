@@ -4,14 +4,12 @@ import { useProfilingScreen } from "@/profiling/hooks/useProfilingScreen";
 
 export default function Bio() {
   const { t } = useTranslation();
-  const { form, onNext } = useProfilingScreen("bio");
+  const { form, onNext, flowType } = useProfilingScreen("bio");
   return (
     <Container showBack>
-      <Text className="font-bold text-3xl mb-10">
-        {t("profiling.titles.bio")}
-      </Text>
+      <Text className="font-bold text-3xl mb-10">{t(`profiling.titles.bio.${flowType}`)}</Text>
       <Input
-        label={t("profiling.fields.bio")}
+        label={t(`profiling.fields.bio.${flowType}`)}
         name="bio"
         type="textarea"
         className="min-h-32"

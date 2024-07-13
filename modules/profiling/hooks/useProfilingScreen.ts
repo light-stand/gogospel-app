@@ -1,12 +1,7 @@
-import { useRouter } from "expo-router";
+import { useCallback } from "react";
+import { useFocusEffect, useRouter } from "expo-router";
 import { UseFormReturn } from "react-hook-form";
-import {
-  fieldsByScreen,
-  ProfilingField,
-  profilingFlow,
-  ProfilingScreen,
-  UserType,
-} from "../domain/Profiling";
+import { fieldsByScreen, profilingFlow, ProfilingScreen, UserType } from "../domain/Profiling";
 import { useProfilingContext } from "../context/ProfilingContext";
 import { ProfilingFields } from "../domain/ProfilingForm";
 
@@ -21,7 +16,7 @@ export const getNextScreen = (current: ProfilingScreen, flowType: UserType) => {
 export const useProfilingScreen = (screen: ProfilingScreen) => {
   const router = useRouter();
   const { form, onSubmit } = useProfilingContext();
-  const { trigger, getValues } = form as UseFormReturn<ProfilingFields>;
+  const { trigger, getValues, resetField } = form as UseFormReturn<ProfilingFields>;
 
   const onNext = async () => {
     const flowType = getValues("type") as UserType;
@@ -31,5 +26,15 @@ export const useProfilingScreen = (screen: ProfilingScreen) => {
     isLast ? onSubmit() : router.push(nextScreen);
   };
 
-  return { form, onNext };
+  useFocusEffect(
+    useCallback(() => {
+      if (screen === "type") {
+        // to avoid validation problems
+        resetField("lastName");
+        resetField("interests");
+      }
+    }, [screen])
+  );
+
+  return { form, onNext, flowType: (form.getValues("type") || UserType.Missionary) as UserType };
 };

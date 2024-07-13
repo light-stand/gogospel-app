@@ -13,9 +13,20 @@
     },
     "profiling": {
       "fields": {
-        "bio": "Sobre mí",
-        "firstName": "Nombre",
-        "lastName": "Apellido",
+        "bio": {
+          "missionary": "Sobre mi",
+          "ministry": "Más información sobre el ministerio",
+          "error": "La descripción es requerida y tiene que tener al menos 60 caracteres"
+        },
+        "firstName": {
+          "missionary": "Nombre",
+          "ministry": "Nombre del ministerio, organización o iglesia",
+          "error": "El nombre tiene que tener al menos 3 caracteres"
+        },
+        "lastName": {
+          "missionary": "Apellido",
+          "error": "El apellido tiene que tener al menos 3 caracteres"
+        },
         "types": {
           "missionary": {
             "title": "Misionero",
@@ -24,14 +35,25 @@
           "ministry": {
             "title": "Ministerio",
             "description": "Soy un ministerio que busca misioneros para llevar a cabo su misión."
-          }
-        }
+          },
+          "error": "El tipo de cuenta es requerido"
+        },
+        "image": {
+          "error": "Este campo es requerido"
+        },
+        "interests": {
+          "error": "Este campo es requerido"
+        },
+        "type": {}
       },
       "titles": {
-        "bio": "Un poco más sobre ti",
-        "name": "Mi nombre es",
-        "image": "Una foto",
-        "type": "Soy..."
+        "type": "Soy",
+        "name": {
+          "missionary": "Soy...",
+          "ministry": "Somos..."
+        },
+        "bio": { "missionary": "Un poco más sobre ti", "ministry": "Sobre nosotros" },
+        "image": "Una foto"
       }
     },
     "action": {
