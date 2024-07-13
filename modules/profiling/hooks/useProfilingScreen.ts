@@ -1,33 +1,34 @@
 import { useRouter } from "expo-router";
-import { useFormContext } from "react-hook-form";
-import { fieldsByScreen, profilingFlow, UserType } from "../domain/Profiling";
+import { UseFormReturn } from "react-hook-form";
+import {
+  fieldsByScreen,
+  ProfilingField,
+  profilingFlow,
+  ProfilingScreen,
+  UserType,
+} from "../domain/Profiling";
+import { useProfilingContext } from "../context/ProfilingContext";
+import { ProfilingFields } from "../domain/ProfilingForm";
 
-type ProfilingFlowTypes = keyof typeof profilingFlow;
-
-export const getNextStep = (
-  current: string,
-  flowType: ProfilingFlowTypes
-): string => {
+export const getNextScreen = (current: ProfilingScreen, flowType: UserType) => {
   const steps = profilingFlow[flowType];
-  return steps[steps.indexOf(current) + 1];
+  const nextIndex = steps.indexOf(current) + 1;
+  const isLast = nextIndex > steps.length - 1;
+  const nextScreen = !isLast ? `/onboarding/profiling/${steps[nextIndex]}` : "";
+  return { nextScreen, isLast };
 };
 
-export const useProfilingScreen = (field: string) => {
+export const useProfilingScreen = (screen: ProfilingScreen) => {
   const router = useRouter();
-  const form = useFormContext();
-  const { getFieldState, formState, trigger, clearErrors } = form;
+  const { form, onSubmit } = useProfilingContext();
+  const { trigger, getValues } = form as UseFormReturn<ProfilingFields>;
 
   const onNext = async () => {
-    const flowType = form.getValues("type");
-    const isValid = await trigger(fieldsByScreen[flowType as UserType][field]);
-    if (!isValid) {
-      const updatedField = getFieldState(field);
-      console.log(updatedField.error);
-      return;
-    }
-
-    const nextStep = getNextStep(field, flowType);
-    router.push(`/onboarding/profiling/${nextStep}`);
+    const flowType = getValues("type") as UserType;
+    const isValid = await trigger(fieldsByScreen[flowType][screen]);
+    if (!isValid) return;
+    const { nextScreen, isLast } = getNextScreen(screen, flowType);
+    isLast ? onSubmit() : router.push(nextScreen);
   };
 
   return { form, onNext };
