@@ -1,8 +1,4 @@
-import {
-  PutObjectCommand,
-  S3Client,
-  DeleteObjectCommand,
-} from "@aws-sdk/client-s3";
+import { PutObjectCommand, S3Client, DeleteObjectCommand } from "@aws-sdk/client-s3";
 import "react-native-get-random-values";
 import "react-native-url-polyfill/auto";
 import { ReadableStream } from "web-streams-polyfill";
@@ -25,7 +21,7 @@ const client = new S3Client({
   },
 });
 
-const BASE_URL = `${process.env.EXPO_PUBLIC_SB_API_REST_URL}storage/v1/object/public/${options.bucket}/`;
+const BASE_URL = `${process.env.EXPO_PUBLIC_SB_API_REST_URL}/storage/v1/object/public/${options.bucket}/`;
 
 export type S3File = {
   uri: string;

@@ -52,7 +52,7 @@ const ImagePicker: React.FC<ImagePickerProps> = ({
 
   return (
     <>
-      <View className={clsx("max-w-[50%] aspect-square self-center shadow")} style={style}>
+      <View className={clsx("w-1/2 max-w-[50%] aspect-square self-center shadow")} style={style}>
         {field.value ? (
           <UserPhoto
             source={{ uri: field.value }}
