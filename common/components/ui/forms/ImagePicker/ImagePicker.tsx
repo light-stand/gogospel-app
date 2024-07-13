@@ -37,7 +37,7 @@ const ImagePicker: React.FC<ImagePickerProps> = ({
     name: name || "",
   });
 
-  const { error: fieldError, isDirty, invalid, isTouched } = fieldState;
+  const { error: fieldError } = fieldState;
   const error = fieldError?.message || globalError;
 
   const handlePress = async () => {

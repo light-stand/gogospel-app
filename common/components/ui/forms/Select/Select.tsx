@@ -22,19 +22,16 @@ export interface SelectProps {
   style?: object[];
 }
 
-const Select: React.FC<SelectProps> = ({
-  options,
-  value,
-  name,
-  control,
-  onSelect,
-  style,
-}) => {
-  const { field, fieldState, formState } = useController({
+const Select: React.FC<SelectProps> = ({ options, name, control, onSelect, style }) => {
+  const { field, fieldState } = useController({
     control,
     defaultValue: "",
     name,
   });
+
+  const { error: fieldError } = fieldState;
+  const error = fieldError?.message;
+
   return (
     <View style={style}>
       {options.map((item: Option, index: number) => {
@@ -42,11 +39,7 @@ const Select: React.FC<SelectProps> = ({
         return (
           <TouchableOpacity
             key={index}
-            onPress={() =>
-              onSelect
-                ? onSelect(item.value, index)
-                : field.onChange(item.value)
-            }
+            onPress={() => (onSelect ? onSelect(item.value, index) : field.onChange(item.value))}
             disabled={selected}
             className={clsx(
               "rounded-lg",
@@ -55,24 +48,19 @@ const Select: React.FC<SelectProps> = ({
               "border  border-gray-400",
               "bg-gray-1",
               selected && "bg-indigo-200 border-indigo-500 shadow",
+              error && "border-red-500",
               "flex-col items-center justify-between"
             )}
           >
             {item.icon && (
               <Icon
                 name={item.icon}
-                className={clsx(
-                  "my-2 text-gray-600",
-                  selected && "text-indigo-500"
-                )}
+                className={clsx("my-2 text-gray-600", selected && "text-indigo-500")}
               />
             )}
             <Text
               bold={selected}
-              className={clsx(
-                "font-semibold text-lg text-gray-600",
-                selected && "text-indigo-500"
-              )}
+              className={clsx("font-semibold text-lg text-gray-600", selected && "text-indigo-500")}
             >
               {item.title}
             </Text>
@@ -84,6 +72,7 @@ const Select: React.FC<SelectProps> = ({
           </TouchableOpacity>
         );
       })}
+      {error && <Text className="text-sm mt-1 text-center text-red-500">{error}</Text>}
     </View>
   );
 };

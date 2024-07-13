@@ -4,7 +4,7 @@ import { UserType } from "./Profiling";
 
 export const profilingSchema = z
   .object({
-    type: z.nativeEnum(UserType),
+    type: z.nativeEnum(UserType, { message: t("profiling.fields.types.error") }),
     firstName: z.string().min(3, t("profiling.fields.firstName.error")),
     lastName: z.string().min(3, t("profiling.fields.lastName.error")).optional(),
     bio: z.string().min(60, t("profiling.fields.bio.error")),

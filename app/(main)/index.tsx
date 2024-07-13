@@ -14,13 +14,13 @@ export default function Explore() {
   return (
     <Container>
       <Text className="mt-4 text-red-500">Explore</Text>
-      <Text className="mt-4 text-slate-500">{JSON.stringify(user)}</Text>
       <Button onPress={logout} label={"Logout"} variant="secondary"></Button>
       <Button
         onPress={() => router.push("/onboarding/profiling/type")}
         label={"Onboarding"}
         variant="primary"
       />
+      <Text className="mt-4 text-slate-500">{JSON.stringify(user)}</Text>
     </Container>
   );
 }
