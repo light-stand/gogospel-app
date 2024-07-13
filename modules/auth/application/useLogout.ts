@@ -1,6 +1,6 @@
 import { useRouter } from "expo-router";
 import { useMutation } from "react-query";
-import { logout } from "../infrastructure/authApi";
+import { logout } from "../interface/authApi";
 
 export const useLogout = () => {
   const router = useRouter();

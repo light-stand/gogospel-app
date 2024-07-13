@@ -1,6 +1,6 @@
 import { useRouter } from "expo-router";
 import { useMutation } from "react-query";
-import { login } from "../infrastructure/authApi";
+import { login } from "../interface/authApi";
 
 export const useLogin = () => {
   const router = useRouter();

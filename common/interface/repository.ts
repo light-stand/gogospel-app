@@ -2,15 +2,18 @@ import { PostgrestSingleResponse, SupabaseClient } from "@supabase/supabase-js";
 
 export class Repository<T> {
   public tableName: string;
-  private client: SupabaseClient;
+  public client: SupabaseClient;
 
   constructor(tableName: string, client: SupabaseClient) {
     this.tableName = tableName;
     this.client = client;
   }
 
-  get = async (): Promise<T[]> => {
-    const { data, error } = await this.client.from<string, T>(this.tableName).select("*");
+  get = async (query: Record<string, unknown>): Promise<T[]> => {
+    const { data, error } = await this.client
+      .from<string, T>(this.tableName)
+      .select("*")
+      .match(query);
 
     if (error) {
       console.error("Error fetching data:", error);
