@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
-import { SplashScreen, useRootNavigationState, useRouter } from "expo-router";
+import { useEffect } from "react";
+import { SplashScreen } from "expo-router";
 import { useFonts } from "expo-font";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useAuthInit } from "@/auth/application/useAuthInit";
+import { useUserInit } from "@/user/application/useUserInit";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -10,24 +11,12 @@ export default function useAppSetup() {
     SpaceMono: require("@/assets/fonts/SpaceMono-Regular.ttf"),
   });
 
-  const router = useRouter();
-  const navigationState = useRootNavigationState();
-  const [tokenChecked, setTokenChecked] = useState(false);
-
-  const checkToken = async () => {
-    const token = await AsyncStorage.getItem("token");
-    // router.push(token ? "/(main)" : "/onboarding/welcome");
-    router.push("/onboarding/profiling/type");
-    setTokenChecked(true);
-  };
+  useAuthInit();
+  useUserInit();
 
   useEffect(() => {
     if (loaded) SplashScreen.hideAsync();
   }, [loaded]);
-
-  useEffect(() => {
-    !tokenChecked && navigationState?.key && checkToken();
-  }, [tokenChecked, navigationState]);
 
   return { loaded };
 }

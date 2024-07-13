@@ -1,17 +1,15 @@
 import { useTranslation } from "react-i18next";
 import { Button, Container, Input, Text } from "@/components";
-import { useProfilingScreen } from "@/profiling/hooks/useProfilingScreen";
+import { useProfilingStep } from "@/profiling/hooks/useProfilingStep";
 
 export default function Bio() {
   const { t } = useTranslation();
-  const { form, onNext } = useProfilingScreen("bio");
+  const { form, onNext, flowType } = useProfilingStep("bio");
   return (
     <Container showBack>
-      <Text className="font-bold text-3xl mb-10">
-        {t("profiling.titles.bio")}
-      </Text>
+      <Text className="font-bold text-3xl mb-10">{t(`profiling.titles.bio.${flowType}`)}</Text>
       <Input
-        label={t("profiling.fields.bio")}
+        label={t(`profiling.fields.bio.${flowType}`)}
         name="bio"
         type="textarea"
         className="min-h-32"

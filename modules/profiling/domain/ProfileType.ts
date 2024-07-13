@@ -1,14 +1,16 @@
+import { t } from "i18next";
+
 export const profileTypeOptions = [
   {
     value: "missionary",
     icon: "hand-heart",
-    title: "profiling.fields.types.missionary.title",
-    description: "profiling.fields.types.missionary.description",
+    title: t("profiling.fields.types.missionary.title"),
+    description: t("profiling.fields.types.missionary.description"),
   },
   {
     value: "ministry",
     icon: "church",
-    title: "profiling.fields.types.ministry.title",
-    description: "profiling.fields.types.ministry.description",
+    title: t("profiling.fields.types.ministry.title"),
+    description: t("profiling.fields.types.ministry.description"),
   },
 ];

@@ -16,7 +16,3 @@ export const signupSchema = z
   });
 
 export type SignupFields = z.infer<typeof signupSchema>;
-
-export type SignupErrorResponse = {
-  msg: string;
-};

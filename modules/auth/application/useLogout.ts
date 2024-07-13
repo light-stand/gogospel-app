@@ -1,13 +1,15 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
+import { useMutation } from "react-query";
+import { logout } from "../interface/authApi";
 
 export const useLogout = () => {
   const router = useRouter();
 
-  const logout = async () => {
-    await AsyncStorage.multiRemove(["token", "refresh"]);
+  const onSuccess = async () => {
     router.push("/onboarding/welcome");
   };
 
-  return { logout };
+  const logoutMutation = useMutation(logout, { onSuccess });
+
+  return logoutMutation;
 };
