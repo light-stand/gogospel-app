@@ -53,7 +53,7 @@ export const useProfiling = () => {
       createMissionary({
         user_id: session?.user.id as string,
         first_name: values.firstName,
-        last_name: values.lastName,
+        last_name: values.lastName as string,
         bio: values.bio,
         images: [values.picture],
       });

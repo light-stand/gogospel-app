@@ -10,14 +10,8 @@ export default function Type() {
 
   return (
     <Container>
-      <Text className="font-bold text-3xl mb-10">
-        {t("profiling.titles.type")}
-      </Text>
-      <Select
-        name="type"
-        control={form.control}
-        options={profileTypeOptions as Option[]}
-      />
+      <Text className="font-bold text-3xl mb-10">{t("profiling.titles.type")}</Text>
+      <Select name="type" control={form.control} options={profileTypeOptions as Option[]} />
       <Button label={t("action.next")} className="mt-auto" onPress={onNext} />
     </Container>
   );

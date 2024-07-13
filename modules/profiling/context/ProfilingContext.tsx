@@ -3,7 +3,7 @@ import { UseFormReturn } from "react-hook-form";
 import { ProfilingFields } from "../domain/ProfilingForm";
 
 type ProfilingContextType = {
-  form?: UseFormReturn<ProfilingFields>;
+  form: UseFormReturn<ProfilingFields>;
   onSubmit: () => void;
 };
 
@@ -12,6 +12,7 @@ interface ProfilingProviderProps extends ProfilingContextType {
 }
 
 const ProfilingContext = createContext<ProfilingContextType>({
+  form: {} as UseFormReturn<ProfilingFields>,
   onSubmit: async () => {},
 });
 
