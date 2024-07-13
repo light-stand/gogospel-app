@@ -1,13 +1,23 @@
 import * as z from "zod";
+import { t } from "i18next";
 import { UserType } from "./Profiling";
 
-export const profilingSchema = z.object({
-  type: z.nativeEnum(UserType),
-  firstName: z.string().min(3),
-  lastName: z.string().min(3),
-  bio: z.string().min(60),
-  picture: z.string().min(64),
-  interests: z.array(z.string()).nullable(),
-});
+export const profilingSchema = z
+  .object({
+    type: z.nativeEnum(UserType),
+    firstName: z.string().min(3, t("profiling.fields.firstName.error")),
+    lastName: z.string().min(3, t("profiling.fields.lastName.error")).optional(),
+    bio: z.string().min(60, t("profiling.fields.bio.error")),
+    picture: z.string().min(64, t("profiling.fields.image.error")),
+    interests: z.array(z.string()).min(3, t("profiling.fields.interests.error")).optional(),
+  })
+  .refine(({ type, lastName }) => (type === UserType.Missionary ? !!lastName : true), {
+    message: t("profiling.fields.lastName.error"),
+    path: ["lastName"],
+  })
+  .refine(({ type, interests }) => (type === UserType.Missionary ? !!interests : true), {
+    message: t("profiling.fields.interests.error"),
+    path: ["interests"],
+  });
 
 export type ProfilingFields = z.infer<typeof profilingSchema>;
