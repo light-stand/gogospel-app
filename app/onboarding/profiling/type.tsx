@@ -8,12 +8,6 @@ export default function Type() {
   const { t } = useTranslation();
   const { form, onNext } = useProfilingScreen("type");
 
-  const options = profileTypeOptions.map((option) => ({
-    ...option,
-    title: t(option.title),
-    description: t(option.description),
-  }));
-
   return (
     <Container>
       <Text className="font-bold text-3xl mb-10">
@@ -22,7 +16,7 @@ export default function Type() {
       <Select
         name="type"
         control={form.control}
-        options={options as Option[]}
+        options={profileTypeOptions as Option[]}
       />
       <Button label={t("action.next")} className="mt-auto" onPress={onNext} />
     </Container>

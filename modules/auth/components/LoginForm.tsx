@@ -38,17 +38,9 @@ export const LoginForm = () => {
           error={!!error}
         />
       </View>
-      {error && (
-        <Text className="text-red-500 my-4">
-          {error.message || t("error.unknown")}
-        </Text>
-      )}
+      {error && <Text className="text-red-500 my-4">{error.message || t("error.unknown")}</Text>}
       <View />
-      <Button
-        className="mt-3"
-        label={t("action.next")}
-        onPress={handleSubmit(onSubmit)}
-      />
+      <Button className="mt-3" label={t("action.next")} onPress={handleSubmit(onSubmit)} />
     </>
   );
 };
