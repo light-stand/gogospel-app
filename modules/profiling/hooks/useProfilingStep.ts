@@ -16,7 +16,8 @@ export const getNextScreen = (current: ProfilingScreen, flowType: UserType) => {
 export const useProfilingStep = (screen: ProfilingScreen) => {
   const router = useRouter();
   const { form, onSubmit } = useProfilingContext();
-  const { trigger, getValues, resetField } = form as UseFormReturn<ProfilingFields>;
+  const { trigger, getValues, resetField, clearErrors, reset, handleSubmit } =
+    form as UseFormReturn<ProfilingFields>;
 
   const onNext = async () => {
     const flowType = getValues("type") as UserType;
@@ -33,6 +34,7 @@ export const useProfilingStep = (screen: ProfilingScreen) => {
         resetField("lastName");
         resetField("interests");
       }
+      clearErrors();
     }, [screen])
   );
 

@@ -17,13 +17,12 @@ export const useProfiling = () => {
   const { session } = useAuthStore();
   const form = useForm<ProfilingFields>({
     resolver: zodResolver(profilingSchema),
-    mode: "all",
+    mode: "onBlur",
   });
 
   const { getValues } = form;
 
   const onSuccess = (userType: UserType) => (data: Missionary | Ministry) => {
-    console.log(data);
     if (userType === UserType.Ministry) {
       setUser({ ministry: data as Ministry });
       router.push("/mission/(creation)");
