@@ -13,14 +13,14 @@ export const getNextScreen = (current: ProfilingScreen, flowType: UserType) => {
   return { nextScreen, isLast };
 };
 
-export const useProfilingScreen = (screen: ProfilingScreen) => {
+export const useProfilingStep = (screen: ProfilingScreen) => {
   const router = useRouter();
   const { form, onSubmit } = useProfilingContext();
   const { trigger, getValues, resetField } = form as UseFormReturn<ProfilingFields>;
 
   const onNext = async () => {
     const flowType = getValues("type") as UserType;
-    const isValid = await trigger(fieldsByScreen[flowType][screen]);
+    const isValid = (await trigger("type")) && (await trigger(fieldsByScreen[flowType][screen]));
     if (!isValid) return;
     const { nextScreen, isLast } = getNextScreen(screen, flowType);
     isLast ? onSubmit() : router.push(nextScreen);

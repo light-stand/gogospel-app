@@ -1,11 +1,11 @@
 import { View } from "react-native";
 import { useTranslation } from "react-i18next";
 import { Button, Container, Input, Text } from "@/components";
-import { useProfilingScreen } from "@/profiling/hooks/useProfilingScreen";
+import { useProfilingStep } from "@/profiling/hooks/useProfilingStep";
 import { UserType } from "@/profiling/domain/Profiling";
 
 export default function Name() {
-  const { form, flowType, onNext } = useProfilingScreen("name");
+  const { form, flowType, onNext } = useProfilingStep("name");
   const { t } = useTranslation();
   return (
     <Container showBack>

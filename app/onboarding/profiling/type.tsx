@@ -1,12 +1,12 @@
 import { useTranslation } from "react-i18next";
 import { Button, Container, Text, Select } from "@/components";
-import { useProfilingScreen } from "@/profiling/hooks/useProfilingScreen";
+import { useProfilingStep } from "@/profiling/hooks/useProfilingStep";
 import { profileTypeOptions } from "@/profiling/domain/ProfileType";
 import { Option } from "@/components/ui/forms/Select/Select";
 
 export default function Type() {
   const { t } = useTranslation();
-  const { form, onNext } = useProfilingScreen("type");
+  const { form, onNext } = useProfilingStep("type");
 
   return (
     <Container>
