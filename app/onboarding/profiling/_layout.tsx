@@ -1,17 +1,13 @@
 import { Stack } from "expo-router";
-import { useForm, FormProvider } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { profilingSchema } from "@/modules/profiling/domain/ProfilingForm";
+import { useProfiling } from "@/profiling/hooks/useProfiling";
+import { ProfilingProvider } from "@/profiling/context/ProfilingContext";
 
 export default function ProfilingLayout() {
-  const form = useForm({
-    resolver: zodResolver(profilingSchema),
-    mode: "all",
-  });
+  const { form, onSubmit } = useProfiling();
 
   return (
-    <FormProvider {...form}>
+    <ProfilingProvider form={form} onSubmit={onSubmit}>
       <Stack screenOptions={{ headerShown: false }} />
-    </FormProvider>
+    </ProfilingProvider>
   );
 }
