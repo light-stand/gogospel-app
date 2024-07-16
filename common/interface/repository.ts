@@ -9,10 +9,10 @@ export class Repository<T> {
     this.client = client;
   }
 
-  get = async (query: Record<string, unknown>): Promise<T[]> => {
+  async get(query: Record<string, unknown>, select = "*"): Promise<T[]> {
     const { data, error } = await this.client
       .from<string, T>(this.tableName)
-      .select("*")
+      .select(select)
       .match(query);
 
     if (error) {
@@ -21,9 +21,9 @@ export class Repository<T> {
     }
 
     return data as T[];
-  };
+  }
 
-  getById = async (id: string): Promise<T> => {
+  async getById(id: string): Promise<T> {
     const { data, error } = await this.client
       .from<string, T>(this.tableName)
       .select("*")
@@ -36,9 +36,9 @@ export class Repository<T> {
     }
 
     return data as T;
-  };
+  }
 
-  create = async (newData: Omit<T, "id" | "created_at" | "updated_at">): Promise<T> => {
+  async create(newData: Omit<T, "id" | "created_at" | "updated_at">): Promise<T> {
     const { data, error }: PostgrestSingleResponse<T> = await this.client
       .from<string, T>(this.tableName)
       .insert(newData as any)
@@ -51,9 +51,9 @@ export class Repository<T> {
     }
 
     return data as T;
-  };
+  }
 
-  update = async (id: string, updatedData: Partial<T>): Promise<T> => {
+  async update(id: string, updatedData: Partial<T>): Promise<T> {
     const { data, error }: PostgrestSingleResponse<T> = await this.client
       .from<string, T>(this.tableName)
       .update(updatedData as any)
@@ -66,9 +66,9 @@ export class Repository<T> {
     }
 
     return data as T;
-  };
+  }
 
-  delete = async (id: string): Promise<T> => {
+  async delete(id: string): Promise<T> {
     const { data, error }: PostgrestSingleResponse<T> = await this.client
       .from<string, T>(this.tableName)
       .delete()
@@ -81,5 +81,5 @@ export class Repository<T> {
     }
 
     return data as T;
-  };
+  }
 }
