@@ -10,6 +10,7 @@ import { Missionary } from "@/missionary/domain/Missionary";
 import { Ministry } from "@/ministry/domain/Ministry";
 import { useAuthStore } from "@/auth/store/useAuthStore";
 import { useUserStore } from "@/user/store/useUserStore";
+import { MissionType } from "@/mission/domain/MissionType";
 
 export const useProfiling = () => {
   const router = useRouter();
@@ -35,6 +36,7 @@ export const useProfiling = () => {
   const { mutate: createMinistry } = useMutation(ministryRepository.create, {
     onSuccess: onSuccess(UserType.Ministry),
   });
+
   const { mutate: createMissionary } = useMutation(missionaryRepository.create, {
     onSuccess: onSuccess(UserType.Missionary),
   });
@@ -55,6 +57,7 @@ export const useProfiling = () => {
         last_name: values.lastName as string,
         bio: values.bio,
         images: [values.picture],
+        interests: values.interests as MissionType[],
       });
     }
   };
