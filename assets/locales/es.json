@@ -56,6 +56,16 @@
         "image": "Una foto"
       }
     },
+    "mission": {
+      "type": {
+        "evangelism": "Evangelismo",
+        "service": "Servicio",
+        "teaching": "Enseñanza",
+        "worship": "Adoración",
+        "fellowship": "Comunión",
+        "other": "Otro"
+      }
+    },
     "action": {
       "next": "Continuar",
       "save": "Guardar"

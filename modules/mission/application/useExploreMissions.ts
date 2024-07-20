@@ -9,7 +9,7 @@ export const useExploreMissions = () => {
 
   const { data: missions } = useQuery({
     queryKey: ["missions", filters],
-    queryFn: () => missionRepository.get({}),
+    queryFn: () => missionRepository.get({}, "*, ministry(name)"),
   });
 
   return { focused, setFocused, missions, filters };
