@@ -45,8 +45,8 @@ const MissionCard: React.FC<MissionCardProps> = ({ mission, style, from }) => {
             </Text>
             <View className="flex flex-row items-center w-full">
               <View className="flex flex-row items-center w-1/2">
-                <Icon name="church" className="mr-2 text-neutral-600 text-base" />
-                <Text bold className="text-neutral-600 font-bold text-md w-full" numberOfLines={1}>
+                <Icon name="church" className="mr-2 text-neutral-500 text-base" />
+                <Text bold className="text-neutral-500 font-bold w-full" numberOfLines={1}>
                   {ministry.name}
                 </Text>
               </View>

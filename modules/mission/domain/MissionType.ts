@@ -31,11 +31,11 @@ export const missionTypes = {
   family: { icon: "account-group", color: "amber", category: "children-family" },
   "fine-arts": { icon: "palette", color: "emerald", category: "arts-media" },
   frontiers: { icon: "compass", color: "violet", category: "mission-spiritual" },
-  healthcare: { icon: "hospital", color: "zinc", category: "children-family" },
+  healthcare: { icon: "hospital", color: "red", category: "children-family" },
   leadership: { icon: "account-tie", color: "orange", category: "mission-spiritual" },
   media: { icon: "television", color: "sky", category: "arts-media" },
   music: { icon: "music", color: "teal", category: "arts-media" },
-  "performing-arts": { icon: "drama-masks", color: "red", category: "arts-media" },
+  "performing-arts": { icon: "drama-masks", color: "indigo", category: "arts-media" },
   photography: { icon: "camera", color: "blue", category: "arts-media" },
   "poor-and-marginalized": { icon: "hand-coin", color: "yellow", category: "poverty-justice" },
   reconciliation: { icon: "handshake", color: "green", category: "poverty-justice" },
@@ -50,7 +50,7 @@ export const missionTypes = {
   "the-unreached": { icon: "earth", color: "amber", category: "mission-spiritual" },
   urban: { icon: "city-variant", color: "emerald", category: "mission-spiritual" },
   writing: { icon: "pencil", color: "violet", category: "arts-media" },
-  worship: { icon: "music", color: "zinc", category: "mission-spiritual" },
+  worship: { icon: "music", color: "lime", category: "mission-spiritual" },
 } as const;
 
 export type MissionType = keyof typeof missionTypes;
