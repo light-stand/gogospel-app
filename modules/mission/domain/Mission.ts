@@ -9,9 +9,8 @@ export type Mission = {
   end_date: string;
   latitude: number;
   longitude: number;
-  type: MissionType;
   ministry: Ministry;
-  categories: string[];
+  categories: MissionType[];
   duration: number;
 };
 
