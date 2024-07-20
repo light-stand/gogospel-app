@@ -53,17 +53,55 @@
           "ministry": "We are..."
         },
         "bio": { "missionary": "A little more about you", "ministry": "About us" },
-        "image": "A Photo"
+        "image": "A Photo",
+        "interests": "My Interests"
       }
     },
     "mission": {
       "type": {
+        "categories": {
+          "mission": "Mission",
+          "justice": "Justice",
+          "business": "Business",
+          "children": "Children",
+          "arts": "Arts"
+        },
+        "adventure": "Adventure",
+        "anti-trafficking": "Anti-Trafficking",
+        "bible": "Bible",
+        "business": "Business",
+        "children-and-youth": "Children and Youth",
+        "children-at-risk": "Children at Risk",
+        "cinematography": "Cinematography",
+        "compassion": "Compassion",
+        "community-development": "Community Development",
+        "counseling": "Counseling",
+        "culture": "Culture",
+        "design": "Design",
         "evangelism": "Evangelism",
-        "service": "Service",
+        "family": "Family",
+        "fine-arts": "Fine Arts",
+        "frontiers": "Frontiers",
+        "healthcare": "Healthcare",
+        "leadership": "Leadership",
+        "media": "Media",
+        "music": "Music",
+        "performing-arts": "Performing Arts",
+        "photography": "Photography",
+        "poor-and-marginalized": "Poor and Marginalized",
+        "reconciliation": "Reconciliation",
+        "refugees": "Refugees",
+        "revival": "Revival",
+        "science": "Science",
+        "social-justice": "Social Justice",
+        "spiritual-growth": "Spiritual Growth",
+        "sports": "Sports",
         "teaching": "Teaching",
-        "worship": "Worship",
-        "fellowship": "Fellowship",
-        "other": "Other"
+        "technology": "Technology",
+        "the-unreached": "The Unreached",
+        "urban": "Urban",
+        "writing": "Writing",
+        "worship": "Worship"
       }
     },
     "action": {

@@ -53,17 +53,55 @@
           "ministry": "Somos..."
         },
         "bio": { "missionary": "Un poco más sobre ti", "ministry": "Sobre nosotros" },
-        "image": "Una foto"
+        "image": "Una foto",
+        "interests": "Mis intereses"
       }
     },
     "mission": {
-      "type": {
+      "types": {
+        "categories": {
+          "mission": "Misión",
+          "justice": "Justicia",
+          "business": "Negocios",
+          "children": "Niños",
+          "arts": "Artes"
+        },
+        "adventure": "Aventura",
+        "anti-trafficking": "Anti-Tráfico",
+        "bible": "Biblia",
+        "business": "Negocios",
+        "children-and-youth": "Niños y Juventud",
+        "children-at-risk": "Niños en Riesgo",
+        "cinematography": "Cinematografía",
+        "compassion": "Compasión",
+        "community-development": "Desarrollo Comunitario",
+        "counseling": "Consejería",
+        "culture": "Cultura",
+        "design": "Diseño",
         "evangelism": "Evangelismo",
-        "service": "Servicio",
+        "family": "Familia",
+        "fine-arts": "Bellas Artes",
+        "frontiers": "Fronteras",
+        "healthcare": "Salud",
+        "leadership": "Liderazgo",
+        "media": "Medios",
+        "music": "Música",
+        "performing-arts": "Artes Escénicas",
+        "photography": "Fotografía",
+        "poor-and-marginalized": "Pobres y Marginados",
+        "reconciliation": "Reconciliación",
+        "refugees": "Refugiados",
+        "revival": "Avivamiento",
+        "science": "Ciencia",
+        "social-justice": "Justicia Social",
+        "spiritual-growth": "Crecimiento Espiritual",
+        "sports": "Deportes",
         "teaching": "Enseñanza",
-        "worship": "Adoración",
-        "fellowship": "Comunión",
-        "other": "Otro"
+        "technology": "Tecnología",
+        "the-unreached": "Los No Alcanzados",
+        "urban": "Urbano",
+        "writing": "Escritura",
+        "worship": "Adoración"
       }
     },
     "action": {

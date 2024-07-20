@@ -4,9 +4,9 @@ import { TouchableOpacity, View } from "react-native";
 import Animated from "react-native-reanimated";
 import { useRouter } from "expo-router";
 
-import { Icon, Text, Button, Image } from "@/components";
+import { Icon, Text, Button, Image, TagCloud } from "@/components";
 import { Mission } from "@/mission/domain/Mission";
-import { missionTypeIcon } from "@/mission/domain/MissionType";
+import { missionTypes } from "@/mission/domain/MissionType";
 import { useTranslation } from "react-i18next";
 
 export interface MissionCardProps {
@@ -30,7 +30,7 @@ const MissionCard: React.FC<MissionCardProps> = ({ mission, style, from }) => {
     gallery: ["https://picsum.photos/200/300"],
   };
 
-  const { start_date, end_date, title, ministry, type, categories, duration } = mission;
+  const { start_date, end_date, title, ministry, categories, duration } = mission;
 
   return (
     <TouchableOpacity activeOpacity={0.8} onPress={onCardPress}>
@@ -45,8 +45,8 @@ const MissionCard: React.FC<MissionCardProps> = ({ mission, style, from }) => {
             </Text>
             <View className="flex flex-row items-center w-full">
               <View className="flex flex-row items-center w-1/2">
-                <Icon name="church" className="mr-2 text-neutral-600 text-base" />
-                <Text bold className="text-neutral-600 font-bold text-md w-full" numberOfLines={1}>
+                <Icon name="church" className="mr-2 text-neutral-500 text-base" />
+                <Text bold className="text-neutral-500 font-bold w-full" numberOfLines={1}>
                   {ministry.name}
                 </Text>
               </View>
@@ -68,15 +68,16 @@ const MissionCard: React.FC<MissionCardProps> = ({ mission, style, from }) => {
               )}
             </View>
             <View className="flex flex-row items-center flex-wrap max-h-10">
-              {categories.map((category) => (
-                // TODO tags
-                <>
-                  <Text className="text-md text-neutral-500 font-bold">{category}</Text>
-                  <Text className="text-md text-neutral-500 font-bold">{category}</Text>
-                  <Text className="text-md text-neutral-500 font-bold">{category}</Text>
-                  <Text className="text-md text-neutral-500 font-bold">{category}</Text>
-                </>
-              ))}
+              <TagCloud
+                compact
+                allSelected
+                options={categories.map((category) => ({
+                  label: t(`mission.types.${category}`),
+                  value: category,
+                  color: missionTypes[category].color,
+                  icon: missionTypes[category].icon,
+                }))}
+              />
             </View>
             {/* <View className="flex flex-row items-center">
               <Icon name="calendar-month" className="mr-2 text-neutral-500 text-base" />
