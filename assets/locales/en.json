@@ -56,6 +56,16 @@
         "image": "A Photo"
       }
     },
+    "mission": {
+      "type": {
+        "evangelism": "Evangelism",
+        "service": "Service",
+        "teaching": "Teaching",
+        "worship": "Worship",
+        "fellowship": "Fellowship",
+        "other": "Other"
+      }
+    },
     "action": {
       "next": "Continue",
       "save": "Save"
