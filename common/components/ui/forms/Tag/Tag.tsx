@@ -30,8 +30,8 @@ const Tag: React.FC<TagProps> = ({ label, selected, onPress, compact, color, ico
       style={[
         style,
         color && {
-          backgroundColor: selected ? colors[color][200] : colors[color][50],
-          borderColor: colors[color][selected ? 400 : 600],
+          backgroundColor: colors[selected ? color : "neutral"][selected ? 200 : 200],
+          borderColor: colors[selected ? color : "neutral"][selected ? 400 : 600],
         },
       ]}
     >
@@ -42,7 +42,7 @@ const Tag: React.FC<TagProps> = ({ label, selected, onPress, compact, color, ico
           style={[
             {
               ...(color && {
-                color: colors[color][selected ? 700 : 400],
+                color: colors[selected ? color : "neutral"][selected ? 600 : 500],
               }),
             },
           ]}
@@ -52,7 +52,7 @@ const Tag: React.FC<TagProps> = ({ label, selected, onPress, compact, color, ico
         className={clsx(selected ? "text-neutral-700" : "text-neutral-400", "text-xs")}
         style={{
           ...(color && {
-            color: colors[color][selected ? 600 : 400],
+            color: colors[selected ? color : "neutral"][selected ? 600 : 500],
           }),
         }}
       >

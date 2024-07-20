@@ -53,7 +53,8 @@
           "ministry": "Somos..."
         },
         "bio": { "missionary": "Un poco más sobre ti", "ministry": "Sobre nosotros" },
-        "image": "Una foto"
+        "image": "Una foto",
+        "interests": "Mis intereses"
       }
     },
     "mission": {
