@@ -5,13 +5,14 @@ export type Mission = {
   id: number;
   title: string;
   description: string;
-  start_date: string;
-  end_date: string;
-  latitude: number;
-  longitude: number;
-  ministry: Ministry;
+  start_date?: string;
+  end_date?: string;
+  images: string[];
+  location?: string;
+  ministry?: Ministry;
+  ministry_id?: number;
   categories: MissionType[];
-  duration: number;
+  duration?: number;
 };
 
 export type MissionViewInput = {

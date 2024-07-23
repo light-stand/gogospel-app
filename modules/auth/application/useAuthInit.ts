@@ -18,5 +18,6 @@ export const useAuthInit = () => {
   useEffect(() => {
     if (!isRouterInitialized) return;
     router.push(session?.access_token ? "/(main)" : "/onboarding/welcome");
+    // router.push("/mission/creation");
   }, [isRouterInitialized, session]);
 };

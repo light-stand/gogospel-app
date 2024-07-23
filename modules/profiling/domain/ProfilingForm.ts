@@ -16,7 +16,8 @@ export const profilingSchema = z
           message: t("profiling.fields.interests.error"),
         })
       )
-      .min(3, t("profiling.fields.interests.error"))
+      .min(4, t("profiling.fields.interests.error"))
+      .max(10, t("profiling.fields.interests.error"))
       .optional(),
   })
   .refine(({ type, lastName }) => (type === UserType.Missionary ? !!lastName : true), {
