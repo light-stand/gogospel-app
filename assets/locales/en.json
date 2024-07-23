@@ -58,6 +58,18 @@
       }
     },
     "mission": {
+      "creation": {
+        "titles": {
+          "start": "Let's create a Mission",
+          "location": "Location"
+        },
+        "location": {
+          "pick": "Pick a Location"
+        },
+        "start": {
+          "text": "Hello {{ministry}}, thank you for being part of GoGospel! You will now be guided through the steps to create a mission, to which missionaries can join."
+        }
+      },
       "type": {
         "categories": {
           "mission": "Mission",
@@ -102,6 +114,12 @@
         "urban": "Urban",
         "writing": "Writing",
         "worship": "Worship"
+      }
+    },
+    "maps": {
+      "picker": {
+        "helper": "Long press to select location",
+        "confirm": "Confim"
       }
     },
     "action": {

@@ -58,6 +58,35 @@
       }
     },
     "mission": {
+      "creation": {
+        "titles": {
+          "start": "Creemos una Misión",
+          "location": "Ubicación",
+          "title": "Buscamos...",
+          "duration": "Duración"
+        },
+        "fields": {
+          "title": "Título",
+          "description": "Descripción",
+          "startDate": "Fecha de inicio",
+          "duration": "Duración"
+        },
+        "location": {
+          "pick": "Selecciona una ubicación"
+        },
+        "start": {
+          "text": "¡Hola {{ministry}}, gracias por ser parte de GoGospel! Ahora será guiado por los pasos para que puedas crear tu una misión, a la cual misioneros podrán unirse."
+        },
+        "placeholder": {
+          "title": "Ej: Voluntario para un campamento de verano",
+          "description": "Ej: Necesitamos voluntarios para un campamento de verano en Valencia. La misión durará 2 semanas y se llevará a cabo en la comunidad local."
+        },
+        "duration": {
+          "days": "Días",
+          "weeks": "Semanas",
+          "months": "Meses"
+        }
+      },
       "types": {
         "categories": {
           "mission": "Misión",
@@ -104,9 +133,16 @@
         "worship": "Adoración"
       }
     },
+    "maps": {
+      "picker": {
+        "helper": "Mantén presionado para seleccionar la ubicación",
+        "confirm": "Confirmar"
+      }
+    },
     "action": {
       "next": "Continuar",
-      "save": "Guardar"
+      "save": "Guardar",
+      "done": "Listo"
     },
     "error": {
       "unknown": "Error desconocido"
