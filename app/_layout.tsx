@@ -8,7 +8,13 @@ import useAppSetup from "@/common/hooks/setup/useAppSetup";
 import "react-native-reanimated";
 import { ActionSheetProvider } from "@expo/react-native-action-sheet";
 
-export const queryClient = new QueryClient();
+export const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      keepPreviousData: true,
+    },
+  },
+});
 
 export default function RootLayout() {
   const { loaded } = useAppSetup();
@@ -23,6 +29,7 @@ export default function RootLayout() {
           <Stack.Screen name="(main)" options={{ headerShown: false }} />
           <Stack.Screen name="+not-found" />
           <Stack.Screen name="onboarding" options={{ headerShown: false }} />
+          <Stack.Screen name="mission" options={{ headerShown: false }} />
         </Stack>
       </QueryClientProvider>
     </ActionSheetProvider>
