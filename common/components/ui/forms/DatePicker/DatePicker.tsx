@@ -1,0 +1,137 @@
+import React, { useState } from "react";
+import { View, TouchableOpacity, Platform } from "react-native";
+import clsx from "clsx";
+import dayjs from "dayjs";
+import { useTranslation } from "react-i18next";
+import { Control, useController } from "react-hook-form";
+import DateTimePicker, { DateTimePickerAndroid } from "@react-native-community/datetimepicker";
+
+import { Text } from "../../foundation";
+import { Modal } from "../../structure";
+import { Button } from "../../actions";
+
+interface DatePickerProps {
+  name: string;
+  date?: Date;
+  onChange?: (newDate: Date) => void;
+  label?: string;
+  inline?: boolean;
+  helperText?: string | null;
+  control: Control<any, any>;
+  className?: string;
+  error?: boolean | null;
+  style?: object[];
+}
+
+const DatePicker = ({
+  date: propDate = new Date(),
+  onChange,
+  label,
+  inline,
+  error,
+  helperText,
+  control,
+  name,
+  style,
+}: DatePickerProps) => {
+  const { t } = useTranslation();
+  const { field } = useController({ control, name, defaultValue: propDate });
+  //only for IOS
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const isIOS = Platform.OS === "ios";
+
+  const date = propDate || field.value;
+  const dateString = dayjs(date).format("DD/MM/YYYY");
+
+  const openAndroidPicker = () =>
+    DateTimePickerAndroid.open({
+      // locale: 'pt-BR',
+      value: new Date(date),
+      onChange: onDateChange,
+      display: "spinner",
+    });
+
+  const openIOSPicker = () => setModalOpen(true);
+
+  const onDateChange = (_: any, selectedDate: Date | undefined) => {
+    field.onChange(selectedDate as Date /* .toUTCString() */);
+  };
+
+  let content;
+
+  if (inline) {
+    content = (
+      <View>
+        {isIOS && (
+          <DateTimePicker
+            locale="pt-BR"
+            value={new Date(date)}
+            mode="date"
+            display="spinner"
+            onChange={onDateChange}
+            textColor="white"
+          />
+        )}
+        {!isIOS && (
+          <Button block variant="secondary" onPress={openAndroidPicker} label={dateString} />
+        )}
+      </View>
+    );
+  } else {
+    content = (
+      <View style={style}>
+        {label && <Text className={clsx("text-xs text-gray-500 mb-1 font-medium")}>{label}</Text>}
+        <TouchableOpacity
+          className={clsx(
+            "bg-gray-1",
+            "rounded-lg",
+            "border border-gray-400",
+            "focus:border-gray-500",
+            error && "border-danger",
+            "flex-row items-center",
+            error && "border-red-500"
+          )}
+          onPress={isIOS ? openIOSPicker : openAndroidPicker}
+        >
+          <Text className={clsx("font-sans", "text-gray-5", "py-3 px-4", "w-full")}>
+            {dateString}
+          </Text>
+        </TouchableOpacity>
+        {isIOS && (
+          <Modal
+            open={modalOpen}
+            onClose={() => setModalOpen(false)}
+            // title={t("profiling.birthday.title")}
+          >
+            <View className={clsx("rounded-lg bg-white", "p-4")}>
+              <DateTimePicker
+                // locale="pt-BR"
+                value={date}
+                mode="date"
+                display="spinner"
+                onChange={onDateChange}
+              />
+              <Button
+                variant="secondary"
+                onPress={() => setModalOpen(false)}
+                label={t("action.done")}
+                className="mt-4"
+                size="small"
+              />
+            </View>
+          </Modal>
+        )}
+        {helperText && (
+          <Text className={clsx("mt-1 text-gray-2 text-xs", error && "text-danger")}>
+            {helperText}
+          </Text>
+        )}
+      </View>
+    );
+  }
+
+  return content;
+};
+
+export default DatePicker;
