@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  View,
-  Platform,
-  KeyboardAvoidingView,
-  ScrollView,
-  ScrollViewProps,
-} from "react-native";
+import { View, Platform, KeyboardAvoidingView, ScrollView, ScrollViewProps } from "react-native";
 import {
   SafeAreaView,
   useSafeAreaInsets,
@@ -53,16 +47,14 @@ const Container: React.FC<ContainerProps> = ({
 }) => {
   const { top } = useSafeAreaInsets();
   if (scroll) {
-    const ScrollViewComponent = keyboardAware
-      ? KeyboardAwareScrollView
-      : ScrollView;
+    const ScrollViewComponent = keyboardAware ? KeyboardAwareScrollView : ScrollView;
 
     const WrapperComponent = avoidKeyboard ? KeyboardAvoidingView : View;
 
     return (
-      <WrapperComponent className="flex-1 bg-background" behavior="height">
+      <WrapperComponent className="flex-1 bg-white" behavior="height">
         <ScrollViewComponent
-          className="bg-background"
+          className="bg-white"
           keyboardShouldPersistTaps="handled"
           contentContainerStyle={[style, { padding: 16, paddingTop: top + 16 }]}
           {...props}
@@ -83,12 +75,8 @@ const Container: React.FC<ContainerProps> = ({
   const WrapperComponent = avoidKeyboard ? KeyboardAvoidingView : View;
 
   return (
-    <WrapperComponent className="flex-1 bg-background" behavior="padding">
-      <ViewComponent
-        style={style}
-        className={"flex-1 bg-background p-4 flex"}
-        {...props}
-      >
+    <WrapperComponent className="flex-1 bg-white" behavior="padding">
+      <ViewComponent style={style} className={"flex-1 bg-white p-4 flex"} {...props}>
         {showBack && <BackButton />}
         {children}
       </ViewComponent>

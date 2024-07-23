@@ -4,36 +4,20 @@ import {
   View,
   ImageSourcePropType,
   ViewStyle,
+  ImageProps as RNImageProps,
 } from "react-native";
 import clsx from "clsx";
 import { Skeleton } from "../Skeleton";
 
-export interface ImageProps {
-  source: ImageSourcePropType;
-  blurRadius?: undefined | number;
-  onError?: (error: any) => void;
-  className?: string;
-  style?: ViewStyle | ViewStyle[];
-}
+export interface ImageProps extends RNImageProps {}
 
-const Image: React.FC<ImageProps> = ({
-  source,
-  blurRadius = undefined,
-  onError,
-  style,
-}) => {
+const Image: React.FC<ImageProps> = ({ style, ...props }) => {
   const [loaded, setLoaded] = useState(false);
 
   return (
     <View style={style} className={clsx("overflow-hidden")}>
       {!loaded && <Skeleton />}
-      <RNImage
-        source={source}
-        onLoadEnd={() => setLoaded(true)}
-        className={clsx("w-full h-full")}
-        onError={onError}
-        blurRadius={blurRadius}
-      />
+      <RNImage onLoadEnd={() => setLoaded(true)} className={clsx("w-full h-full")} {...props} />
     </View>
   );
 };
