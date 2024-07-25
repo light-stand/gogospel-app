@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, TouchableOpacity, Platform } from "react-native";
 import clsx from "clsx";
 import dayjs from "dayjs";
@@ -28,21 +28,29 @@ const DatePicker = ({
   onChange,
   label,
   inline,
-  error,
+  error: globalError,
   helperText,
   control,
   name,
   style,
 }: DatePickerProps) => {
   const { t } = useTranslation();
-  const { field } = useController({ control, name, defaultValue: propDate });
+  const { field, fieldState } = useController({ control, name, defaultValue: propDate });
   //only for IOS
   const [modalOpen, setModalOpen] = useState(false);
 
   const isIOS = Platform.OS === "ios";
 
-  const date = propDate || field.value;
+  const [date, setDate] = useState(propDate || field.value);
   const dateString = dayjs(date).format("DD/MM/YYYY");
+
+  const { error: fieldError } = fieldState;
+  const error = fieldError?.message;
+
+  const onDateChange = (_: any, selectedDate: Date | undefined) => {
+    setDate(selectedDate as Date);
+    field.onChange(selectedDate as Date);
+  };
 
   const openAndroidPicker = () =>
     DateTimePickerAndroid.open({
@@ -53,10 +61,6 @@ const DatePicker = ({
     });
 
   const openIOSPicker = () => setModalOpen(true);
-
-  const onDateChange = (_: any, selectedDate: Date | undefined) => {
-    field.onChange(selectedDate as Date /* .toUTCString() */);
-  };
 
   let content;
 
@@ -94,7 +98,7 @@ const DatePicker = ({
           )}
           onPress={isIOS ? openIOSPicker : openAndroidPicker}
         >
-          <Text className={clsx("font-sans", "text-gray-5", "py-3 px-4", "w-full")}>
+          <Text className={clsx("font-sans text-gray-5 py-3 px-4 w-full", error && "text-red-500")}>
             {dateString}
           </Text>
         </TouchableOpacity>
@@ -107,7 +111,7 @@ const DatePicker = ({
             <View className={clsx("rounded-lg bg-white", "p-4")}>
               <DateTimePicker
                 // locale="pt-BR"
-                value={date}
+                value={new Date(date)}
                 mode="date"
                 display="spinner"
                 onChange={onDateChange}
@@ -122,9 +126,9 @@ const DatePicker = ({
             </View>
           </Modal>
         )}
-        {helperText && (
-          <Text className={clsx("mt-1 text-gray-2 text-xs", error && "text-danger")}>
-            {helperText}
+        {(helperText || error) && (
+          <Text className={clsx("mt-1 text-xs", "text-gray-2", error && "text-red-500")}>
+            {helperText || error}
           </Text>
         )}
       </View>

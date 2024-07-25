@@ -1,27 +1,20 @@
 import React, { useState } from "react";
-import {
-  View,
-  TextInput,
-  KeyboardTypeOptions,
-  InputModeOptions,
-  Platform,
-  TextInputProps,
-} from "react-native";
+import { View, TextInput, InputModeOptions, Platform, TextInputProps } from "react-native";
+import { Control, useController } from "react-hook-form";
 import clsx from "clsx";
+
 import Text from "../../foundation/Text/Text";
 import Icon, { MaterialIconType } from "../../foundation/Icon/Icon";
-import { Control, UseFormRegisterReturn, useController } from "react-hook-form";
 
 export type InputProps = Omit<TextInputProps, "onChange"> & {
   type?: "text" | "textarea";
   label?: string;
   value?: string;
   name: string;
-  onChange?: (text: string) => void;
+  onChange?: (text: string | number) => void;
   placeholder?: string | null;
   maxLength?: number;
   inputMode?: InputModeOptions;
-  keyboardType?: KeyboardTypeOptions;
   disabled?: boolean;
   helperText?: string | null;
   icon?: MaterialIconType;
@@ -61,6 +54,13 @@ const Input: React.FC<InputProps> = ({
   const { error: fieldError, isDirty, invalid, isTouched } = fieldState;
   const error = fieldError?.message || globalError;
   const valid = formState.isSubmitted && isDirty && !invalid && !error;
+
+  const onChangeText = (text: string) => {
+    const value =
+      props.keyboardType === "numeric" && text ? Number(text.replaceAll(/\D/g, "")) : text;
+    field.onChange(value);
+    onChange && onChange(value);
+  };
 
   return (
     <View style={style}>
@@ -102,8 +102,8 @@ const Input: React.FC<InputProps> = ({
             valid && "text-green-600",
             error && "text-red-600"
           )}
-          onChangeText={onChange || field.onChange}
-          value={field.value}
+          onChangeText={onChangeText}
+          value={`${field.value}`}
           multiline={type === "textarea"}
           numberOfLines={type === "textarea" ? 4 : undefined}
           // placeholderTextColor={theme?.colors?.gray[3]}
@@ -122,8 +122,7 @@ const Input: React.FC<InputProps> = ({
           }}
           style={
             //Android textarea height workaround
-            Platform.OS === "android" &&
-            type === "textarea" && { height: textInputHeight }
+            Platform.OS === "android" && type === "textarea" && { height: textInputHeight }
           }
           onBlur={field.onBlur}
           {...props}
@@ -131,13 +130,7 @@ const Input: React.FC<InputProps> = ({
       </View>
 
       {(helperText || fieldError?.message) && (
-        <Text
-          className={clsx(
-            "mt-1 text-xs",
-            "text-gray-2",
-            error && "text-red-500"
-          )}
-        >
+        <Text className={clsx("mt-1 text-xs", "text-gray-2", error && "text-red-500")}>
           {helperText || fieldError?.message}
         </Text>
       )}

@@ -51,7 +51,8 @@ const MapPicker: React.FC<MapPickerProps> = ({ open, onClose, name, control, sty
 
   useEffect(() => {
     if (open && location) {
-      mapRef.current?.animateToRegion({
+      const map = mapRef.current as MapView;
+      map.animateToRegion({
         latitude: location.latitude,
         longitude: location.longitude,
         latitudeDelta: 0.005,
