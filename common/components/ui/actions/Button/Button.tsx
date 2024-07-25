@@ -34,7 +34,7 @@ const Button: React.FC<ButtonProps> = ({
     },
     secondary: {
       disabled: "bg-stone-950",
-      enabled: "border-2 border-indigo-500",
+      enabled: "border border-indigo-500",
     },
     success: {
       disabled: "bg-lime-950",
