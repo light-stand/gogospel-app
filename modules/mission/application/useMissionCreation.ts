@@ -15,9 +15,7 @@ export const useMissionCreation = () => {
   const form = useForm<MissionCreationFields>({
     resolver: zodResolver(missionCreationSchema),
     mode: "onBlur",
-    defaultValues: {
-      durationUnit: 1,
-    },
+    defaultValues: { durationMultiplier: 7, duration: 1 },
   });
 
   const { getValues } = form;
@@ -34,9 +32,11 @@ export const useMissionCreation = () => {
       ministry_id: user.ministry?.id,
       title: values.title,
       description: values.description,
+      start_date: values.startDate,
+      duration: values.duration * values.durationMultiplier,
       categories: values.categories,
-      images: [values.picture],
-      location: `gis.st_point(${values.location.latitude}, ${values.location.longitude})`,
+      location: `POINT(${values.location.longitude} ${values.location.latitude})`,
+      ...(values.image && { images: [values.image] }),
     });
   };
 

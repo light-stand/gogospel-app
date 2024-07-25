@@ -21,6 +21,8 @@ export default function MissionLocation() {
     queryFn: () => reverseGeocode(location),
   });
 
+  const error = form.formState.errors.location?.message;
+
   return (
     <Container showBack>
       <Text className="font-bold text-3xl mb-4">{t("mission.creation.titles.location")}</Text>
@@ -29,14 +31,17 @@ export default function MissionLocation() {
         className="w-full aspect-[1.6]"
         resizeMode="contain"
       />
+      <Text className="font-bold text-neutral-500 my-6 text-center">
+        {t("mission.creation.helper.location")}
+      </Text>
       <Button
-        className="mt-auto mb-2"
         icon="map-marker"
         variant="secondary"
         label={address || t("mission.creation.location.pick")}
         onPress={() => setOpen((p) => !p)}
       />
-      <Button label={t("action.next")} onPress={onNext} />
+      {error && <Text className="text-center mt-2 mb-auto text-xs text-red-500">{error}</Text>}
+      <Button className="mt-auto" label={t("action.next")} onPress={onNext} />
       <MapPicker
         open={open}
         onClose={() => setOpen(false)}

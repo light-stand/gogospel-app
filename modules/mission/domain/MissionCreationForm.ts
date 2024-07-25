@@ -8,30 +8,47 @@ export const missionCreationFlow = [
   "duration",
   "category",
   "location",
+  "image",
 ] as const;
+
+export const fieldsByScreen = {
+  index: [],
+  details: ["title", "description"],
+  duration: ["startDate", "duration", "durationMultiplier"],
+  category: ["categories"],
+  location: ["location"],
+  image: ["image"],
+} as const;
 
 export type MissionCreationScreen = (typeof missionCreationFlow)[number];
 
+const langPrefix = "mission.creation.error";
+
 export const missionCreationSchema = z.object({
-  // title: z.string().min(3, t("missionCreation.fields.firstName.error")).nullable(),
-  // description: z.string().min(60, t("missionCreation.fields.bio.error")).nullable(),
-  duration: z.number().nullable(),
-  durationUnit: z.number().nullable(),
-  startDate: z.date().nullable(),
-  endDate: z.date().nullable(),
-  picture: z.string().min(64, t("missionCreation.fields.image.error")),
+  title: z.string().min(3, t(`${langPrefix}.title`)),
+  description: z.string().min(60, t(`${langPrefix}.description`)),
+  startDate: z
+    .date({ message: t(`${langPrefix}.startDate`) })
+    .min(new Date(), t(`${langPrefix}.startDateAfterToday`)),
+  duration: z.number().min(1, t(`${langPrefix}.duration`)),
+  durationMultiplier: z.number({ message: t(`${langPrefix}.durationMultiplier`) }),
+  // endDate: z.date().nullable(),
   categories: z
     .array(
       z.enum(Object.keys(missionTypes) as [MissionType, ...MissionType[]], {
-        message: t("profiling.fields.interests.error"),
+        message: t(`profiling.fields.interests.error`),
       })
     )
-    .min(4, t("profiling.fields.interests.error"))
-    .max(10, t("profiling.fields.interests.error")),
-  location: z.object({
-    latitude: z.number(),
-    longitude: z.number(),
-  }),
+    .min(4, t(`${langPrefix}.categories`))
+    .max(10, t(`${langPrefix}.categories`)),
+  location: z.object(
+    {
+      latitude: z.number(),
+      longitude: z.number(),
+    },
+    { message: t(`${langPrefix}.location`) }
+  ),
+  image: z.string().nullable(),
 });
 
 export type MissionCreationFields = z.infer<typeof missionCreationSchema>;

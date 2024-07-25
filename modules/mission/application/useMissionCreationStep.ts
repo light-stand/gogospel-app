@@ -1,7 +1,11 @@
 import { useCallback } from "react";
 import { useFocusEffect, useRouter } from "expo-router";
 import { UseFormReturn } from "react-hook-form";
-import { missionCreationFlow, MissionCreationScreen } from "../domain/MissionCreationForm";
+import {
+  fieldsByScreen,
+  missionCreationFlow,
+  MissionCreationScreen,
+} from "../domain/MissionCreationForm";
 import { useMissionCreationContext } from "../context/MissionCreationContext";
 import { MissionCreationFields } from "../domain/MissionCreationForm";
 
@@ -19,7 +23,7 @@ export const useMissionCreationStep = (screen: MissionCreationScreen) => {
   const { trigger, clearErrors } = form as UseFormReturn<MissionCreationFields>;
 
   const onNext = async () => {
-    const isValid = await trigger(screen);
+    const isValid = await trigger(fieldsByScreen[screen]);
     if (!isValid) return;
     const { nextScreen, isLast } = getNextScreen(screen);
     isLast ? onSubmit() : router.push(nextScreen);

@@ -6,11 +6,14 @@ import { useMissionCreationStep } from "@/mission/application/useMissionCreation
 
 export default function MissionDuration() {
   const { t } = useTranslation();
-  const { form, onNext } = useMissionCreationStep("details");
+  const { form, onNext } = useMissionCreationStep("duration");
 
   return (
     <Container showBack>
       <Text className="font-bold text-3xl mb-4">{t("mission.creation.titles.duration")}</Text>
+      <Text className="font-bold text-neutral-500 mb-4">
+        {t("mission.creation.helper.duration")}
+      </Text>
       <DatePicker
         name="startDate"
         control={form.control}
@@ -24,10 +27,11 @@ export default function MissionDuration() {
           label={t("mission.creation.fields.duration")}
           className="flex-[1.5]"
           inputMode="numeric"
+          keyboardType="numeric"
+          maxLength={2}
         />
-        {/* <Input name="durationUnit" control={form.control} label=" " className="flex-1" /> */}
         <Picker
-          name="durationUnit"
+          name="durationMultiplier"
           label=" "
           items={[
             { label: t("mission.creation.duration.days"), value: 1 },
