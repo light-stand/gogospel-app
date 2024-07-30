@@ -9,6 +9,7 @@ export const missionCreationFlow = [
   "category",
   "location",
   "image",
+  "summary",
 ] as const;
 
 export const fieldsByScreen = {
@@ -18,6 +19,7 @@ export const fieldsByScreen = {
   category: ["categories"],
   location: ["location"],
   image: ["image"],
+  summary: [],
 } as const;
 
 export type MissionCreationScreen = (typeof missionCreationFlow)[number];

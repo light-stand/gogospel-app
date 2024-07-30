@@ -2,10 +2,9 @@ import { useRouter } from "expo-router";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import { zodResolver } from "@hookform/resolvers/zod";
+
 import { MissionCreationFields, missionCreationSchema } from "@/mission/domain/MissionCreationForm";
-import { useAuthStore } from "@/auth/store/useAuthStore";
 import { useUserStore } from "@/user/store/useUserStore";
-import { Mission } from "../domain/Mission";
 import { missionRepository } from "../interface/missionRepository";
 
 export const useMissionCreation = () => {
@@ -20,8 +19,8 @@ export const useMissionCreation = () => {
 
   const { getValues } = form;
 
-  const onSuccess = (data: Mission) => {
-    router.push("/mission/creation");
+  const onSuccess = () => {
+    router.push("/(main)");
   };
 
   const { mutate: createMission } = useMutation(missionRepository.create, { onSuccess });
