@@ -58,6 +58,53 @@
       }
     },
     "mission": {
+      "creation": {
+        "titles": {
+          "start": "Create a Mission",
+          "location": "Location",
+          "title": "We are looking for...",
+          "duration": "Duration",
+          "categories": "Categories",
+          "image": "A photo",
+          "summary": "Your mission"
+        },
+        "helper": {
+          "categories": "Select one or more categories that best describe your mission",
+          "start": "Hello {{ministry}}, thank you for being part of GoGospel! You will now be guided through the steps to create your own mission, to which missionaries can join.",
+          "duration": "When does your mission start and how long will it last?",
+          "location": "Select the location where your mission will take place",
+          "image": "Add an image that represents your mission. It is optional, but recommended. You can change it later if you wish.",
+          "summary": "Your mission is about to be created. Please review the information before continuing."
+        },
+        "fields": {
+          "title": "Title",
+          "description": "Description",
+          "startDate": "Start Date",
+          "duration": "Duration"
+        },
+        "location": {
+          "pick": "Pick a location"
+        },
+        "placeholder": {
+          "title": "E.g. Volunteer for a summer camp",
+          "description": "E.g. We need volunteers for a summer camp in Valencia. The mission will last for 2 weeks and will take place in the local community."
+        },
+        "error": {
+          "title": "The title is invalid",
+          "description": "The description is required and must be at least 60 characters long",
+          "startDate": "The start date is required",
+          "duration": "The duration must be greater than 0",
+          "durationMultiplier": "A duration unit is required",
+          "categories": "Select between 4 and 10 categories",
+          "startDateAfterToday": "The start date must be after today",
+          "location": "The location is required"
+        },
+        "duration": {
+          "days": "Days",
+          "weeks": "Weeks",
+          "months": "Months"
+        }
+      },
       "type": {
         "categories": {
           "mission": "Mission",
@@ -104,9 +151,17 @@
         "worship": "Worship"
       }
     },
+    "maps": {
+      "picker": {
+        "helper": "Long press to select location",
+        "confirm": "Confim"
+      }
+    },
     "action": {
       "next": "Continue",
-      "save": "Save"
+      "save": "Save",
+      "later": "Later",
+      "done": "Done"
     },
     "error": {
       "unknown": "Unknown Error"

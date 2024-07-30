@@ -1,5 +1,6 @@
 import { MaterialIconType } from "@/components/ui/foundation/Icon/Icon";
 import colors from "tailwindcss/colors";
+import { t } from "i18next";
 
 type CategoryValues =
   | "mission-spiritual"
@@ -54,6 +55,12 @@ export const missionTypes = {
 } as const;
 
 export type MissionType = keyof typeof missionTypes;
+
+export const missionTypesWithLocale = Object.entries(missionTypes).map(([key, value]) => ({
+  ...value,
+  value: key,
+  label: t(`mission.types.${key}`),
+}));
 
 // This is a type checker of all the values in the missionTypes object
 const missionTypeArray: MissionTypeData[] = Object.values(missionTypes);

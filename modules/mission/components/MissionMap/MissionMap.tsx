@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { View } from "react-native";
-import MapView, { Marker } from "react-native-maps";
+import MapView, { LatLng, Marker } from "react-native-maps";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { mapSettings } from "./settings";
 import { Mission } from "@/mission/domain/Mission";
@@ -27,12 +27,12 @@ const MissionMap: React.FC<MapWithMarkersProps> = ({ focused, missions, setFocus
     const map = mapRef.current as MapView;
     map.animateCamera({
       center: {
-        latitude: missions[focused].latitude,
-        longitude: missions[focused].longitude,
+        latitude: missions[focused].latitude as number,
+        longitude: missions[focused].longitude as number,
       },
       heading: 0,
       pitch: 0,
-      zoom: 15,
+      zoom: 30,
     });
   }, [focused]);
 
@@ -49,7 +49,7 @@ const MissionMap: React.FC<MapWithMarkersProps> = ({ focused, missions, setFocus
         {missions?.map(({ latitude, longitude }, index) => (
           <Marker
             key={index}
-            coordinate={{ latitude, longitude }}
+            coordinate={{ latitude, longitude } as LatLng}
             onPress={() => setFocused(index)}
           />
         ))}

@@ -34,7 +34,7 @@ const Button: React.FC<ButtonProps> = ({
     },
     secondary: {
       disabled: "bg-stone-950",
-      enabled: "bg-stone-500",
+      enabled: "border border-indigo-500",
     },
     success: {
       disabled: "bg-lime-950",
@@ -74,34 +74,32 @@ const Button: React.FC<ButtonProps> = ({
         containedStyling,
         containedPaddingStyling,
         "rounded-lg",
-        "flex",
-        "justify-center",
-        "flex-row",
-        "items-center",
+        "flex justify-center flex-row items-center",
         block && label ? "self-stretch" : "self-center"
       )}
       style={style}
     >
       <>
-        <Text
-          bold
-          className={clsx(
-            "text-base text-white font-bold",
-            size === "large" && "text-lg"
-          )}
-        >
-          {label}
-        </Text>
         {icon && (
           <Icon
             name={icon}
             className={clsx(
-              disabled && "text-white",
-              "ml-2 text-2xl",
-              variant === "warning" && "text-white"
+              "text-white mr-2 text-xl",
+              variant === "secondary" && "text-indigo-500"
             )}
           />
         )}
+        <Text
+          bold
+          className={clsx(
+            "text-base text-white font-bold",
+            size === "large" && "text-lg",
+            variant === "secondary" && "text-indigo-500"
+          )}
+          numberOfLines={1}
+        >
+          {label}
+        </Text>
       </>
     </TouchableOpacity>
   );

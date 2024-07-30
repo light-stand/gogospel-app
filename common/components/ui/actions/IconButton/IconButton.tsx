@@ -5,13 +5,7 @@ import Icon, { MaterialIconType } from "../../foundation/Icon/Icon";
 import clsx from "clsx";
 
 export interface IconButtonProps {
-  variant?:
-    | "primary"
-    | "secondary"
-    | "success"
-    | "warning"
-    | "danger"
-    | "transparent";
+  variant?: "primary" | "secondary" | "success" | "warning" | "danger" | "transparent";
   size?: "medium" | "small";
   disabled?: boolean;
   icon: MaterialIconType;

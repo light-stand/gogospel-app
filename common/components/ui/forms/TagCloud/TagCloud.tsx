@@ -38,9 +38,13 @@ const TagCloud: React.FC<TagCloudProps> = ({
   compact,
   style,
 }) => {
-  const { field } = control ? useController({ control, defaultValue: [], name }) : { field: null };
+  const { field, fieldState } = control
+    ? useController({ control, defaultValue: [], name })
+    : { field: null, fieldState: {} };
 
   const values = selection || (control ? field?.value : []);
+  const { error: fieldError } = fieldState;
+  const error = fieldError?.message;
 
   const onPressHandler = (value: string) => {
     if (onSelect) {
@@ -56,7 +60,11 @@ const TagCloud: React.FC<TagCloudProps> = ({
 
   return (
     <View style={style}>
-      {label && <Text className="text-gray-4 mb-1 text-sm">{label}</Text>}
+      {(!!error || label) && (
+        <Text className={clsx("mb-3 text-xs", "text-gray-2", error && "text-red-500")}>
+          {error || label}
+        </Text>
+      )}
       <View className={clsx("flex flex-row flex-wrap")}>
         {options.map((item: Option, index: number) => (
           <Tag

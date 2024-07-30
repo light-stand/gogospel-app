@@ -58,6 +58,53 @@
       }
     },
     "mission": {
+      "creation": {
+        "titles": {
+          "start": "Creemos una Misión",
+          "location": "Ubicación",
+          "title": "Buscamos...",
+          "duration": "Duración",
+          "categories": "Categorías",
+          "image": "Una foto",
+          "summary": "Tu misión"
+        },
+        "helper": {
+          "categories": "Selecciona una o más categorías que mejor describan tu misión",
+          "start": "¡Hola {{ministry}}, gracias por ser parte de GoGospel! Ahora será guiado por los pasos para que puedas crear tu una misión, a la cual misioneros podrán unirse.",
+          "duration": "¿Cuándo empieza y cuánto durará tu misión?",
+          "location": "Selecciona la ubicación donde se llevará a cabo tu misión",
+          "image": "Agrega una imágen que represente tu misión. Es opcional, pero recomendado. Puedes cambiarla más tarde si lo deseas.",
+          "summary": "Tu misión está a punto de ser creada. Por favor revisa la información antes de continuar."
+        },
+        "fields": {
+          "title": "Título",
+          "description": "Descripción",
+          "startDate": "Fecha de inicio",
+          "duration": "Duración"
+        },
+        "location": {
+          "pick": "Selecciona una ubicación"
+        },
+        "placeholder": {
+          "title": "Ej: Voluntario para un campamento de verano",
+          "description": "Ej: Necesitamos voluntarios para un campamento de verano en Valencia. La misión durará 2 semanas y se llevará a cabo en la comunidad local."
+        },
+        "error": {
+          "title": "El títutlo es inválido",
+          "description": "La descripción es requerida y tiene que tener al menos 60 caracteres",
+          "startDate": "La fecha de inicio es requerida",
+          "duration": "La duración tiene que ser mayor a 0",
+          "durationMultiplier": "Una unidad de duración es requerida",
+          "categories": "Seleccione entre 4 y 10 categorías",
+          "startDateAfterToday": "La fecha de inicio tiene que ser después de hoy",
+          "location": "La ubicación es requerida"
+        },
+        "duration": {
+          "days": "Días",
+          "weeks": "Semanas",
+          "months": "Meses"
+        }
+      },
       "types": {
         "categories": {
           "mission": "Misión",
@@ -104,9 +151,17 @@
         "worship": "Adoración"
       }
     },
+    "maps": {
+      "picker": {
+        "helper": "Mantén presionado para seleccionar la ubicación",
+        "confirm": "Confirmar"
+      }
+    },
     "action": {
       "next": "Continuar",
-      "save": "Guardar"
+      "save": "Guardar",
+      "later": "Más tarde",
+      "done": "Listo"
     },
     "error": {
       "unknown": "Error desconocido"

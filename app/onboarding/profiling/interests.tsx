@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { ScrollView } from "react-native";
 import { useTranslation } from "react-i18next";
+
 import { Button, Container, TagCloud, Text } from "@/components";
 import { missionTypes } from "@/mission/domain/MissionType";
 import { useProfilingStep } from "@/profiling/hooks/useProfilingStep";
