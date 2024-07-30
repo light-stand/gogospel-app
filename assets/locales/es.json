@@ -65,14 +65,16 @@
           "title": "Buscamos...",
           "duration": "Duración",
           "categories": "Categorías",
-          "image": "Una foto"
+          "image": "Una foto",
+          "summary": "Tu misión"
         },
         "helper": {
           "categories": "Selecciona una o más categorías que mejor describan tu misión",
           "start": "¡Hola {{ministry}}, gracias por ser parte de GoGospel! Ahora será guiado por los pasos para que puedas crear tu una misión, a la cual misioneros podrán unirse.",
           "duration": "¿Cuándo empieza y cuánto durará tu misión?",
           "location": "Selecciona la ubicación donde se llevará a cabo tu misión",
-          "image": "Agrega una imágen que represente tu misión. Es opcional, pero recomendado. Puedes cambiarla más tarde si lo deseas."
+          "image": "Agrega una imágen que represente tu misión. Es opcional, pero recomendado. Puedes cambiarla más tarde si lo deseas.",
+          "summary": "Tu misión está a punto de ser creada. Por favor revisa la información antes de continuar."
         },
         "fields": {
           "title": "Título",
