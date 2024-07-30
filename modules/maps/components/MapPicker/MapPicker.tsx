@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { Modal, View } from "react-native";
 import { Control, useController } from "react-hook-form";
-import MapView, { LatLng, LongPressEvent, Marker } from "react-native-maps";
+import MapView, { LatLng, MapPressEvent, Marker } from "react-native-maps";
 import { useQuery } from "react-query";
 import { useTranslation } from "react-i18next";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -32,7 +32,7 @@ const MapPicker: React.FC<MapPickerProps> = ({ open, onClose, name, control, sty
     queryFn: () => reverseGeocode(location),
   });
 
-  const onLongPress = async (event: LongPressEvent) => {
+  const onPress = async (event: MapPressEvent) => {
     field?.onChange(event.nativeEvent.coordinate);
   };
 
@@ -70,7 +70,7 @@ const MapPicker: React.FC<MapPickerProps> = ({ open, onClose, name, control, sty
         onPress={onClose}
       />
       <View style={[style, { paddingBottom: bottom }]} className="flex-1 w-full">
-        <MapView className="flex-1" onLongPress={onLongPress} ref={mapRef} showsUserLocation>
+        <MapView className="flex-1" onPress={onPress} ref={mapRef} showsUserLocation>
           {location && <Marker coordinate={location} />}
         </MapView>
         <View className="z-10 bg-white w-full shadow-2xl p-2">
