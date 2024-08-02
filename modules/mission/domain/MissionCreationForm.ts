@@ -47,6 +47,7 @@ export const missionCreationSchema = z.object({
     {
       latitude: z.number(),
       longitude: z.number(),
+      locationName: z.string(),
     },
     { message: t(`${langPrefix}.location`) }
   ),

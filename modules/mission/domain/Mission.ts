@@ -15,6 +15,7 @@ export type Mission = {
   duration?: number;
   longitude?: number;
   latitude?: number;
+  location_name?: string;
 };
 
 export type MissionViewInput = {

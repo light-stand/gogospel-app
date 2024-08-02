@@ -17,7 +17,7 @@ export default function MissionLocation() {
   const location = form.getValues("location");
 
   const { data: address } = useQuery({
-    queryKey: ["geocode", location],
+    queryKey: ["geocode", location?.latitude, location?.longitude],
     queryFn: () => reverseGeocode(location),
   });
 
@@ -37,7 +37,7 @@ export default function MissionLocation() {
       <Button
         icon="map-marker"
         variant="secondary"
-        label={address || t("mission.creation.location.pick")}
+        label={address?.formatted_address || t("mission.creation.location.pick")}
         onPress={() => setOpen((p) => !p)}
       />
       {error && <Text className="text-center mt-2 mb-auto text-xs text-red-500">{error}</Text>}

@@ -23,10 +23,10 @@ export class Repository<T> {
     return data as T[];
   };
 
-  getById = async (id: string): Promise<T> => {
+  getById = async (id: string, select = "*"): Promise<T> => {
     const { data, error } = await this.client
       .from<string, T>(this.tableName)
-      .select("*")
+      .select(select)
       .eq("id", id)
       .single();
 

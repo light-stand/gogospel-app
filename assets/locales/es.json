@@ -29,12 +29,12 @@
         },
         "types": {
           "missionary": {
-            "title": "Misionero",
-            "description": "Soy misionero y busco a un ministerio donde servir a Dios."
+            "title": "Voluntario",
+            "description": "Busco donde servir a Dios."
           },
           "ministry": {
-            "title": "Ministerio",
-            "description": "Soy un ministerio que busca misioneros para llevar a cabo su misión."
+            "title": "Punto de misión",
+            "description": "Busco voluntarios para servir con nosotros."
           },
           "error": "El tipo de cuenta es requerido"
         },
@@ -104,6 +104,9 @@
           "weeks": "Semanas",
           "months": "Meses"
         }
+      },
+      "actions": {
+        "join": "Apuntarme"
       },
       "types": {
         "categories": {
