@@ -22,7 +22,7 @@ const MissionCard: React.FC<MissionCardProps> = ({ mission, style, from }) => {
   const { t } = useTranslation();
 
   const onCardPress = () => {
-    router.push(`/event/${mission.id}?from=${from}`);
+    router.push(`/mission/${mission.id}`);
   };
 
   if (!mission.id) return null;
@@ -68,15 +68,12 @@ const MissionCard: React.FC<MissionCardProps> = ({ mission, style, from }) => {
               <TagCloud
                 compact
                 allSelected
-                options={sortBy(
-                  categories.map((category) => ({
-                    label: t(`mission.types.${category}`),
-                    value: category,
-                    color: missionTypes[category].color,
-                    icon: missionTypes[category].icon,
-                  })),
-                  "label"
-                )}
+                options={categories.map((category) => ({
+                  label: t(`mission.types.${category}`),
+                  value: category,
+                  color: missionTypes[category].color,
+                  icon: missionTypes[category].icon,
+                }))}
               />
             </ScrollView>
             {/* <View className="flex flex-row items-center">

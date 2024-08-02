@@ -105,6 +105,9 @@
           "months": "Months"
         }
       },
+      "actions": {
+        "join": "Join"
+      },
       "type": {
         "categories": {
           "mission": "Mission",
