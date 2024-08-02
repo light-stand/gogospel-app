@@ -35,6 +35,7 @@ export const useMissionCreation = () => {
       duration: values.duration * values.durationMultiplier,
       categories: values.categories,
       location: `POINT(${values.location.longitude} ${values.location.latitude})`,
+      location_name: values.location.locationName,
       ...(values.image && { images: [values.image] }),
     });
   };

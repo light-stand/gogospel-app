@@ -9,6 +9,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Button, IconButton, Text } from "@/components";
 import { reverseGeocode } from "@/maps/interface/mapsApi";
 import { getLocation } from "@/maps/interface/mapsService";
+import { addressToCityCountryString } from "@/maps/utils/formatting";
 
 export interface MapPickerProps {
   open?: boolean;
@@ -19,17 +20,24 @@ export interface MapPickerProps {
   style?: object[];
 }
 
+export type MapPickerValue = LatLng & { locationName: string };
+
 const MapPicker: React.FC<MapPickerProps> = ({ open, onClose, name, control, style }) => {
   const { t } = useTranslation();
   const mapRef = useRef<MapView>(null);
   const { bottom } = useSafeAreaInsets();
   const { field } = control ? useController({ control, name }) : { field: null };
-  const location = field?.value as LatLng | undefined;
+  const location = field?.value as MapPickerValue;
   const error = null;
 
-  const { data: address } = useQuery({
-    queryKey: ["geocode", location],
+  const locationName = location?.locationName || "";
+
+  const { data: locationInfo } = useQuery({
+    queryKey: ["geocode", location?.latitude, location?.longitude],
     queryFn: () => reverseGeocode(location),
+    onSuccess: (data) => {
+      field?.onChange({ ...location, locationName: addressToCityCountryString(data) });
+    },
   });
 
   const onPress = async (event: MapPressEvent) => {
@@ -38,7 +46,8 @@ const MapPicker: React.FC<MapPickerProps> = ({ open, onClose, name, control, sty
 
   const onCurrentLocationPress = async () => {
     const location = await getLocation();
-    field?.onChange(location);
+    if (!location) return;
+    field?.onChange({ ...location, locationName });
     if (location) {
       mapRef.current?.animateToRegion({
         latitude: location.latitude,
@@ -81,7 +90,7 @@ const MapPicker: React.FC<MapPickerProps> = ({ open, onClose, name, control, sty
             onPress={onCurrentLocationPress}
           />
           <Text className="text-center mb-3 mt-1" numberOfLines={1}>
-            {address || t("maps.picker.helper")}
+            {locationInfo?.formatted_address || t("maps.picker.helper")}
           </Text>
           <Button label={t("maps.picker.confirm")} onPress={onClose} />
         </View>
