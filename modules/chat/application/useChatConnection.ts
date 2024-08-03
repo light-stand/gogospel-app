@@ -41,7 +41,6 @@ export const useChatConnection = (channelId: number) => {
   useEffect(() => {
     fetchMessages();
     const channel = subscribe(channelId, user.id as string, onMessage);
-    console.log(channel, user.id);
     return () => unsubscribe(channel);
   }, []);
 
