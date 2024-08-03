@@ -3,18 +3,12 @@ import { Stack } from "expo-router";
 
 import "@/utils/axios";
 import "@/utils/i18n";
-import useAppSetup from "@/common/hooks/setup/useAppSetup";
 
 import "react-native-reanimated";
 import { ActionSheetProvider } from "@expo/react-native-action-sheet";
 
-export const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      keepPreviousData: true,
-    },
-  },
-});
+import useAppSetup from "@/common/hooks/setup/useAppSetup";
+import { queryClient } from "@/interface/queryClient";
 
 export default function RootLayout() {
   const { loaded } = useAppSetup();
@@ -24,13 +18,7 @@ export default function RootLayout() {
   return (
     <ActionSheetProvider>
       <QueryClientProvider client={queryClient}>
-        <Stack>
-          <Stack.Screen name="index" options={{ headerShown: false }} />
-          <Stack.Screen name="(main)" options={{ headerShown: false }} />
-          <Stack.Screen name="+not-found" />
-          <Stack.Screen name="onboarding" options={{ headerShown: false }} />
-          <Stack.Screen name="mission" options={{ headerShown: false }} />
-        </Stack>
+        <Stack screenOptions={{ headerShown: false }} />
       </QueryClientProvider>
     </ActionSheetProvider>
   );
