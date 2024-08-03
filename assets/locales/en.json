@@ -165,6 +165,20 @@
           "message": "The message is required and must be at least 40 characters long",
           "alreadySent": "You have already sent a request to this mission",
           "unknown": "Error sending the request"
+        },
+        "manage": {
+          "popup": {
+            "title": {
+              "accepted": "Accept Request?",
+              "rejected": "Reject Request?",
+              "pending": "Reopen Request?"
+            },
+            "text": {
+              "accepted": "The volunteer will be able to contact you",
+              "rejected": "The volunteer will not be able to contact you or resend the request. You can undo this action at any time.",
+              "pending": "You will be able to accept or reject this volunteer again."
+            }
+          }
         }
       }
     },
@@ -176,6 +190,7 @@
     },
     "action": {
       "next": "Continue",
+      "cancel": "Cancel",
       "save": "Save",
       "later": "Later",
       "done": "Done",
