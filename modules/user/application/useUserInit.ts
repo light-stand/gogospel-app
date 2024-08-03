@@ -15,8 +15,8 @@ export const useUserInit = () => {
   const fetchUserProfiles = async () => {
     if (session?.user.id) {
       const [[missionary], [ministry]] = await Promise.all([
-        missionaryRepository.get({ user_id: session.user.id }),
-        ministryRepository.get({ user_id: session.user.id }),
+        missionaryRepository.get(["user_id", "eq", session.user.id]),
+        ministryRepository.get(["user_id", "eq", session.user.id]),
       ]);
 
       if (!missionary && !ministry) {

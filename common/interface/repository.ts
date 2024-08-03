@@ -1,5 +1,7 @@
 import { PostgrestSingleResponse, SupabaseClient } from "@supabase/supabase-js";
 
+export type SupabaseFilter = [string, string, any];
+
 export class Repository<T> {
   public tableName: string;
   public client: SupabaseClient;
@@ -9,11 +11,16 @@ export class Repository<T> {
     this.client = client;
   }
 
-  get = async (query: Record<string, unknown>, select = "*"): Promise<T[]> => {
-    const { data, error } = await this.client
-      .from<string, T>(this.tableName)
-      .select(select)
-      .match(query);
+  get = async (filters: SupabaseFilter | SupabaseFilter[], select = "*"): Promise<T[]> => {
+    const query = this.client.from<string, T>(this.tableName).select(select);
+
+    if (Array.isArray(filters[0])) {
+      filters.forEach((filter: SupabaseFilter) => query.filter(...filter));
+    } else if (filters.length === 3) {
+      query.filter(...(filters as SupabaseFilter));
+    }
+
+    const { data, error } = await query;
 
     if (error) throw error;
 
