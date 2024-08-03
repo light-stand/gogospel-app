@@ -20,7 +20,7 @@ export class Repository<T> {
     return data as T[];
   };
 
-  getById = async (id: string, select = "*"): Promise<T> => {
+  getById = async (id: string | number, select = "*"): Promise<T> => {
     const { data, error } = await this.client
       .from<string, T>(this.tableName)
       .select(select)
@@ -43,7 +43,7 @@ export class Repository<T> {
     return data as T;
   };
 
-  update = async (id: string, updatedData: Partial<T>): Promise<T> => {
+  update = async ({ id, ...updatedData }: Partial<T> & { id: number | string }): Promise<T> => {
     const { data, error }: PostgrestSingleResponse<T> = await this.client
       .from<string, T>(this.tableName)
       .update(updatedData as any)
