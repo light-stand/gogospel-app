@@ -1,5 +1,7 @@
 import { PostgrestSingleResponse, SupabaseClient } from "@supabase/supabase-js";
 
+export type SupabaseFilter = [string, string, any];
+
 export class Repository<T> {
   public tableName: string;
   public client: SupabaseClient;
@@ -9,18 +11,23 @@ export class Repository<T> {
     this.client = client;
   }
 
-  get = async (query: Record<string, unknown>, select = "*"): Promise<T[]> => {
-    const { data, error } = await this.client
-      .from<string, T>(this.tableName)
-      .select(select)
-      .match(query);
+  get = async (filters: SupabaseFilter | SupabaseFilter[], select = "*"): Promise<T[]> => {
+    const query = this.client.from<string, T>(this.tableName).select(select);
+
+    if (Array.isArray(filters[0])) {
+      filters.forEach((filter: SupabaseFilter) => query.filter(...filter));
+    } else if (filters.length === 3) {
+      query.filter(...(filters as SupabaseFilter));
+    }
+
+    const { data, error } = await query;
 
     if (error) throw error;
 
     return data as T[];
   };
 
-  getById = async (id: string, select = "*"): Promise<T> => {
+  getById = async (id: string | number, select = "*"): Promise<T> => {
     const { data, error } = await this.client
       .from<string, T>(this.tableName)
       .select(select)
@@ -43,7 +50,7 @@ export class Repository<T> {
     return data as T;
   };
 
-  update = async (id: string, updatedData: Partial<T>): Promise<T> => {
+  update = async ({ id, ...updatedData }: Partial<T> & { id: number | string }): Promise<T> => {
     const { data, error }: PostgrestSingleResponse<T> = await this.client
       .from<string, T>(this.tableName)
       .update(updatedData as any)

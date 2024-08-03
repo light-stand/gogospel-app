@@ -165,6 +165,20 @@
           "message": "El mensaje es requerido y tiene que tener al menos 40 caracteres",
           "alreadySent": "Ya has enviado una solicitud a esta misión",
           "unknown": "Error al enviar la solicitud"
+        },
+        "manage": {
+          "popup": {
+            "title": {
+              "accepted": "¿Aceptar solicitud?",
+              "rejected": "¿Rechazar solicitud?",
+              "pending": "¿Reabrir solicitud?"
+            },
+            "text": {
+              "accepted": "El voluntario podrá ponerse en contigo",
+              "rejected": "El voluntario no podrá ponerse en contacto contigo ni volver a enviar la solicitud. Podrás deshacer esta acción en cualquier momento.",
+              "pending": "Podrás volver a aceptar o rechazar este voluntario."
+            }
+          }
         }
       }
     },
@@ -176,6 +190,7 @@
     },
     "action": {
       "next": "Continuar",
+      "cancel": "Cancelar",
       "save": "Guardar",
       "later": "Más tarde",
       "done": "Listo",

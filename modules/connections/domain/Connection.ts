@@ -10,5 +10,11 @@ export type Connection = {
   mission?: Mission;
   missionary?: Missionary;
   ministry?: Ministry;
-  status?: string;
+  status?: ConnectionStatus;
 };
+
+export enum ConnectionStatus {
+  Pending = "pending",
+  Accepted = "accepted",
+  Rejected = "rejected",
+}
