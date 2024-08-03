@@ -22,3 +22,7 @@ AppState.addEventListener("change", (state) => {
     supabase.auth.stopAutoRefresh();
   }
 });
+
+export enum SupabaseError {
+  Duplicated = "23505",
+}

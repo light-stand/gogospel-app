@@ -1,12 +1,13 @@
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { ScrollView, Text } from "react-native";
+
+import { Container, Text } from "@/components";
 
 export default function Connection() {
   const { id } = useLocalSearchParams();
 
   return (
-    <ScrollView>
+    <Container showBack>
       <Text>Connection</Text>
-    </ScrollView>
+    </Container>
   );
 }

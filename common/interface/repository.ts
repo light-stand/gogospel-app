@@ -15,10 +15,7 @@ export class Repository<T> {
       .select(select)
       .match(query);
 
-    if (error) {
-      console.error("Error fetching data:", error);
-      throw error;
-    }
+    if (error) throw error;
 
     return data as T[];
   };
@@ -30,10 +27,7 @@ export class Repository<T> {
       .eq("id", id)
       .single();
 
-    if (error) {
-      console.error("Error fetching data by id:", error);
-      throw error;
-    }
+    if (error) throw error;
 
     return data as T;
   };
@@ -44,11 +38,7 @@ export class Repository<T> {
       .insert(newData as any)
       .single();
 
-    console.log(data, error);
-    if (error) {
-      console.error("Error creating data:", error);
-      throw error;
-    }
+    if (error) throw error;
 
     return data as T;
   };
@@ -60,10 +50,7 @@ export class Repository<T> {
       .eq("id", id)
       .single();
 
-    if (error) {
-      console.error("Error updating data:", error);
-      throw error;
-    }
+    if (error) throw error;
 
     return data as T;
   };
@@ -75,10 +62,7 @@ export class Repository<T> {
       .eq("id", id)
       .single();
 
-    if (error) {
-      console.error("Error deleting data:", error);
-      throw error;
-    }
+    if (error) throw error;
 
     return data as T;
   };

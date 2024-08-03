@@ -19,6 +19,8 @@ import { missionRepository } from "@/mission/interface/missionRepository";
 import { Mission } from "@/mission/domain/Mission";
 import { missionTypes } from "@/mission/domain/MissionType";
 import { UserPhoto } from "@/components/ui/structure/UserPhoto";
+import { useUserStore } from "@/user/store/useUserStore";
+import { UserType } from "@/profiling/domain/Profiling";
 
 const PAGE_WIDTH = Dimensions.get("window").width;
 
@@ -26,6 +28,8 @@ export default function EventDetails() {
   const router = useRouter();
   const { t } = useTranslation();
   const { id } = useLocalSearchParams();
+  const { user } = useUserStore();
+
   const { data: mission, isLoading } = useQuery({
     queryKey: ["mission", id],
     queryFn: () => missionRepository.getById(id as string, "*, ministry(name, images)"),
@@ -111,7 +115,13 @@ export default function EventDetails() {
               {mission.description}
             </Text>
           </TouchableWithoutFeedback>
-          <Button label={t("mission.actions.join")} className="mt-auto" />
+          {user.type === UserType.Missionary && (
+            <Button
+              label={t("mission.actions.join")}
+              className="mt-auto"
+              onPress={() => router.push(`connections/request/${id}`)}
+            />
+          )}
         </View>
       </View>
     </ScrollView>

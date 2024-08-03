@@ -10,5 +10,5 @@ export type Connection = {
   mission?: Mission;
   missionary?: Missionary;
   ministry?: Ministry;
-  status: string;
+  status?: string;
 };
