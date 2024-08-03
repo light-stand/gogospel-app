@@ -7,8 +7,8 @@ export const useListConnections = () => {
   const { user } = useUserStore();
   const query =
     user.type === UserType.Missionary
-      ? { ministry_id: user?.ministry?.id }
-      : { missionary_id: user?.missionary?.id };
+      ? { missionary_id: user?.missionary?.id }
+      : { ministry_id: user?.ministry?.id };
 
   return useQuery({
     queryKey: ["connections", query],

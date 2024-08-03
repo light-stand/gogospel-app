@@ -152,6 +152,20 @@
         "urban": "Urban",
         "writing": "Writing",
         "worship": "Worship"
+      },
+      "errors": {
+        "notFound": "Mission not found"
+      }
+    },
+    "connections": {
+      "submission": {
+        "title": "Do you want to join {{name}}?",
+        "text": "{{ministry}} will receive a notification and will be able to accept or reject your request. You can write a message to {{ministry}} introducing yourself and explaining why you would like to join their mission.",
+        "errors": {
+          "message": "The message is required and must be at least 40 characters long",
+          "alreadySent": "You have already sent a request to this mission",
+          "unknown": "Error sending the request"
+        }
       }
     },
     "maps": {
@@ -164,10 +178,13 @@
       "next": "Continue",
       "save": "Save",
       "later": "Later",
-      "done": "Done"
+      "done": "Done",
+      "send": "Send"
     },
     "error": {
-      "unknown": "Unknown Error"
+      "unknown": "Unknown Error",
+      "notMissionary": "You have to be a missionary to do this",
+      "notMinistry": "You have to be a ministry to do this"
     },
     "screen": {
       "explore": "Home",

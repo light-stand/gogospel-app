@@ -152,6 +152,20 @@
         "urban": "Urbano",
         "writing": "Escritura",
         "worship": "Adoración"
+      },
+      "errors": {
+        "notFound": "Misión no encontrada"
+      }
+    },
+    "connections": {
+      "submission": {
+        "title": "¿Quieres apuntarte a {{name}}?",
+        "text": "{{ministry}} recibira una notificación y podrá aceptar o rechazar tu solicitud.\nPuedes escribir un mensaje para {{ministry}} presentandote y explicando por qué te gustaría unirte a su misión.",
+        "errors": {
+          "message": "El mensaje es requerido y tiene que tener al menos 40 caracteres",
+          "alreadySent": "Ya has enviado una solicitud a esta misión",
+          "unknown": "Error al enviar la solicitud"
+        }
       }
     },
     "maps": {
@@ -164,10 +178,13 @@
       "next": "Continuar",
       "save": "Guardar",
       "later": "Más tarde",
-      "done": "Listo"
+      "done": "Listo",
+      "send": "Enviar"
     },
     "error": {
-      "unknown": "Error desconocido"
+      "unknown": "Error desconocido",
+      "notMissionary": "Tienes que ser un misionero para hacer esto",
+      "notMinistry": "Tienes que ser un ministerio para hacer esto"
     },
     "screen": {
       "explore": "Inicio",
