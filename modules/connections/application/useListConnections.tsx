@@ -17,6 +17,6 @@ export const useListConnections = () => {
 
   return useQuery({
     queryKey: ["connections", query],
-    queryFn: () => connectionRepository.get(query, "*, missionary(*), ministry(*), mission(*)"),
+    queryFn: () => connectionRepository.get(query),
   });
 };

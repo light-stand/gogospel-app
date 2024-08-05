@@ -11,14 +11,14 @@ import clsx from "clsx";
 export const ConnectionListItem = ({ connection }: { connection: Connection }) => {
   const router = useRouter();
   const { user } = useUserStore();
-  const { id, mission, ministry, missionary, status } = connection;
+  const { id, mission, ministry, missionary, status, messages } = connection;
   const { onSubmissionManage } = useManageSubmission(id);
 
   const data = {
     image: user.type === UserType.Missionary ? ministry?.images[0] : missionary?.images[0],
     user: user.type === UserType.Missionary ? ministry?.name : missionary?.first_name,
     title: mission?.title,
-    lastMessage: "Lorem ipsum", // TODO: Get last message
+    lastMessage: messages[0].text,
   };
 
   const isPending = user.type === UserType.Missionary && status === ConnectionStatus.Pending;
