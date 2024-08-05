@@ -1,3 +1,4 @@
+import { Message } from "@/chat/domain/Message";
 import { Ministry } from "@/ministry/domain/Ministry";
 import { Mission } from "@/mission/domain/Mission";
 import { Missionary } from "@/missionary/domain/Missionary";
@@ -11,6 +12,7 @@ export type Connection = {
   missionary?: Missionary;
   ministry?: Ministry;
   status?: ConnectionStatus;
+  messages: Message[];
 };
 
 export enum ConnectionStatus {

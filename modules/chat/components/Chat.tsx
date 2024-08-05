@@ -49,6 +49,7 @@ export const Chat = ({ channelId }: ChatProps) => {
         <Bubble {...props} wrapperStyle={{ right: { backgroundColor: indigo[500] } }} />
       )}
       renderSend={(props) => <Send {...props} textStyle={{ color: indigo[500] }} />}
+      bottomOffset={1}
     />
   );
 };

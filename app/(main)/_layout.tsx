@@ -1,6 +1,7 @@
 import { Tabs } from "expo-router";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { indigo } from "tailwindcss/colors";
 
 import { TabBarIcon } from "@/components/navigation/TabBarIcon";
 
@@ -10,6 +11,7 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         headerShown: false,
+        tabBarActiveTintColor: indigo[500],
       }}
     >
       <Tabs.Screen
@@ -17,10 +19,7 @@ export default function TabLayout() {
         options={{
           title: t("screen.explore"),
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon
-              name={focused ? "compass" : "compass-outline"}
-              color={color}
-            />
+            <TabBarIcon name={focused ? "compass" : "compass-outline"} color={color} />
           ),
         }}
       />
@@ -29,10 +28,7 @@ export default function TabLayout() {
         options={{
           title: t("screen.connections"),
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon
-              name={focused ? "chatbubbles" : "chatbubbles-outline"}
-              color={color}
-            />
+            <TabBarIcon name={focused ? "chatbubbles" : "chatbubbles-outline"} color={color} />
           ),
         }}
       />
@@ -41,10 +37,7 @@ export default function TabLayout() {
         options={{
           title: t("screen.profile"),
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon
-              name={focused ? "person" : "person-outline"}
-              color={color}
-            />
+            <TabBarIcon name={focused ? "person" : "person-outline"} color={color} />
           ),
         }}
       />
