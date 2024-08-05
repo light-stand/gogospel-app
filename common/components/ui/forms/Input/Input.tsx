@@ -77,8 +77,6 @@ const Input: React.FC<InputProps> = ({
       )}
       <View
         className={clsx(
-          "bg-gray-1",
-          disabled && "bg-background",
           "rounded-lg",
           "border border-gray-400",
           "focus:border-gray-500",
