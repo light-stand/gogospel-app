@@ -159,6 +159,14 @@
       },
       "errors": {
         "notFound": "Mission not found"
+      },
+      "explore": {
+        "filters": {
+          "title": "Filters",
+          "interests": "Interests",
+          "ministryType": "Ministry Type",
+          "selected": "{{interests}} selected"
+        }
       }
     },
     "ministry": {

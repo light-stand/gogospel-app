@@ -12,6 +12,7 @@ export const mapSettings: MapSettings = {
   //   longitudeDelta: 0.0421,
   // },
   //   provider: PROVIDER_GOOGLE,
+  userInterfaceStyle: "light",
   showsUserLocation: true,
   showsCompass: false,
   showsMyLocationButton: false,

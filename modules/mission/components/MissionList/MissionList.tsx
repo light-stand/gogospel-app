@@ -1,9 +1,7 @@
-import React, { useEffect, useRef } from "react";
-import { View } from "react-native";
-import Carousel, { ICarouselInstance } from "react-native-reanimated-carousel";
 import MissionCard from "../MissionCard/MissionCard";
 import { Mission } from "@/mission/domain/Mission";
 import { Container } from "@/components";
+import { View } from "react-native";
 
 interface MissionListProps {
   missions: Mission[];
@@ -16,7 +14,8 @@ const MissionList: React.FC<MissionListProps> = ({ missions, style }) => {
   if (missions.length === 0) return;
 
   return (
-    <Container scroll className="bg-neutral-200 pt-8">
+    <Container scroll className="bg-neutral-100 pt-8">
+      <View className="h-16"></View>
       {missions.map((item) => (
         <MissionCard className="mb-2" mission={item as Mission} key={item.id} />
       ))}

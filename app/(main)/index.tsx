@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { IconButton } from "@/components";
@@ -7,29 +8,31 @@ import { useExploreMissions } from "@/mission/application/useExploreMissions";
 import { MissionSwiper } from "@/mission/components/MissionSwiper";
 import { ExploreFilters } from "@/mission/components/ExploreFilters";
 import { MissionList } from "@/mission/components/MissionList";
+import { ExploreFiltersTags } from "@/mission/components/ExploreFiltersTags";
 
 export default function Explore() {
+  const { top } = useSafeAreaInsets();
   const [showFilters, setShowFilters] = useState(false);
   const [mode, setMode] = useState<"list" | "map">("map");
-  const { top } = useSafeAreaInsets();
-  const { focused, missions, setFocused } = useExploreMissions();
+  const { focused, missions, setFocused, filters } = useExploreMissions();
 
   return (
     <>
-      <IconButton
-        icon="filter"
-        variant="primary"
-        className="absolute top-4 right-4 z-10 shadow-md"
-        style={[{ marginTop: top }]}
-        onPress={() => setShowFilters(true)}
-      />
-      <IconButton
-        icon={mode === "map" ? "format-list-bulleted-type" : "map"}
-        variant="primary"
-        className="absolute top-4 left-4 z-10 shadow-md"
-        style={[{ marginTop: top }]}
-        onPress={() => setMode((p) => (p === "map" ? "list" : "map"))}
-      />
+      <View className="px-4 absolute top-4 z-10 flex-row" style={[{ marginTop: top }]}>
+        <IconButton
+          icon={mode === "map" ? "format-list-bulleted-type" : "map"}
+          variant="primary"
+          className="z-10 shadow-md"
+          onPress={() => setMode((p) => (p === "map" ? "list" : "map"))}
+        />
+        <ExploreFiltersTags filters={filters} />
+        <IconButton
+          icon="filter"
+          variant="primary"
+          className="z-10 shadow-md"
+          onPress={() => setShowFilters(true)}
+        />
+      </View>
       {mode === "map" && (
         <>
           <MissionMap missions={missions} focused={focused} setFocused={setFocused} />
@@ -42,7 +45,7 @@ export default function Explore() {
         </>
       )}
       {mode === "list" && <MissionList missions={missions || []} />}
-      <ExploreFilters open={showFilters} onClose={() => setShowFilters(false)} />
+      <ExploreFilters open={showFilters} onClose={() => setShowFilters(false)} filters={filters} />
     </>
   );
 }

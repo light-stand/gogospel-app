@@ -16,7 +16,7 @@ export interface ContainerProps extends SafeAreaViewProps, ScrollViewProps {
   avoidKeyboard?: boolean;
   keyboardAware?: boolean;
   scroll?: boolean;
-  style?: object[];
+  style?: any[];
   showBack?: boolean;
   className?: string;
   children?: React.ReactNode;
@@ -52,11 +52,16 @@ const Container: React.FC<ContainerProps> = ({
     const WrapperComponent = avoidKeyboard ? KeyboardAvoidingView : View;
 
     return (
-      <WrapperComponent className="flex-1 bg-white" behavior="height">
+      <WrapperComponent
+        className="flex-1 bg-white"
+        behavior="height"
+        style={[style?.find((e) => e["backgroundColor"])]}
+      >
         <ScrollViewComponent
           className="bg-white"
           keyboardShouldPersistTaps="handled"
           contentContainerStyle={[style, { padding: 16, paddingTop: top + 16 }]}
+          style={[style?.find((e) => e["backgroundColor"])]}
           {...props}
         >
           {showBack && <BackButton />}
