@@ -5,3 +5,4 @@ export * from "./Tag";
 export * from "./TagCloud";
 export * from "./Picker";
 export * from "./DatePicker";
+export * from "./Slider";
