@@ -21,6 +21,7 @@ export interface TagCloudProps {
   onSelect?: (value: string) => void;
   label?: string;
   compact?: boolean;
+  max?: number;
   name?: string;
   control?: Control<any, any>;
   className?: string;
@@ -33,9 +34,10 @@ const TagCloud: React.FC<TagCloudProps> = ({
   selection,
   onSelect,
   label,
+  compact,
+  max,
   name = "",
   control,
-  compact,
   style,
 }) => {
   const { field, fieldState } = control
@@ -53,7 +55,7 @@ const TagCloud: React.FC<TagCloudProps> = ({
       field.onChange(
         field.value.includes(value)
           ? field.value.filter((v: string) => v !== value)
-          : [...field.value, value]
+          : [...(max ? field.value.reverse().slice(0, max - 1) : field.value), value]
       );
     }
   };
@@ -61,7 +63,7 @@ const TagCloud: React.FC<TagCloudProps> = ({
   return (
     <View style={style}>
       {(!!error || label) && (
-        <Text className={clsx("mb-3 text-xs", "text-gray-2", error && "text-red-500")}>
+        <Text className={clsx("text-xs text-gray-500 mb-2 font-medium", error && "text-red-500")}>
           {error || label}
         </Text>
       )}
