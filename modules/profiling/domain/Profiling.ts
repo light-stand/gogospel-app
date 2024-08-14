@@ -26,7 +26,7 @@ export const fieldsByScreen: {
   },
   ministry: {
     type: ["type"],
-    name: ["firstName", "lastName"],
+    name: ["firstName", "ministryType"],
     bio: ["bio"],
     picture: ["picture"],
     interests: ["interests"],

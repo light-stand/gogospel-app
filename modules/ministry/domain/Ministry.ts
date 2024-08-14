@@ -6,6 +6,7 @@ export type Ministry = {
   lat?: number;
   lng?: number;
   verified: boolean;
+  type: string;
   images: string[];
   created_at: string;
   updated_at: string;

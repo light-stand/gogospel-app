@@ -27,6 +27,10 @@
           "missionary": "Apellido",
           "error": "El apellido tiene que tener al menos 3 caracteres"
         },
+        "ministryType": {
+          "ministry": "Tipo de ministerio",
+          "error": "El tipo de ministerio es requerido"
+        },
         "types": {
           "missionary": {
             "title": "Voluntario",

@@ -11,6 +11,7 @@ import { Ministry } from "@/ministry/domain/Ministry";
 import { useAuthStore } from "@/auth/store/useAuthStore";
 import { useUserStore } from "@/user/store/useUserStore";
 import { MissionType } from "@/mission/domain/MissionType";
+import { MinistryType } from "@/ministry/domain/MinistryType";
 
 export const useProfiling = () => {
   const router = useRouter();
@@ -26,7 +27,7 @@ export const useProfiling = () => {
   const onSuccess = (userType: UserType) => (data: Missionary | Ministry) => {
     if (userType === UserType.Ministry) {
       setUser({ ministry: data as Ministry });
-      router.push("/mission/(creation)");
+      router.push("/mission/creation");
     } else {
       setUser({ missionary: data as Missionary });
       router.push("/(main)");
@@ -49,6 +50,8 @@ export const useProfiling = () => {
         name: values.firstName,
         description: values.bio,
         images: [values.picture],
+        verified: false,
+        type: (values.ministryType as MinistryType[])[0],
       });
     } else {
       createMissionary({

@@ -27,6 +27,10 @@
           "missionary": "Last Name",
           "error": "The last name must be at least 3 characters long"
         },
+        "ministryType": {
+          "ministry": "Ministry type",
+          "error": "The ministry type is required"
+        },
         "types": {
           "missionary": {
             "title": "Missionary",
