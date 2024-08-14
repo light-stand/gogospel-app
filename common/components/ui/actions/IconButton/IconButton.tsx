@@ -24,7 +24,7 @@ const IconButton: React.FC<IconButtonProps> = ({
 }) => {
   const containedStyling = {
     primary: {
-      disabled: "bg-indigo-950",
+      disabled: "bg-neutral-400",
       enabled: "bg-indigo-500",
     },
     secondary: {
