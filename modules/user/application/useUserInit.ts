@@ -27,7 +27,8 @@ export const useUserInit = () => {
       const user: User = {
         id: session.user.id,
         email: session.user.email,
-        type: missionary ? UserType.Missionary : UserType.Ministry,
+        // type: missionary ? UserType.Missionary : UserType.Ministry,
+        type: UserType.Missionary,
         ministry,
         missionary,
       };

@@ -207,7 +207,8 @@
       "picker": {
         "helper": "Mantén presionado para seleccionar la ubicación",
         "confirm": "Confirmar"
-      }
+      },
+      "distance": "A {{distance}} km"
     },
     "action": {
       "next": "Continuar",

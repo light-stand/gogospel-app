@@ -207,7 +207,8 @@
       "picker": {
         "helper": "Long press to select location",
         "confirm": "Confim"
-      }
+      },
+      "distance": "{{distance}} km from you"
     },
     "action": {
       "next": "Continue",

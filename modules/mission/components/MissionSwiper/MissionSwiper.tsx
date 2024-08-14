@@ -1,11 +1,11 @@
 import React, { useEffect, useRef } from "react";
 import { View } from "react-native";
 import Carousel, { ICarouselInstance } from "react-native-reanimated-carousel";
-import { planCardSwiperSettings } from "./settings";
+import { missionCardSwiperSettings } from "./settings";
 import { MissionCard } from "../MissionCard";
 import { Mission } from "@/mission/domain/Mission";
 
-interface PlanCardSwiperProps {
+interface MissionCardSwiperProps {
   missions: Mission[];
   focusedEvent: number;
   style?: object;
@@ -13,7 +13,7 @@ interface PlanCardSwiperProps {
   onPlanSelected?: (index: number) => void;
 }
 
-const PlanCardSwiper: React.FC<PlanCardSwiperProps> = ({
+const MissionCardSwiper: React.FC<MissionCardSwiperProps> = ({
   missions,
   focusedEvent,
   onPlanSelected,
@@ -32,7 +32,7 @@ const PlanCardSwiper: React.FC<PlanCardSwiperProps> = ({
   return (
     <View style={style}>
       <Carousel
-        {...planCardSwiperSettings}
+        {...missionCardSwiperSettings}
         ref={carouselRef}
         onSnapToItem={onPlanSelected}
         data={missions}
@@ -45,4 +45,4 @@ const PlanCardSwiper: React.FC<PlanCardSwiperProps> = ({
   );
 };
 
-export default PlanCardSwiper;
+export default MissionCardSwiper;
