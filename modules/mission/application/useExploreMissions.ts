@@ -6,15 +6,17 @@ import { useForm } from "react-hook-form";
 import { ExploreFilters, exploreFiltersSchema } from "../domain/ExploreFilters";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+export const defaultFilters: ExploreFilters = {
+  interests: [],
+  ministryType: [],
+  distance: 0,
+};
+
 export const useExploreMissions = () => {
   const [focused, setFocused] = useState(0);
   const filters = useForm<ExploreFilters>({
     resolver: zodResolver(exploreFiltersSchema),
-    defaultValues: {
-      interests: [],
-      ministryType: [],
-      distance: 0,
-    },
+    defaultValues: defaultFilters,
   });
 
   const { data: missions } = useQuery({

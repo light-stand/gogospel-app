@@ -2,9 +2,9 @@ import { useState } from "react";
 import { View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import { IconButton } from "@/components";
+import { IconButton, Tag } from "@/components";
 import { MissionMap } from "@/mission/components/MissionMap";
-import { useExploreMissions } from "@/mission/application/useExploreMissions";
+import { defaultFilters, useExploreMissions } from "@/mission/application/useExploreMissions";
 import { MissionSwiper } from "@/mission/components/MissionSwiper";
 import { ExploreFilters } from "@/mission/components/ExploreFilters";
 import { MissionList } from "@/mission/components/MissionList";
@@ -16,16 +16,29 @@ export default function Explore() {
   const [mode, setMode] = useState<"list" | "map">("map");
   const { focused, missions, setFocused, filters } = useExploreMissions();
 
+  const filtersCount = Object.entries(filters.getValues()).filter(
+    (filter) => !!filter[1] && (!Array.isArray(filter[1]) || filter[1].length)
+  ).length;
+
   return (
     <>
-      <View className="px-4 absolute top-4 z-10 flex-row" style={[{ marginTop: top }]}>
+      <View className="px-4 absolute top-4 z-10 flex-row w-full" style={[{ marginTop: top }]}>
         <IconButton
           icon={mode === "map" ? "format-list-bulleted-type" : "map"}
           variant="primary"
-          className="z-10 shadow-md"
+          className="z-10 shadow-md mr-auto"
           onPress={() => setMode((p) => (p === "map" ? "list" : "map"))}
         />
-        <ExploreFiltersTags filters={filters} />
+        {filtersCount > 0 && (
+          <Tag
+            selected
+            label={filtersCount.toString()}
+            color="red"
+            className="px-3 mr-1 my-auto"
+            icon="filter-off"
+            onPress={() => filters.reset(defaultFilters)}
+          />
+        )}
         <IconButton
           icon="filter"
           variant="primary"
