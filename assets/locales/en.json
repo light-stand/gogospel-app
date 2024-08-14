@@ -188,6 +188,24 @@
         "confirm": "Confim"
       }
     },
+    "user": {
+      "profile": {
+        "edit": "Edit profile",
+        "favorites": "Favorites",
+        "joined": "Joined",
+        "myMissions": "My missions",
+        "options": {
+          "missions": "Missions",
+          "done": "Completed missions",
+          "testimonies": "Testimonies",
+          "connectedVolunteers": "Connected volunteers",
+          "settings": "Settings",
+          "notification": "Notifications",
+          "verificationCode": "Verification code",
+          "logout": "Logout"
+        }
+      }
+    },
     "action": {
       "next": "Continue",
       "cancel": "Cancel",

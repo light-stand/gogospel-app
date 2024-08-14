@@ -11,5 +11,5 @@ export const useLogout = () => {
 
   const logoutMutation = useMutation(logout, { onSuccess });
 
-  return logoutMutation;
+  return logoutMutation.mutate;
 };
