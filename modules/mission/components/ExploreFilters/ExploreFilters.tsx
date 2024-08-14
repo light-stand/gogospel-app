@@ -50,7 +50,7 @@ const ExploreFilters: React.FC<ExploreFiltersProps> = ({ open, onClose, filters 
         style={[{ marginTop: top }]}
         onPress={onClose}
       />
-      <Container showBack={false}>
+      <Container showBack={false} scroll>
         <Text className="font-bold text-3xl mb-6">{t("mission.explore.filters.title")}</Text>
         <Collapsable className="mb-4">
           <TagCloud
