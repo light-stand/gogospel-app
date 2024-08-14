@@ -5,7 +5,7 @@ const PAGE_WIDTH = Dimensions.get("window").width;
 export const missionCardSwiperSettings = {
   vertical: false,
   width: PAGE_WIDTH,
-  height: PAGE_WIDTH * 0.38,
+  height: 148,
   loop: false,
   autoplay: false,
   enableSnap: true,
