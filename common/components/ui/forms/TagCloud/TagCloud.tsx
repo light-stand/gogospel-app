@@ -61,7 +61,7 @@ const TagCloud: React.FC<TagCloudProps> = ({
   return (
     <View style={style}>
       {(!!error || label) && (
-        <Text className={clsx("mb-3 text-xs", "text-gray-2", error && "text-red-500")}>
+        <Text className={clsx("text-xs text-gray-500 mb-2 font-medium", error && "text-red-500")}>
           {error || label}
         </Text>
       )}

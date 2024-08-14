@@ -23,7 +23,7 @@ const Tag: React.FC<TagProps> = ({ label, selected, onPress, compact, color, ico
       disabled={!onPress}
       className={clsx(
         selected && !color ? "border-neutral-400 bg-neutral-200" : "border-neutral-500",
-        "flex flex-row rounded-lg",
+        "flex flex-row rounded-lg items-center",
         "self-start",
         compact ? "px-2 py-[2px]" : "py-1 px-2"
       )}
@@ -38,7 +38,11 @@ const Tag: React.FC<TagProps> = ({ label, selected, onPress, compact, color, ico
       {icon && (
         <Icon
           name={icon}
-          className={clsx("mr-1 text-xs", selected ? "text-neutral-700" : "text-neutral-400")}
+          className={clsx(
+            "mr-1",
+            selected ? "text-neutral-700" : "text-neutral-400",
+            compact ? "text-xs" : "text-sm"
+          )}
           style={[
             {
               ...(color && {
@@ -49,7 +53,10 @@ const Tag: React.FC<TagProps> = ({ label, selected, onPress, compact, color, ico
         />
       )}
       <Text
-        className={clsx(selected ? "text-neutral-700" : "text-neutral-400", "text-xs")}
+        className={clsx(
+          selected ? "text-neutral-700" : "text-neutral-400",
+          compact ? "text-xs" : "text-md"
+        )}
         style={{
           ...(color && {
             color: colors[selected ? color : "neutral"][selected ? 600 : 500],

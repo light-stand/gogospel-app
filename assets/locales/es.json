@@ -157,6 +157,27 @@
         "notFound": "Misión no encontrada"
       }
     },
+    "ministry": {
+      "types": {
+        "church": "Iglesia",
+        "association": "Asociación",
+        "foundation": "Fundación",
+        "ngo": "ONG",
+        "ministry": "Ministerio",
+        "rehab": "Centro de Rehabilitación",
+        "media": "Medio de Comunicación",
+        "mission-agency": "Agencia Misionera",
+        "fraternity": "Fraternidad",
+        "denomination": "Denominación",
+        "organization": "Organización",
+        "bookstore": "Librería",
+        "record-label": "Sello Musical",
+        "business": "Negocio",
+        "school-university": "Colegio, Universidad",
+        "seminary": "Seminario, Centro Teológico",
+        "sports": "Deporte"
+      }
+    },
     "connections": {
       "submission": {
         "title": "¿Quieres apuntarte a {{name}}?",
@@ -186,7 +207,8 @@
       "picker": {
         "helper": "Mantén presionado para seleccionar la ubicación",
         "confirm": "Confirmar"
-      }
+      },
+      "distance": "A {{distance}} km"
     },
     "user": {
       "profile": {

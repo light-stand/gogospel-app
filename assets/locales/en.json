@@ -157,6 +157,27 @@
         "notFound": "Mission not found"
       }
     },
+    "ministry": {
+      "types": {
+        "church": "Church",
+        "association": "Association",
+        "foundation": "Foundation",
+        "ngo": "NGO",
+        "ministry": "Ministry",
+        "rehab": "Rehabilitation Center",
+        "media": "Media Outlet",
+        "mission-agency": "Mission Agency",
+        "fraternity": "Fraternity",
+        "denomination": "Denomination",
+        "organization": "Organization",
+        "bookstore": "Bookstore",
+        "record-label": "Record Label",
+        "business": "Business",
+        "school-university": "School or University",
+        "seminary": "Seminary or Theological Center",
+        "sports": "Sports"
+      }
+    },
     "connections": {
       "submission": {
         "title": "Do you want to join {{name}}?",
@@ -186,7 +207,8 @@
       "picker": {
         "helper": "Long press to select location",
         "confirm": "Confim"
-      }
+      },
+      "distance": "{{distance}} km from you"
     },
     "user": {
       "profile": {
