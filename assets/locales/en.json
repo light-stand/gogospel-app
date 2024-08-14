@@ -164,8 +164,10 @@
         "filters": {
           "title": "Filters",
           "interests": "Interests",
-          "ministryType": "Ministry Type",
-          "selected": "{{interests}} selected"
+          "ministryType": "Ministry type",
+          "selected": "{{interests}} selected",
+          "distance": "Distance",
+          "unlimited": "Unlimited"
         }
       }
     },

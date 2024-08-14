@@ -9,6 +9,7 @@ export const exploreFiltersSchema = z.object({
   ministryType: z
     .array(z.enum(Object.keys(ministryTypes) as [MinistryType, ...MinistryType[]]))
     .optional(),
+  distance: z.number().optional(),
 });
 
 export type ExploreFilters = z.infer<typeof exploreFiltersSchema>;

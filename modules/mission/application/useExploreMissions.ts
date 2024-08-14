@@ -10,6 +10,11 @@ export const useExploreMissions = () => {
   const [focused, setFocused] = useState(0);
   const filters = useForm<ExploreFilters>({
     resolver: zodResolver(exploreFiltersSchema),
+    defaultValues: {
+      interests: [],
+      ministryType: [],
+      distance: 0,
+    },
   });
 
   const { data: missions } = useQuery({

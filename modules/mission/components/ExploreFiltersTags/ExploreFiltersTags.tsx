@@ -14,7 +14,7 @@ export interface ExploreFiltersTagsProps {
   filters: UseFormReturn<ExploreFilters>;
 }
 
-type FilterEntry = [keyof ExploreFilters, MissionType[] | MinistryType[]];
+type FilterEntry = [keyof ExploreFilters, MissionType[] | MinistryType[] | number];
 
 const ExploreFiltersTags: React.FC<ExploreFiltersTagsProps> = ({ filters }) => {
   const router = useRouter();
@@ -25,14 +25,23 @@ const ExploreFiltersTags: React.FC<ExploreFiltersTagsProps> = ({ filters }) => {
   const getLabel = useCallback(
     (filter: FilterEntry) => {
       const label = t(`mission.explore.filters.${filter[0]}`);
-      let valueLabel = {
-        interests: filter[1].map((interest: string) => t(`mission.types.${interest}`)).join(", "),
-        ministryType: filter[1]
-          .map((ministryType: string) => t(`ministry.types.${ministryType}`))
-          .join(", "),
-      }[filter[0] as keyof ExploreFilters];
-
-      if (valueLabel.length > 30)
+      let valueLabel;
+      switch (filter[0]) {
+        case "interests":
+          valueLabel = (filter[1] as MissionType[])
+            .map((interest: MissionType) => t(`mission.types.${interest}`))
+            .join(", ");
+          break;
+        case "ministryType":
+          valueLabel = (filter[1] as MinistryType[])
+            .map((ministryType: MinistryType) => t(`ministry.types.${ministryType}`))
+            .join(", ");
+          break;
+        case "distance":
+          valueLabel = (filter[1] as number) + " km";
+          break;
+      }
+      if (valueLabel.length > 30 && Array.isArray(filter[1]))
         valueLabel = t(`mission.explore.filters.selected`, { interests: filter[1].length });
 
       return `${label}: ${valueLabel}`;
@@ -51,7 +60,7 @@ const ExploreFiltersTags: React.FC<ExploreFiltersTagsProps> = ({ filters }) => {
       showsHorizontalScrollIndicator={false}
     >
       {(Object.entries(values) as FilterEntry[])
-        .filter((filter) => !!filter[1])
+        .filter((filter) => !!filter[1] && (!Array.isArray(filter[1]) || filter[1].length))
         .map((filter) => (
           <Tag
             selected

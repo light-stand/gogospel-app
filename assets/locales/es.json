@@ -165,7 +165,9 @@
           "title": "Filtros",
           "interests": "Intereses",
           "ministryType": "Tipo de ministerio",
-          "selected": "{{interests}} seleccionados"
+          "selected": "{{interests}} seleccionados",
+          "distance": "Distancia",
+          "unlimited": "Ilimitado"
         }
       }
     },
