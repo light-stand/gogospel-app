@@ -7,20 +7,20 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { useQuery } from "react-query";
 import { capitalize, size, sortBy } from "lodash";
 import { useTranslation } from "react-i18next";
 import dayjs from "dayjs";
 import Carousel from "react-native-reanimated-carousel";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import { Text, Icon, Image, Button, Modal, TagCloud } from "@/components";
-import { missionRepository } from "@/mission/interface/missionRepository";
-import { Mission } from "@/mission/domain/Mission";
+import { Text, Icon, Image, Button, Modal, TagCloud, IconButton } from "@/components";
 import { missionTypes } from "@/mission/domain/MissionType";
 import { UserPhoto } from "@/components/ui/structure/UserPhoto";
 import { useUserStore } from "@/user/store/useUserStore";
 import { UserType } from "@/profiling/domain/Profiling";
+import { LinearGradient } from "expo-linear-gradient";
+import { useMissionDetails } from "@/mission/application/useMissionDetails";
+import { useFavorite } from "@/mission/application/useFavorite";
 
 const PAGE_WIDTH = Dimensions.get("window").width;
 
@@ -30,34 +30,53 @@ export default function EventDetails() {
   const { id } = useLocalSearchParams();
   const { user } = useUserStore();
 
-  const { data: mission, isLoading } = useQuery({
-    queryKey: ["mission", id],
-    queryFn: () => missionRepository.getById(id as string, "*, ministry(name, images)"),
-  });
   const { top } = useSafeAreaInsets();
   const [expanded, setExpanded] = useState(false);
 
+  const { mission, isLoading, isFavorite } = useMissionDetails(parseInt(id as string));
+
+  const { addFavorite, removeFavorite } = useFavorite();
+
+  const toggleFavorite = () => {
+    if (isFavorite) {
+      removeFavorite(parseInt(id as string));
+    } else {
+      addFavorite(parseInt(id as string));
+    }
+  };
+
   if (!mission) return null;
 
-  const { start_date, title, ministry, categories, duration, images, location_name } =
-    mission as Mission;
+  const { start_date, title, ministry, categories, duration, images, location_name } = mission;
 
   return (
     <ScrollView className="flex-1" contentContainerStyle={{ minHeight: "100%", paddingBottom: 32 }}>
-      <TouchableOpacity
+      <IconButton
+        icon="window-close"
+        className="absolute right-4 z-50 text-white"
         onPress={() => router.back()}
-        className="absolute right-4 z-50"
-        style={{ top: top }}
-      >
-        <Icon name="window-close" />
-      </TouchableOpacity>
+        style={[{ top: top }]}
+      />
+      {user.type === UserType.Missionary && (
+        <IconButton
+          icon={isFavorite ? "heart" : "heart-outline"}
+          size="small"
+          className="absolute right-14 z-50 text-white"
+          onPress={toggleFavorite}
+          style={[{ top: top }]}
+        />
+      )}
+      <LinearGradient
+        colors={["#00000099", "#00000044", "#00000000"]}
+        className="absolute top-0 w-full h-24 z-20"
+      />
       {isLoading && <Text className="text-white">Loading...</Text>}
-      <View style={{ height: PAGE_WIDTH / 1.5 }}>
+      <View style={{ height: PAGE_WIDTH / 1.3 }}>
         {!!size(images) ? (
           <Carousel
             data={images as string[]}
             width={PAGE_WIDTH}
-            height={PAGE_WIDTH / 1.5}
+            height={PAGE_WIDTH / 1.3}
             renderItem={({ index, item }) => (
               <Image className="h-full" key={index} source={{ uri: item }} />
             )}
@@ -68,7 +87,7 @@ export default function EventDetails() {
         <View
           pointerEvents="none"
           className="absolute flex justify-end z-20 t-0 w-full"
-          style={{ height: PAGE_WIDTH / 1.5 }}
+          style={{ height: PAGE_WIDTH / 1.3 }}
         ></View>
       </View>
       <View className="gap-y-2 p-4">

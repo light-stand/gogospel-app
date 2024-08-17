@@ -1,5 +1,6 @@
 import { Ministry } from "@/ministry/domain/Ministry";
 import { MissionType } from "./MissionType";
+import { Favorite } from "./Favorite";
 
 export type Mission = {
   id: number;
@@ -18,6 +19,7 @@ export type Mission = {
   location_name?: string;
   active?: boolean;
   approved?: boolean;
+  favorite?: Favorite[];
 };
 
 export type MissionViewInput = {
