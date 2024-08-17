@@ -1,9 +1,9 @@
 import clsx from "clsx";
 import dayjs from "dayjs";
+import { Fragment } from "react";
 import { TouchableOpacity, View } from "react-native";
-import { Link, useLocalSearchParams, useRouter } from "expo-router";
+import { useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { Container, Icon, IconButton, Text } from "@/components";
 import { UserPhoto } from "@/components/ui/structure/UserPhoto";
@@ -13,25 +13,25 @@ import { profileOptions } from "@/user/domain/profileOptions";
 import { useLogout } from "@/auth/application/useLogout";
 
 export default function MyProfile() {
-  const { id } = useLocalSearchParams();
   const router = useRouter();
   const { t } = useTranslation();
   const { user } = useUserStore();
-  const { top } = useSafeAreaInsets();
   const logout = useLogout();
+
+  if (!user) return null;
 
   const { ministry, missionary, type } = user;
 
   const data = {
     missionary: {
-      images: missionary?.images,
-      name: [missionary?.first_name, missionary?.last_name].join(" "),
+      images: missionary?.images || [],
+      name: [missionary?.first_name, missionary?.last_name].filter(Boolean).join(" "),
       created_at: missionary?.created_at,
       verified: false,
     },
     ministry: {
-      images: ministry?.images,
-      name: ministry?.name,
+      images: ministry?.images || [],
+      name: ministry?.name || "",
       created_at: ministry?.created_at,
       verified: ministry?.verified,
     },
@@ -71,15 +71,23 @@ export default function MyProfile() {
         {/*=Buttons=*/}
         <View className="flex-row justify-evenly w-full my-4">
           <View className="items-center">
-            <Link href="/settings/edit" asChild>
-              <IconButton icon="pencil" size="medium" variant="primary" className="mb-1" disabled />
-            </Link>
+            <IconButton
+              icon="pencil"
+              size="medium"
+              variant="primary"
+              className="mb-1"
+              onPress={() => router.push("/settings/edit")}
+            />
             <Text className="mt-1 font-bold text-neutral-500">{t("user.profile.edit")}</Text>
           </View>
           <View className="items-center">
-            <Link href="/settings/interests" asChild>
-              <IconButton icon="heart" size="medium" variant="primary" className="mb-1" disabled />
-            </Link>
+            <IconButton
+              icon="heart"
+              size="medium"
+              variant="primary"
+              className="mb-1"
+              onPress={() => router.push("/settings/interests")}
+            />
             <Text className="mt-1 font-bold text-neutral-500">{t("user.profile.favorites")}</Text>
           </View>
         </View>
@@ -87,12 +95,13 @@ export default function MyProfile() {
       {/*=Options=*/}
       <View className="justify-between">
         {profileOptions.map((option) => (
-          <>
+          <Fragment key={option.label}>
             <Text className="font-bold my-2">{t(option.label)}</Text>
             {option.items.map(
               ({ icon, label, href, userType, action, disabled }) =>
                 (!userType || userType === type) && (
                   <TouchableOpacity
+                    key={label}
                     disabled={disabled}
                     onPress={href ? () => router.push(href) : action ? actions[action] : undefined}
                     className={clsx(disabled && "opacity-50")}
@@ -105,7 +114,7 @@ export default function MyProfile() {
                   </TouchableOpacity>
                 )
             )}
-          </>
+          </Fragment>
         ))}
       </View>
     </Container>

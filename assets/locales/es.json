@@ -197,9 +197,10 @@
         "title": "¿Quieres apuntarte a {{name}}?",
         "text": "{{ministry}} recibira una notificación y podrá aceptar o rechazar tu solicitud.\nPuedes escribir un mensaje para {{ministry}} presentandote y explicando por qué te gustaría unirte a su misión.",
         "errors": {
-          "message": "El mensaje es requerido y tiene que tener al menos 40 caracteres",
+          "message": "El mensaje es requerido y debe tener al menos 40 caracteres",
           "alreadySent": "Ya has enviado una solicitud a esta misión",
-          "unknown": "Error al enviar la solicitud"
+          "unknown": "Error al enviar la solicitud",
+          "notAccepted": "La solicitud aún no ha sido aceptada. Puedes abrir el chat una vez que la solicitud sea aceptada."
         },
         "manage": {
           "popup": {

@@ -199,7 +199,8 @@
         "errors": {
           "message": "The message is required and must be at least 40 characters long",
           "alreadySent": "You have already sent a request to this mission",
-          "unknown": "Error sending the request"
+          "unknown": "Error sending the request",
+          "notAccepted": "The request was not accepted yet. You can open the chat once the request is accepted."
         },
         "manage": {
           "popup": {

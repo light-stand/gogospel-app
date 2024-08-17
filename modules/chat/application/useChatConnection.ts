@@ -30,12 +30,14 @@ export const useChatConnection = (channelId: number) => {
           msg.text === variables.text ? { ...msg, pending: false } : msg
         )
       );
+      queryClient.invalidateQueries(["connections", channelId]);
     },
   });
 
   const onMessage = (payload: RealtimePostgresInsertPayload<Message>) => {
     if (payload.new.user_id === user.id) return;
     setMessages((prev: Message[] | undefined) => [payload.new, ...(prev as Message[])]);
+    queryClient.invalidateQueries(["connections", channelId]);
   };
 
   const handleSend = (message: Omit<Message, "id">) => {

@@ -43,6 +43,7 @@ export class Repository<T> {
     const { data, error }: PostgrestSingleResponse<T> = await this.client
       .from<string, T>(this.tableName)
       .insert(newData as any)
+      .select("*")
       .single();
 
     if (error) throw error;

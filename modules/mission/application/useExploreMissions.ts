@@ -21,7 +21,14 @@ export const useExploreMissions = () => {
 
   const { data: missions } = useQuery({
     queryKey: ["missions", filters.getValues()],
-    queryFn: () => missionRepository.get([], "*, ministry(name, images)"),
+    queryFn: () =>
+      missionRepository.get(
+        [
+          ["approved", "eq", true],
+          ["active", "eq", true],
+        ],
+        "*, ministry(name, images)"
+      ),
   });
 
   return { focused, setFocused, missions, filters };

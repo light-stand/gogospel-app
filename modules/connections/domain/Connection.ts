@@ -12,7 +12,7 @@ export type Connection = {
   missionary?: Missionary;
   ministry?: Ministry;
   status?: ConnectionStatus;
-  messages: Message[];
+  messages?: Message[];
 };
 
 export enum ConnectionStatus {
