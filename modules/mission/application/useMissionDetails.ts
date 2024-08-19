@@ -8,7 +8,7 @@ export const useMissionDetails = (id: number) => {
   const { data: mission, isLoading } = useQuery({
     queryKey: ["mission", id],
     queryFn: () =>
-      missionRepository.getById(id, "*, ministry(name, images), favorite(missionary_id)"),
+      missionRepository.getById(id, "*, ministry(id, name, images), favorite(missionary_id)"),
   });
 
   // Thanks to RLS, "favorite" should contain only the user entry

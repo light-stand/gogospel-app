@@ -1,29 +1,9 @@
-import { MaterialIconType } from "@/components/ui/foundation/Icon/Icon";
 import { UserType } from "@/profiling/domain/Profiling";
+import { ProfileOptions } from "../components/ProfileOptions";
 
-type ProfileOptions = {
-  label: string;
-  items: {
-    icon: MaterialIconType;
-    label: string;
-    href?: string;
-    userType?: UserType;
-    action?: "logout";
-    disabled?: boolean;
-  }[];
-}[];
-
-export const profileOptions: ProfileOptions = [
+export const publicProfileOptions: ProfileOptions = [
   {
-    label: "user.profile.options.missions",
     items: [
-      {
-        icon: "heart-outline",
-        label: "user.profile.favorites",
-        href: "/mission/favorites",
-        userType: UserType.Missionary,
-        // disabled: true,
-      },
       {
         icon: "handshake-outline",
         label: "user.profile.options.done",
@@ -51,6 +31,22 @@ export const profileOptions: ProfileOptions = [
         href: "/settings",
         // disabled: true,
       },
+    ],
+  },
+];
+
+export const profileOptions: ProfileOptions = [
+  {
+    label: "user.profile.options.missions",
+    items: [
+      {
+        icon: "heart-outline",
+        label: "user.profile.favorites",
+        href: "/mission/favorites",
+        userType: UserType.Missionary,
+        // disabled: true,
+      },
+      ...publicProfileOptions[0].items,
     ],
   },
   {

@@ -1,7 +1,5 @@
-import clsx from "clsx";
 import dayjs from "dayjs";
-import { Fragment } from "react";
-import { TouchableOpacity, View } from "react-native";
+import { View } from "react-native";
 import { useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
 
@@ -11,6 +9,7 @@ import { UserType } from "@/profiling/domain/Profiling";
 import { useUserStore } from "@/user/store/useUserStore";
 import { profileOptions } from "@/user/domain/profileOptions";
 import { useLogout } from "@/auth/application/useLogout";
+import { ProfileOptions } from "@/user/components/ProfileOptions";
 
 export default function MyProfile() {
   const router = useRouter();
@@ -76,7 +75,7 @@ export default function MyProfile() {
               size="medium"
               variant="primary"
               className="mb-1"
-              onPress={() => router.push("/settings/edit")}
+              onPress={() => router.push(`/profile/${type}/${user[type as UserType]?.id}`)}
             />
             <Text className="mt-1 font-bold text-neutral-500">{t("user.profile.edit")}</Text>
           </View>
@@ -93,30 +92,7 @@ export default function MyProfile() {
         </View>
       </View>
       {/*=Options=*/}
-      <View className="justify-between">
-        {profileOptions.map((option) => (
-          <Fragment key={option.label}>
-            <Text className="font-bold my-2">{t(option.label)}</Text>
-            {option.items.map(
-              ({ icon, label, href, userType, action, disabled }) =>
-                (!userType || userType === type) && (
-                  <TouchableOpacity
-                    key={label}
-                    disabled={disabled}
-                    onPress={href ? () => router.push(href) : action ? actions[action] : undefined}
-                    className={clsx(disabled && "opacity-50")}
-                  >
-                    <View className="flex-row items-center py-4 px-2">
-                      <Icon name={icon} className="mr-2 text-neutral-700" />
-                      <Text className="font-bold text-neutral-500">{t(label)}</Text>
-                      <Icon className="ml-auto" name="chevron-right" />
-                    </View>
-                  </TouchableOpacity>
-                )
-            )}
-          </Fragment>
-        ))}
-      </View>
+      <ProfileOptions options={profileOptions} actions={actions} userType={user.type} />
     </Container>
   );
 }

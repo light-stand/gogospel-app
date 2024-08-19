@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import clsx from "clsx";
 import { useRouter } from "expo-router";
 
@@ -22,7 +22,7 @@ export const ChatHeader = ({ id }: ChatHeaderProps) => {
     queryFn: () =>
       connectionRepository.getById(
         id,
-        "*, missionary(images, first_name), ministry(images, name), mission(title)"
+        "*, missionary(id, images, first_name), ministry(id, images, name), mission(title)"
       ),
   });
 
@@ -31,10 +31,21 @@ export const ChatHeader = ({ id }: ChatHeaderProps) => {
   const { mission, ministry, missionary, status } = connection;
 
   const data = {
-    image: user.type === UserType.Missionary ? ministry?.images[0] : missionary?.images[0],
-    user: user.type === UserType.Missionary ? ministry?.name : missionary?.first_name,
-    title: mission?.title,
-  };
+    missionary: {
+      id: ministry?.id,
+      type: UserType.Ministry,
+      image: ministry?.images[0],
+      user: ministry?.name,
+      title: mission?.title,
+    },
+    ministry: {
+      id: missionary?.id,
+      type: UserType.Missionary,
+      image: missionary?.images[0],
+      user: missionary?.first_name,
+      title: mission?.title,
+    },
+  }[user.type as UserType];
 
   return (
     <View className="flex-row items-center h-14">
@@ -42,11 +53,14 @@ export const ChatHeader = ({ id }: ChatHeaderProps) => {
       <UserPhoto
         source={{ uri: data.image }}
         className={clsx("h-10 w-10 mr-3", status === ConnectionStatus.Rejected && "opacity-50")}
+        onPress={() => router.push(`/profile/${data.type}/${data.id}`)}
       />
-      <View className={clsx(status === ConnectionStatus.Rejected && "opacity-50")}>
-        <Text className={"font-bold text-base"}>{data.user}</Text>
-        <Text className="text-neutral-400 font-bold mb-[2px]">{data.title}</Text>
-      </View>
+      <TouchableOpacity onPress={() => router.push(`/profile/${data.type}/${data.id}`)}>
+        <View className={clsx(status === ConnectionStatus.Rejected && "opacity-50")}>
+          <Text className={"font-bold text-base"}>{data.user}</Text>
+          <Text className="text-neutral-400 font-bold mb-[2px]">{data.title}</Text>
+        </View>
+      </TouchableOpacity>
     </View>
   );
 };

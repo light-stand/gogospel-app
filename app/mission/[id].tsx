@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import {
-  TouchableOpacity,
   View,
   Dimensions,
   ScrollView,
   TouchableWithoutFeedback,
+  TouchableOpacity,
 } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { capitalize, size, sortBy } from "lodash";
@@ -27,22 +27,18 @@ const PAGE_WIDTH = Dimensions.get("window").width;
 export default function EventDetails() {
   const router = useRouter();
   const { t } = useTranslation();
-  const { id } = useLocalSearchParams();
   const { user } = useUserStore();
+  const id = parseInt(useLocalSearchParams().id as string);
 
   const { top } = useSafeAreaInsets();
   const [expanded, setExpanded] = useState(false);
 
-  const { mission, isLoading, isFavorite } = useMissionDetails(parseInt(id as string));
+  const { mission, isLoading, isFavorite } = useMissionDetails(id);
 
   const { addFavorite, removeFavorite } = useFavoriteActions();
 
   const toggleFavorite = () => {
-    if (isFavorite) {
-      removeFavorite(parseInt(id as string));
-    } else {
-      addFavorite(parseInt(id as string));
-    }
+    isFavorite ? removeFavorite(id) : addFavorite(id);
   };
 
   if (!mission) return null;
@@ -94,12 +90,14 @@ export default function EventDetails() {
         <Text className="text-3xl font-bold" numberOfLines={2}>
           {title}
         </Text>
-        <View className="flex flex-row items-center gap-x-2">
-          <UserPhoto source={{ uri: ministry?.images[0] }} className="h-6 w-6" />
-          <Text bold className="text-neutral-600 font-semibold" numberOfLines={1}>
-            {ministry?.name}
-          </Text>
-        </View>
+        <TouchableOpacity onPress={() => router.push(`/profile/ministry/${ministry?.id}`)}>
+          <View className="flex flex-row items-center gap-x-2">
+            <UserPhoto source={{ uri: ministry?.images[0] }} className="h-6 w-6" />
+            <Text bold className="text-neutral-600 font-semibold" numberOfLines={1}>
+              {ministry?.name}
+            </Text>
+          </View>
+        </TouchableOpacity>
         <View className="flex-row items-center gap-x-1">
           <Icon name="calendar" className="text-neutral-500 text-base" />
           <Text bold className="text-md text-neutral-500">
