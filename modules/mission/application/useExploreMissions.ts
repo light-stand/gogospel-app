@@ -21,6 +21,13 @@ export const useExploreMissions = () => {
     defaultValues: defaultFilters,
   });
 
+  const filterValues = filters.getValues();
+
+  const { data: missions } = useQuery({
+    queryKey: ["missions", { ...filterValues, ...location }],
+    queryFn: () => missionRepository.exploreMissions({ ...filterValues, ...location }),
+  });
+
   useEffect(() => {
     getLocation().then((location) => {
       location &&
@@ -30,13 +37,6 @@ export const useExploreMissions = () => {
         });
     });
   }, []);
-
-  const filterValues = filters.getValues();
-
-  const { data: missions } = useQuery({
-    queryKey: ["missions", filterValues],
-    queryFn: () => missionRepository.exploreMissions({ ...filterValues, ...location }),
-  });
 
   return { focused, setFocused, missions, filters };
 };
