@@ -13,3 +13,5 @@ export const exploreFiltersSchema = z.object({
 });
 
 export type ExploreFilters = z.infer<typeof exploreFiltersSchema>;
+
+export type ExploreFiltersInput = ExploreFilters & { lat: number; long: number };
