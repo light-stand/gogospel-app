@@ -16,6 +16,7 @@ export interface ImagePickerProps {
   icon?: MaterialIconType;
   helperText?: string | null;
   error?: boolean | null;
+  disabled?: boolean;
   control?: Control<any, any>;
   className?: string;
   style?: object[];
@@ -27,6 +28,7 @@ const ImagePicker: React.FC<ImagePickerProps> = ({
   icon,
   helperText,
   error: globalError,
+  disabled,
   control,
   style,
 }) => {
@@ -59,6 +61,7 @@ const ImagePicker: React.FC<ImagePickerProps> = ({
             onPress={handlePress}
             iconButton="delete"
             onButtonPress={handleDelete}
+            disabled={disabled}
           />
         ) : (
           <TouchableOpacity
@@ -71,6 +74,7 @@ const ImagePicker: React.FC<ImagePickerProps> = ({
               !field.value && "bg-gray-300",
               error && "text-red-500"
             )}
+            disabled={disabled}
           >
             {icon && !isLoading && (
               <Icon
