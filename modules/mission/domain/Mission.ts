@@ -13,8 +13,9 @@ export type Mission = {
   ministry_id?: number;
   categories: MissionType[];
   duration?: number;
-  longitude?: number;
-  latitude?: number;
+  distance?: number;
+  lat?: number;
+  long?: number;
   location_name?: string;
   active?: boolean;
   approved?: boolean;

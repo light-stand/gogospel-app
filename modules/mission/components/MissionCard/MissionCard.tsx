@@ -16,37 +16,19 @@ export interface MissionCardProps {
   mission: Mission;
   style?: object;
   className?: string;
-  from?: string;
 }
 
-const MissionCard: React.FC<MissionCardProps> = ({ mission, style, from }) => {
+const MissionCard: React.FC<MissionCardProps> = ({ mission, style }) => {
   const router = useRouter();
   const { t } = useTranslation();
-  const [distance, setDistance] = React.useState<number>();
 
   const onCardPress = () => {
     router.push(`/mission/${mission.id}`);
   };
 
-  const getMissionDistance = async () => {
-    const userLocation = await getLocation();
-    if (!userLocation || !mission.latitude || !mission.longitude) return;
-    const distance = haversineDistance(
-      userLocation?.latitude,
-      userLocation?.longitude,
-      mission.latitude,
-      mission.longitude
-    );
-    setDistance(Math.floor(distance));
-  };
-
-  useEffect(() => {
-    getMissionDistance();
-  }, []);
-
   if (!mission.id) return null;
 
-  const { start_date, end_date, title, ministry, categories, duration, images } = mission;
+  const { start_date, end_date, title, ministry, categories, duration, images, distance } = mission;
 
   // return (
   //   <TouchableOpacity activeOpacity={0.8} onPress={onCardPress} className="relative" style={style}>

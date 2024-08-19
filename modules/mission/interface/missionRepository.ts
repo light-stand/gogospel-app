@@ -1,11 +1,21 @@
 import { Repository } from "@/interface/repository";
 import { Mission, MissionViewInput } from "../domain/Mission";
 import { supabase } from "@/interface/supabase";
+import { ExploreFiltersInput } from "../domain/ExploreFilters";
 
 class MissionRepository extends Repository<Mission> {
   constructor() {
     super("mission_view", supabase);
   }
+
+  // Apply filters and location
+  exploreMissions = async (input: ExploreFiltersInput): Promise<Mission[]> => {
+    const { data, error } = await this.client
+      .rpc("explore_missions", input)
+      .select("*, ministry(name, images)");
+    if (error) throw error;
+    return data as Mission[];
+  };
 
   // for when we have a millions missions :)
   getMissionsOnView = async (view: MissionViewInput): Promise<Mission[]> => {

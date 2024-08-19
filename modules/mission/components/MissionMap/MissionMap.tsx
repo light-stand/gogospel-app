@@ -27,8 +27,8 @@ const MissionMap: React.FC<MapWithMarkersProps> = ({ focused, missions, setFocus
     const map = mapRef.current as MapView;
     map.animateCamera({
       center: {
-        latitude: missions[focused].latitude as number,
-        longitude: missions[focused].longitude as number,
+        latitude: missions[focused].lat as number,
+        longitude: missions[focused].long as number,
       },
       heading: 0,
       pitch: 0,
@@ -46,10 +46,10 @@ const MissionMap: React.FC<MapWithMarkersProps> = ({ focused, missions, setFocus
         ref={mapRef}
         showsUserLocation={true}
       >
-        {missions?.map(({ latitude, longitude }, index) => (
+        {missions?.map(({ lat, long }, index) => (
           <Marker
             key={index}
-            coordinate={{ latitude, longitude } as LatLng}
+            coordinate={{ latitude: lat, longitude: long } as LatLng}
             onPress={() => setFocused(index)}
           />
         ))}
