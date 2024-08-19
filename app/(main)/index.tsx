@@ -8,7 +8,6 @@ import { defaultFilters, useExploreMissions } from "@/mission/application/useExp
 import { MissionSwiper } from "@/mission/components/MissionSwiper";
 import { ExploreFilters } from "@/mission/components/ExploreFilters";
 import { MissionList } from "@/mission/components/MissionList";
-import { ExploreFiltersTags } from "@/mission/components/ExploreFiltersTags";
 
 export default function Explore() {
   const { top } = useSafeAreaInsets();
@@ -57,7 +56,12 @@ export default function Explore() {
           />
         </>
       )}
-      {mode === "list" && <MissionList missions={missions || []} />}
+      {mode === "list" && (
+        <>
+          <View className="h-16" />
+          <MissionList missions={missions || []} />
+        </>
+      )}
       <ExploreFilters open={showFilters} onClose={() => setShowFilters(false)} filters={filters} />
     </>
   );

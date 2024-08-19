@@ -14,8 +14,7 @@ const MissionList: React.FC<MissionListProps> = ({ missions, style }) => {
   if (missions.length === 0) return;
 
   return (
-    <Container scroll className="bg-neutral-100 pt-8">
-      <View className="h-16"></View>
+    <Container scroll className="bg-neutral-100">
       {missions.map((item) => (
         <MissionCard className="mb-2" mission={item as Mission} key={item.id} />
       ))}
