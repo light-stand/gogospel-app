@@ -2,10 +2,9 @@ import { useMutation, useQueryClient } from "react-query";
 import { addFavorite, removeFavorite } from "../interface/favoriteApi";
 import { useUserStore } from "@/user/store/useUserStore";
 import { Favorite } from "../domain/Favorite";
-import { Mission } from "../domain/Mission";
 import { Updater } from "react-query/types/core/utils";
 
-export const useFavorite = () => {
+export const useFavoriteActions = () => {
   const { user } = useUserStore();
   const queryClient = useQueryClient();
 
@@ -17,6 +16,7 @@ export const useFavorite = () => {
           ? [...(data?.favorite || []), fav]
           : data?.favorite?.filter((f: Favorite) => f.missionary_id !== user?.missionary?.id),
     }));
+    queryClient.invalidateQueries(["favoriteMissions"]);
   };
 
   const addFavoriteMutation = useMutation({

@@ -86,7 +86,7 @@ export default function MyProfile() {
               size="medium"
               variant="primary"
               className="mb-1"
-              onPress={() => router.push("/settings/interests")}
+              onPress={() => router.push("/mission/favorites")}
             />
             <Text className="mt-1 font-bold text-neutral-500">{t("user.profile.favorites")}</Text>
           </View>

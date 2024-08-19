@@ -20,7 +20,7 @@ import { useUserStore } from "@/user/store/useUserStore";
 import { UserType } from "@/profiling/domain/Profiling";
 import { LinearGradient } from "expo-linear-gradient";
 import { useMissionDetails } from "@/mission/application/useMissionDetails";
-import { useFavorite } from "@/mission/application/useFavorite";
+import { useFavoriteActions } from "@/mission/application/useFavoriteActions";
 
 const PAGE_WIDTH = Dimensions.get("window").width;
 
@@ -35,7 +35,7 @@ export default function EventDetails() {
 
   const { mission, isLoading, isFavorite } = useMissionDetails(parseInt(id as string));
 
-  const { addFavorite, removeFavorite } = useFavorite();
+  const { addFavorite, removeFavorite } = useFavoriteActions();
 
   const toggleFavorite = () => {
     if (isFavorite) {

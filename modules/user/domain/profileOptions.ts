@@ -20,7 +20,7 @@ export const profileOptions: ProfileOptions = [
       {
         icon: "heart-outline",
         label: "user.profile.favorites",
-        href: "/settings",
+        href: "/mission/favorites",
         userType: UserType.Missionary,
         // disabled: true,
       },
