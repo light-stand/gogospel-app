@@ -14,20 +14,20 @@ export const useFavoriteActions = () => {
       favorite:
         action === "add"
           ? [...(data?.favorite || []), fav]
-          : data?.favorite?.filter((f: Favorite) => f.missionary_id !== user?.missionary?.id),
+          : data?.favorite?.filter((f: Favorite) => f.user_id !== user?.id),
     }));
     queryClient.invalidateQueries(["favoriteMissions"]);
   };
 
   const addFavoriteMutation = useMutation({
     mutationFn: (missionId: number) =>
-      addFavorite({ missionary_id: user?.missionary?.id as number, mission_id: missionId }),
+      addFavorite({ user_id: user?.id as string, mission_id: missionId }),
     onSuccess: onSuccess("add"),
   });
 
   const removeFavoriteMutation = useMutation({
     mutationFn: (missionId: number) =>
-      removeFavorite({ missionary_id: user?.missionary?.id as number, mission_id: missionId }),
+      removeFavorite({ user_id: user?.id as string, mission_id: missionId }),
     onSuccess: onSuccess("remove"),
   });
 

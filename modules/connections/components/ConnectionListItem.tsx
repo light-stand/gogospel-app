@@ -3,7 +3,6 @@ import { Connection, ConnectionStatus } from "../domain/Connection";
 import { UserPhoto } from "@/components/ui/structure/UserPhoto";
 import { Icon, IconButton, Text } from "@/components";
 import { useUserStore } from "@/user/store/useUserStore";
-import { UserType } from "@/profiling/domain/Profiling";
 import { useRouter } from "expo-router";
 import { useManageSubmission } from "../application/useManageSubmission";
 import clsx from "clsx";
@@ -13,19 +12,20 @@ export const ConnectionListItem = ({ connection }: { connection: Connection }) =
   const router = useRouter();
   const { t } = useTranslation();
   const { user } = useUserStore();
-  const { id, mission, ministry, missionary, status, messages } = connection;
+  const { id, mission, user1, user2, user1_id, user2_id, status, messages } = connection;
   const { onSubmissionManage } = useManageSubmission(id);
 
   const data = {
-    image: user.type === UserType.Missionary ? ministry?.images[0] : missionary?.images[0],
-    user: user.type === UserType.Missionary ? ministry?.name : missionary?.first_name,
+    image: user.id === user1 ? user2?.images[0] : user1?.images[0],
+    user: user.id === user1 ? user2?.name : user1?.name,
     title: mission?.title,
     lastMessage: messages && messages[0] && messages[0].text,
   };
 
-  const isPending = user.type === UserType.Missionary && status === ConnectionStatus.Pending;
-  const canManage = user.type === UserType.Ministry && status === ConnectionStatus.Pending;
-  const canRestore = user.type === UserType.Ministry && status === ConnectionStatus.Rejected;
+  // User 1 is the connection creator, user 2 is the connection receiver
+  const isPending = user.id === user1_id && status === ConnectionStatus.Pending;
+  const canManage = user.id === user2_id && status === ConnectionStatus.Pending;
+  const canRestore = user.id === user2_id && status === ConnectionStatus.Rejected;
 
   const onItemPress = () => {
     if (isPending) return Alert.alert(t("connections.submission.errors.notAccepted"));

@@ -1,16 +1,15 @@
 import { Message } from "@/chat/domain/Message";
-import { Ministry } from "@/ministry/domain/Ministry";
 import { Mission } from "@/mission/domain/Mission";
-import { Missionary } from "@/missionary/domain/Missionary";
+import { UserProfile } from "@/user/domain/User";
 
 export type Connection = {
   id: number;
   mission_id: number;
-  missionary_id: number;
-  ministry_id: number;
+  user1_id: string;
+  user2_id: string;
   mission?: Mission;
-  missionary?: Missionary;
-  ministry?: Ministry;
+  user1?: UserProfile;
+  user2?: UserProfile;
   status?: ConnectionStatus;
   messages?: Message[];
 };

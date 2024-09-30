@@ -12,7 +12,7 @@ class MissionRepository extends Repository<Mission> {
   exploreMissions = async (input: ExploreFiltersInput): Promise<Mission[]> => {
     const { data, error } = await this.client
       .rpc("explore_missions", input)
-      .select("*, ministry(name, images)");
+      .select("*,user_profile!created_by(*)");
     if (error) throw error;
     return data as Mission[];
   };

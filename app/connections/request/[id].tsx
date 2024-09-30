@@ -18,7 +18,7 @@ export default function MissionRequest() {
 
   const { data: mission } = useQuery({
     queryKey: ["mission", id],
-    queryFn: () => missionRepository.getById(id as string, "*, ministry(id, name, images)"),
+    queryFn: () => missionRepository.getById(id as string, "*, user_profile(user_id, name, images)"),
   });
 
   const { sendSubmission } = useSendSubmission(mission);
@@ -29,7 +29,7 @@ export default function MissionRequest() {
         {t("connections.submission.title", { name: mission?.title })}
       </Text>
       <Text className="font-bold text-neutral-500 mb-4">
-        {t("connections.submission.text", { ministry: mission?.ministry?.name })}
+        {t("connections.submission.text", { ministry: mission?.user_profile?.name })}
       </Text>
       <Input type="textarea" control={control} name="message" />
       <Button label={t("action.send")} className="mt-auto" onPress={handleSubmit(sendSubmission)} />

@@ -3,15 +3,12 @@ import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ProfilingFields, profilingSchema } from "@/profiling/domain/ProfilingForm";
-import { missionaryRepository } from "@/missionary/interface/missionaryRepository";
-import { ministryRepository } from "@/ministry/interface/ministryRepository";
-import { UserType } from "../domain/Profiling";
-import { Missionary } from "@/missionary/domain/Missionary";
-import { Ministry } from "@/ministry/domain/Ministry";
 import { useAuthStore } from "@/auth/store/useAuthStore";
 import { useUserStore } from "@/user/store/useUserStore";
 import { MissionType } from "@/mission/domain/MissionType";
 import { MinistryType } from "@/ministry/domain/MinistryType";
+import { userProfileRepository } from "@/user/interface/userProfileRepository";
+import { UserProfile } from "@/user/domain/User";
 
 export const useProfiling = () => {
   const router = useRouter();
@@ -24,46 +21,26 @@ export const useProfiling = () => {
 
   const { getValues } = form;
 
-  const onSuccess = (userType: UserType) => (data: Missionary | Ministry) => {
-    if (userType === UserType.Ministry) {
-      setUser({ ministry: data as Ministry });
-      router.push("/mission/creation");
-    } else {
-      setUser({ missionary: data as Missionary });
-      router.push("/(main)");
-    }
+  const onSuccess = (data: UserProfile) => {
+    setUser({ profile: data as UserProfile });
+    router.push("/mission/creation");
   };
 
-  const { mutate: createMinistry } = useMutation(ministryRepository.create, {
-    onSuccess: onSuccess(UserType.Ministry),
-  });
-
-  const { mutate: createMissionary } = useMutation(missionaryRepository.create, {
-    onSuccess: onSuccess(UserType.Missionary),
+  const { mutate: createProfile } = useMutation(userProfileRepository.create, {
+    onSuccess,
   });
 
   const onSubmit = () => {
     const values = getValues();
-    if (getValues("type") === UserType.Ministry) {
-      createMinistry({
-        user_id: session?.user.id as string,
-        name: values.firstName,
-        description: values.bio,
-        images: [values.picture],
-        verified: false,
-        type: (values.ministryType as MinistryType[])[0],
-      });
-    } else {
-      createMissionary({
-        user_id: session?.user.id as string,
-        first_name: values.firstName,
-        last_name: values.lastName as string,
-        bio: values.bio,
-        images: [values.picture],
-        interests: values.interests as MissionType[],
-      });
-    }
-  };
+    createProfile({
+      user_id: session?.user.id as string,
+      name: values.name,
+      description: values.bio,
+      images: [values.picture],
+      verified: false,
+      type: (values.ministryType as MinistryType[])[0],
+    });
+  }
 
   return { form, onSubmit };
 };

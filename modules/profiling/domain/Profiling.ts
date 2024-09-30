@@ -1,34 +1,18 @@
 import { ProfilingFields } from "./ProfilingForm";
 
-export enum UserType {
-  Missionary = "missionary",
-  Ministry = "ministry",
-}
-
-export type ProfilingScreen = "type" | "name" | "bio" | "picture" | "interests";
+export type ProfilingScreen = "name" | "bio" | "picture" | "interests";
 
 export type ProfilingField = keyof ProfilingFields;
 
-export const profilingFlow: { [key in UserType]: ProfilingScreen[] } = {
-  missionary: ["type", "name", "bio", "picture", "interests"],
-  ministry: ["type", "name", "bio", "picture"],
-};
+export const profilingFlow: ProfilingScreen[] =
+  ["name", "bio", "picture"];
+// missionary: ["type", "name", "bio", "picture", "interests"],
 
 export const fieldsByScreen: {
-  [key in UserType]: { [key: string]: ProfilingField[] };
+  [key: string]: ProfilingField[];
 } = {
-  missionary: {
-    type: ["type"],
-    name: ["firstName", "lastName"],
-    bio: ["bio"],
-    picture: ["picture"],
-    interests: ["interests"],
-  },
-  ministry: {
-    type: ["type"],
-    name: ["firstName", "ministryType"],
-    bio: ["bio"],
-    picture: ["picture"],
-    interests: ["interests"],
-  },
+  name: ["name", "ministryType"],
+  bio: ["bio"],
+  picture: ["picture"],
+  interests: ["interests"],
 };

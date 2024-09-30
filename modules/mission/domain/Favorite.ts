@@ -1,5 +1,5 @@
 export type Favorite = {
-  missionary_id: number;
+  user_id: string;
   mission_id: number;
   created_at?: Date;
 };

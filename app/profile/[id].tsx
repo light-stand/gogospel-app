@@ -2,7 +2,6 @@ import { View } from "react-native";
 import { useTranslation } from "react-i18next";
 
 import { Container, Icon, ImagePicker, TagCloud, Text } from "@/components";
-import { UserType } from "@/profiling/domain/Profiling";
 import { ProfileOptions } from "@/user/components/ProfileOptions";
 import { publicProfileOptions } from "@/user/domain/profileOptions";
 import { missionTypes } from "@/mission/domain/MissionType";
@@ -10,7 +9,7 @@ import { useUserProfile } from "@/user/application/useUserProfile";
 
 export default function Profile() {
   const { t } = useTranslation();
-  const { form, profileData, isOwn, userType } = useUserProfile();
+  const { form, profileData, isOwn } = useUserProfile();
 
   const { name, description, verified, interests } = profileData;
 
@@ -29,21 +28,19 @@ export default function Profile() {
         </Text>
         {verified && <Icon name="check-decagram" className="text-indigo-500" />}
       </View>
-      {userType === UserType.Missionary && (
-        <TagCloud
-          compact
-          allSelected
-          options={interests?.map((category) => ({
-            label: t(`mission.types.${category}`),
-            value: category,
-            color: missionTypes[category].color,
-            icon: missionTypes[category].icon,
-          }))}
-          className="mt-4"
-        />
-      )}
+      {/* <TagCloud
+        compact
+        allSelected
+        options={interests?.map((category) => ({
+          label: t(`mission.types.${category}`),
+          value: category,
+          color: missionTypes[category].color,
+          icon: missionTypes[category].icon,
+        }))}
+        className="mt-4"
+      /> */}
       <Text className="mt-4 px-2 text-center text-neutral-500">{description}</Text>
-      <ProfileOptions options={publicProfileOptions} userType={userType} className="mt-4" />
+      <ProfileOptions options={publicProfileOptions} className="mt-4" />
     </Container>
   );
 }
