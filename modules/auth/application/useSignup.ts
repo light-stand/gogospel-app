@@ -6,7 +6,7 @@ export const useSignup = () => {
   const router = useRouter();
 
   const onSuccess = async () => {
-    router.push("/onboarding/profiling/type");
+    router.push("/onboarding/profiling/name");
   };
 
   const loginMutation = useMutation(signup, { onSuccess });

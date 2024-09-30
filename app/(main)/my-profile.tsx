@@ -1,15 +1,15 @@
 import dayjs from "dayjs";
 import { View } from "react-native";
-import { useRouter } from "expo-router";
+import { Redirect, useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
 
 import { Container, Icon, IconButton, Text } from "@/components";
 import { UserPhoto } from "@/components/ui/structure/UserPhoto";
-import { UserType } from "@/profiling/domain/Profiling";
 import { useUserStore } from "@/user/store/useUserStore";
 import { profileOptions } from "@/user/domain/profileOptions";
 import { useLogout } from "@/auth/application/useLogout";
 import { ProfileOptions } from "@/user/components/ProfileOptions";
+import { UserProfile } from "@/user/domain/User";
 
 export default function MyProfile() {
   const router = useRouter();
@@ -17,30 +17,15 @@ export default function MyProfile() {
   const { user } = useUserStore();
   const logout = useLogout();
 
-  if (!user) return null;
+  const { profile } = user;
 
-  const { ministry, missionary, type } = user;
-
-  const data = {
-    missionary: {
-      images: missionary?.images || [],
-      name: [missionary?.first_name, missionary?.last_name].filter(Boolean).join(" "),
-      created_at: missionary?.created_at,
-      verified: false,
-    },
-    ministry: {
-      images: ministry?.images || [],
-      name: ministry?.name || "",
-      created_at: ministry?.created_at,
-      verified: ministry?.verified,
-    },
-  }[type as UserType];
+  if (!user || !profile) return <Redirect href="/onboarding/auth/login" />;
 
   const actions = {
-    logout: () => logout(),
+    logout,
   };
 
-  const { name, images, created_at, verified } = data;
+  const { name, images, created_at, verified } = profile as UserProfile;
 
   return (
     <Container scroll>
@@ -75,7 +60,7 @@ export default function MyProfile() {
               size="medium"
               variant="primary"
               className="mb-1"
-              onPress={() => router.push(`/profile/${type}/${user[type as UserType]?.id}`)}
+              onPress={() => router.push(`/profile/${user?.id}`)}
             />
             <Text className="mt-1 font-bold text-neutral-500">{t("user.profile.edit")}</Text>
           </View>
@@ -92,7 +77,7 @@ export default function MyProfile() {
         </View>
       </View>
       {/*=Options=*/}
-      <ProfileOptions options={profileOptions} actions={actions} userType={user.type} />
+      <ProfileOptions options={profileOptions} actions={actions} />
     </Container>
   );
 }

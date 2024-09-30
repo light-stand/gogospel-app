@@ -14,33 +14,16 @@
     "profiling": {
       "fields": {
         "bio": {
-          "missionary": "About Me",
-          "ministry": "More Information About the Ministry",
+          "label": "More information about me",
           "error": "The description is required and must be at least 60 characters long"
         },
-        "firstName": {
-          "missionary": "First Name",
-          "ministry": "Name of the Ministry, Organization, or Church",
-          "error": "The first name must be at least 3 characters long"
-        },
-        "lastName": {
-          "missionary": "Last Name",
-          "error": "The last name must be at least 3 characters long"
+        "name": {
+          "label": "My name or the name of my ministry",
+          "error": "The name must be at least 3 characters long"
         },
         "ministryType": {
-          "ministry": "Ministry type",
+          "label": "Ministry type",
           "error": "The ministry type is required"
-        },
-        "types": {
-          "missionary": {
-            "title": "Missionary",
-            "description": "I am a missionary looking for a ministry to serve God."
-          },
-          "ministry": {
-            "title": "Ministry",
-            "description": "We are a ministry looking for missionaries to carry out our mission."
-          },
-          "error": "The account type is required"
         },
         "image": {
           "error": "This field is required"
@@ -52,11 +35,8 @@
       },
       "titles": {
         "type": "I am",
-        "name": {
-          "missionary": "I am...",
-          "ministry": "We are..."
-        },
-        "bio": { "missionary": "A little more about you", "ministry": "About us" },
+        "name": "I am...",
+        "bio": "More information about me",
         "image": "A Photo",
         "interests": "My Interests"
       }

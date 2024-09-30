@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useFocusEffect, useRouter } from "expo-router";
+import { Href, useFocusEffect, useRouter } from "expo-router";
 import { UseFormReturn } from "react-hook-form";
 import {
   fieldsByScreen,
@@ -13,7 +13,7 @@ export const getNextScreen = (current: MissionCreationScreen) => {
   const steps = missionCreationFlow;
   const nextIndex = steps.indexOf(current) + 1;
   const isLast = nextIndex > steps.length - 1;
-  const nextScreen = !isLast ? `/mission/creation/${steps[nextIndex]}` : "";
+  const nextScreen: Href = `/mission/creation/${steps[nextIndex]}`;
   return { nextScreen, isLast };
 };
 

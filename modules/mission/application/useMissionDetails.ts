@@ -8,11 +8,11 @@ export const useMissionDetails = (id: number) => {
   const { data: mission, isLoading } = useQuery({
     queryKey: ["mission", id],
     queryFn: () =>
-      missionRepository.getById(id, "*, ministry(id, name, images), favorite(missionary_id)"),
+      missionRepository.getById(id, "*, user_profile!created_by(user_id, name, images), favorite(user_id)"),
   });
 
   // Thanks to RLS, "favorite" should contain only the user entry
-  const isFavorite = mission?.favorite?.some((fav) => fav.missionary_id === user?.missionary?.id);
+  const isFavorite = mission?.favorite?.some((fav) => fav.user_id === user?.id);
 
   return { mission, isLoading, isFavorite };
 };

@@ -11,9 +11,9 @@ export const useFavoriteMissions = () => {
         [
           ["approved", "eq", true],
           ["active", "eq", true],
-          ["favorite.missionary_id", "eq", user?.missionary?.id],
+          ["favorite.user_id", "eq", user?.id],
         ],
-        "*, ministry(name, images), favorite!inner(*)"
+        "*, user_profile!created_by(name, images), favorite!inner(*)"
       ),
   });
 };

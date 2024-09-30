@@ -1,7 +1,6 @@
 import { useMutation, useQueryClient } from "react-query";
 import { connectionRepository } from "../interface/connectionRepository";
 import { useUserStore } from "@/user/store/useUserStore";
-import { UserType } from "@/profiling/domain/Profiling";
 import { Alert } from "react-native";
 import { Mission } from "@/mission/domain/Mission";
 import { useRouter } from "expo-router";
@@ -15,7 +14,7 @@ export const useSendSubmission = (mission?: Mission) => {
   const { t } = useTranslation();
 
   const onSuccess = () => {
-    router.push("(main)/connections");
+    router.push("/(main)/connections");
   };
 
   const onError = (error: any) => {
@@ -38,12 +37,13 @@ export const useSendSubmission = (mission?: Mission) => {
 
   const sendSubmission = async ({ message }: { message: string }) => {
     if (!mission) return Alert.alert(t("mission.errors.notFound"));
-    if (user.type !== UserType.Missionary) return Alert.alert(t("error.notMissionary"));
+    // if (user.type !== UserType.Missionary) return Alert.alert(t("error.notMissionary"));
+    if (!user.id || !mission.created_by) return Alert.alert(t("errors.unknown"));
 
     const connection = await createConnection({
       mission_id: mission.id,
-      missionary_id: user.missionary?.id as number,
-      ministry_id: mission.ministry?.id as number,
+      user1_id: user.id,
+      user2_id: mission.created_by
     });
 
     await sendMessageMutation({

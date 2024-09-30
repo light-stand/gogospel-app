@@ -28,7 +28,7 @@ export const useMissionCreation = () => {
   const onSubmit = () => {
     const values = getValues();
     createMission({
-      ministry_id: user.ministry?.id,
+      created_by: user?.id,
       title: values.title,
       description: values.description,
       start_date: values.startDate,

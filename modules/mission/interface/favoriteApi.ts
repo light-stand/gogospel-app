@@ -15,7 +15,7 @@ export const removeFavorite = async (favorite: Favorite): Promise<Favorite> => {
   const { error, data } = await supabase
     .from("favorite")
     .delete()
-    .eq("missionary_id", favorite.missionary_id)
+    .eq("user_id", favorite.user_id)
     .eq("mission_id", favorite.mission_id)
     .select("*")
     .single();

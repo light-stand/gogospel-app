@@ -4,12 +4,12 @@ import { useProfilingStep } from "@/profiling/hooks/useProfilingStep";
 
 export default function Bio() {
   const { t } = useTranslation();
-  const { form, onNext, flowType } = useProfilingStep("bio");
+  const { form, onNext } = useProfilingStep("bio");
   return (
     <Container showBack>
-      <Text className="font-bold text-3xl mb-10">{t(`profiling.titles.bio.${flowType}`)}</Text>
+      <Text className="font-bold text-3xl mb-10">{t(`profiling.titles.bio`)}</Text>
       <Input
-        label={t(`profiling.fields.bio.${flowType}`)}
+        label={t(`profiling.fields.bio.label`)}
         name="bio"
         type="textarea"
         className="min-h-32"

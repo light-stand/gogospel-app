@@ -1,15 +1,14 @@
 import { useCallback } from "react";
-import { useFocusEffect, useRouter } from "expo-router";
+import { Href, useFocusEffect, useRouter } from "expo-router";
 import { UseFormReturn } from "react-hook-form";
-import { fieldsByScreen, profilingFlow, ProfilingScreen, UserType } from "../domain/Profiling";
+import { fieldsByScreen, profilingFlow, ProfilingScreen } from "../domain/Profiling";
 import { useProfilingContext } from "../context/ProfilingContext";
 import { ProfilingFields } from "../domain/ProfilingForm";
 
-export const getNextScreen = (current: ProfilingScreen, flowType: UserType) => {
-  const steps = profilingFlow[flowType];
-  const nextIndex = steps.indexOf(current) + 1;
-  const isLast = nextIndex > steps.length - 1;
-  const nextScreen = !isLast ? `/onboarding/profiling/${steps[nextIndex]}` : "";
+export const getNextScreen = (current: ProfilingScreen) => {
+  const nextIndex = profilingFlow.indexOf(current) + 1;
+  const isLast = nextIndex > profilingFlow.length - 1;
+  const nextScreen: Href = `/onboarding/profiling/${profilingFlow[nextIndex]}`;
   return { nextScreen, isLast };
 };
 
@@ -20,23 +19,23 @@ export const useProfilingStep = (screen: ProfilingScreen) => {
     form as UseFormReturn<ProfilingFields>;
 
   const onNext = async () => {
-    const flowType = getValues("type") as UserType;
-    const isValid = (await trigger("type")) && (await trigger(fieldsByScreen[flowType][screen]));
+    // const flowType = getValues("type") as UserType;
+    const isValid = await trigger(fieldsByScreen[screen]);
     if (!isValid) return;
-    const { nextScreen, isLast } = getNextScreen(screen, flowType);
+    const { nextScreen, isLast } = getNextScreen(screen);
     isLast ? onSubmit() : router.push(nextScreen);
   };
 
   useFocusEffect(
     useCallback(() => {
-      if (screen === "type") {
-        // to avoid validation problems
-        resetField("lastName");
-        resetField("interests");
-      }
+      // if (screen === "type") {
+      // // to avoid validation problems
+      //   resetField("lastName"); 
+      //   resetField("interests");
+      // }
       clearErrors();
     }, [screen])
   );
 
-  return { form, onNext, flowType: (form.getValues("type") || UserType.Missionary) as UserType };
+  return { form, onNext };
 };

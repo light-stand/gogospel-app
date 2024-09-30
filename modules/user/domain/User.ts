@@ -1,11 +1,19 @@
-import { Ministry } from "@/ministry/domain/Ministry";
-import { Missionary } from "@/missionary/domain/Missionary";
-import { UserType } from "@/profiling/domain/Profiling";
-
 export type User = {
   id?: string;
   email?: string;
-  type?: UserType;
-  missionary?: Missionary;
-  ministry?: Ministry;
+  profile?: UserProfile;
 };
+
+export type UserProfile = {
+  id: number;
+  user_id: string;
+  name: string;
+  description: string;
+  lat?: number;
+  lng?: number;
+  verified: boolean;
+  type: string;
+  images: string[];
+  created_at: string;
+  updated_at: string;
+}

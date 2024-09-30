@@ -1,10 +1,7 @@
 import { useMutation } from "react-query";
 import { connectionRepository } from "../interface/connectionRepository";
 import { useUserStore } from "@/user/store/useUserStore";
-import { UserType } from "@/profiling/domain/Profiling";
 import { Alert } from "react-native";
-import { Mission } from "@/mission/domain/Mission";
-import { useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
 import { queryClient } from "@/interface/queryClient";
 import { SupabaseError } from "@/interface/supabase";
@@ -32,7 +29,6 @@ export const useManageSubmission = (connectionId: number) => {
 
   const manageSubmission = async (status: ConnectionStatus) => {
     if (!connectionId) return Alert.alert(t("mission.errors.notFound"));
-    if (user.type !== UserType.Ministry) return Alert.alert(t("error.notMinistry"));
 
     updateSubmission({
       id: connectionId,
