@@ -1,6 +1,17 @@
 {
   "translation": {
     "auth": {
+      "modal": {
+        "title": "¡Bienvenido a GoGospel!",
+        "text": "Crea tu cuenta para comenzar",
+        "items": {
+          "connect": "Conéctate con Ministerios y Voluntarios",
+          "serve": "Encuentra Oportunidades para Servir",
+          "mission": "Crea y Gestiona Misiones",
+          "grow": "Aumenta el Impacto de tu Ministerio"
+        },
+        "button": "Registrarse"
+      },
       "fields": {
         "email": "Email",
         "password": "Contraseña",
@@ -9,6 +20,9 @@
       "titles": {
         "login": "Iniciar sesión",
         "register": "Registrarse"
+      },
+      "messages": {
+        "dontHaveAccount": "¿No tienes una cuenta? Registrarse"
       }
     },
     "profiling": {
