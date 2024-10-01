@@ -2,6 +2,7 @@ import { View } from "react-native";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "expo-router";
 
 import { Button, Input, Text } from "@/components";
 import { LoginFields, loginSchema } from "../domain/Login";
@@ -10,6 +11,7 @@ import { useLogin } from "../application/useLogin";
 export const LoginForm = () => {
   const { t } = useTranslation();
   const { error, mutate: login } = useLogin();
+  const router = useRouter();
 
   const { control, handleSubmit } = useForm<LoginFields>({
     resolver: zodResolver(loginSchema),
@@ -39,7 +41,12 @@ export const LoginForm = () => {
         />
       </View>
       {error && <Text className="text-red-500 my-4">{error.message || t("error.unknown")}</Text>}
-      <View />
+      <Button
+        label={t("auth.messages.dontHaveAccount")}
+        variant="text"
+        className="mt-4"
+        onPress={() => router.push("./signup")}
+      />
       <Button className="mt-3" label={t("action.next")} onPress={handleSubmit(onSubmit)} />
     </>
   );
