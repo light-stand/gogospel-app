@@ -1,6 +1,17 @@
 {
   "translation": {
     "auth": {
+      "modal": {
+        "title": "Welcome to GoGospel!",
+        "text": "Create your account to get started",
+        "items": {
+          "connect": "Connect with Ministries and Volunteers",
+          "serve": "Find Opportunities to Serve",
+          "mission": "Create and Manage Missions",
+          "grow": "Grow Your Ministry's Impact"
+        },
+        "button": "Register"
+      },
       "fields": {
         "email": "Email",
         "password": "Password",
@@ -9,6 +20,9 @@
       "titles": {
         "login": "Log In",
         "register": "Register"
+      },
+      "messages": {
+        "dontHaveAccount": "Don't have an account? Register"
       }
     },
     "profiling": {

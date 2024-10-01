@@ -20,6 +20,7 @@ import { useUserStore } from "@/user/store/useUserStore";
 import { LinearGradient } from "expo-linear-gradient";
 import { useMissionDetails } from "@/mission/application/useMissionDetails";
 import { useFavoriteActions } from "@/mission/application/useFavoriteActions";
+import { useAuthModal } from "@/auth/context/AuthModalContext";
 
 const PAGE_WIDTH = Dimensions.get("window").width;
 
@@ -36,8 +37,16 @@ export default function EventDetails() {
 
   const { addFavorite, removeFavorite } = useFavoriteActions();
 
+  const { openModal } = useAuthModal();
+
   const toggleFavorite = () => {
+    if (!user?.id) return openModal();
     isFavorite ? removeFavorite(id) : addFavorite(id);
+  };
+
+  const onJoin = () => {
+    if (!user?.id) return openModal();
+    router.push(`/connections/request/${id}`);
   };
 
   if (!mission) return null;
@@ -129,11 +138,7 @@ export default function EventDetails() {
               {mission.description}
             </Text>
           </TouchableWithoutFeedback>
-          <Button
-            label={t("mission.actions.join")}
-            className="mt-auto"
-            onPress={() => router.push(`/connections/request/${id}`)}
-          />
+          <Button label={t("mission.actions.join")} className="mt-auto" onPress={onJoin} />
         </View>
       </View>
     </ScrollView>

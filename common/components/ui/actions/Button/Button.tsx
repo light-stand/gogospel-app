@@ -6,7 +6,7 @@ import Icon, { MaterialIconType } from "../../foundation/Icon/Icon";
 import clsx from "clsx";
 
 export interface ButtonProps {
-  variant?: "primary" | "secondary" | "success" | "warning" | "danger";
+  variant?: "primary" | "secondary" | "success" | "warning" | "danger" | "text";
   size?: "medium" | "small" | "large";
   disabled?: boolean;
   icon?: MaterialIconType | null;
@@ -47,6 +47,10 @@ const Button: React.FC<ButtonProps> = ({
     danger: {
       disabled: "bg-red-950",
       enabled: "bg-red-500",
+    },
+    text: {
+      disabled: "bg-transparent",
+      enabled: "bg-transparent",
     },
   }[variant][disabled ? "disabled" : "enabled"];
 
@@ -93,6 +97,7 @@ const Button: React.FC<ButtonProps> = ({
           bold
           className={clsx(
             "text-base text-white font-bold",
+            variant === "text" && "text-neutral-500",
             size === "large" && "text-lg",
             variant === "secondary" && "text-indigo-500"
           )}

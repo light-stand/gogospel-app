@@ -19,8 +19,6 @@ export default function MyProfile() {
 
   const { profile } = user;
 
-  if (!user || !profile) return <Redirect href="/onboarding/auth/login" />;
-
   const actions = {
     logout,
   };
