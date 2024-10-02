@@ -5,7 +5,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { IconButton, Tag } from "@/components";
 import { MissionMap } from "@/mission/components/MissionMap";
 import { defaultFilters, useExploreMissions } from "@/mission/application/useExploreMissions";
-import { MissionSwiper } from "@/mission/components/MissionSwiper";
+import { MissionSheet } from "@/mission/components/MissionSheet";
 import { ExploreFilters } from "@/mission/components/ExploreFilters";
 import { MissionList } from "@/mission/components/MissionList";
 
@@ -48,12 +48,7 @@ export default function Explore() {
       {mode === "map" && (
         <>
           <MissionMap missions={missions} focused={focused} setFocused={setFocused} />
-          <MissionSwiper
-            className="absolute bottom-0"
-            missions={missions || []}
-            focusedEvent={focused}
-            onPlanSelected={setFocused}
-          />
+          {missions && <MissionSheet mission={missions[focused]} />}
         </>
       )}
       {mode === "list" && (
