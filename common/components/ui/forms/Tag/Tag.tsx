@@ -57,6 +57,7 @@ const Tag: React.FC<TagProps> = ({ label, selected, onPress, compact, color, ico
           selected ? "text-neutral-700" : "text-neutral-400",
           compact ? "text-xs" : "text-md"
         )}
+        numberOfLines={1}
         style={{
           ...(color && {
             color: colors[selected ? color : "neutral"][selected ? 600 : 500],

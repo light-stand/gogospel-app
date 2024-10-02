@@ -217,7 +217,7 @@
         "helper": "Mantén presionado para seleccionar la ubicación",
         "confirm": "Confirmar"
       },
-      "distance": "A {{distance}} km"
+      "distance": "A {{distance}} km de ti"
     },
     "user": {
       "profile": {
