@@ -41,7 +41,7 @@ export const MissionSheetInfo = ({ mission }: MissionSheetInfoProps) => {
 
       <View className="flex-row flex-wrap items-center gap-y-1">
         {info.map((item) => (
-          <View className="w-1/2 flex-row items-center px-1">
+          <View key={item.icon} className="w-1/2 flex-row items-center px-1">
             <Icon name={item.icon} className="text-lg text-neutral-500 mr-1" />
             <Text className="flex-1 text-base font-semibold text-neutral-500" numberOfLines={1}>
               {item.text}

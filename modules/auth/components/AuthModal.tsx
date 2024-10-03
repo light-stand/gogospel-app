@@ -1,9 +1,9 @@
 import React, { ForwardedRef, forwardRef } from "react";
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import { BottomSheetBackdrop, BottomSheetModal, BottomSheetView } from "@gorhom/bottom-sheet";
 import { useTranslation } from "react-i18next";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { Button, Icon, Image } from "@/components";
+import { Button, Icon, Image, Text } from "@/components";
 import { useRouter } from "expo-router";
 
 type AuthModalProps = {

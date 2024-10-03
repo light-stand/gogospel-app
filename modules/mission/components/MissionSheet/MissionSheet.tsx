@@ -1,11 +1,11 @@
 import React, { useCallback, useRef, useState } from "react";
 import { Dimensions, View, ViewStyle } from "react-native";
 import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import BottomSheet, { BottomSheetBackdrop, BottomSheetScrollView } from "@gorhom/bottom-sheet";
 
 import { IconButton } from "@/components";
 import { Mission } from "@/mission/domain/Mission";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { MissionSheetTitle } from "./partials/MissionSheetTitle";
 import { MissionSheetCarousel } from "./partials/MissionSheetCarousel";
 import { MissionSheetInfo } from "./partials/MissionSheetInfo";
@@ -27,7 +27,6 @@ const MissionSheet: React.FC<MissionSheetProps> = ({ mission, style }) => {
 
   const handleSheetAnimates = useCallback((curr: number) => setPosition(curr), []);
 
-  console.log(position);
   if (!mission) return;
 
   return (
@@ -56,7 +55,7 @@ const MissionSheet: React.FC<MissionSheetProps> = ({ mission, style }) => {
               <IconButton
                 size="small"
                 icon="close"
-                className="text-neutral-600"
+                className="text-neutral-600 bg-[#FFFFFF99]"
                 onPress={() => bottomSheetRef.current?.snapToIndex(1)}
               />
             </Animated.View>

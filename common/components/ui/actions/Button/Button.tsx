@@ -1,6 +1,6 @@
 import React from "react";
 import { TouchableOpacity } from "react-native";
-import Text from "../../foundation/Text/Text";
+import { Text } from "../../foundation/Text/Text";
 import Icon, { MaterialIconType } from "../../foundation/Icon/Icon";
 
 import clsx from "clsx";
@@ -94,7 +94,6 @@ const Button: React.FC<ButtonProps> = ({
           />
         )}
         <Text
-          bold
           className={clsx(
             "text-base text-white font-bold",
             variant === "text" && "text-neutral-500",
