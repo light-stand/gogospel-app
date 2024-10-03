@@ -1,9 +1,8 @@
 import React from "react";
-import { TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, TouchableOpacity, View } from "react-native";
 import Text from "../../foundation/Text/Text";
 import Icon, { MaterialIconType } from "../../foundation/Icon/Icon";
 import UserPhoto from "../../structure/UserPhoto/UserPhoto";
-import Spinner from "../../feedback/Spinner/Spinner";
 
 import clsx from "clsx";
 import { usePickImageUpload } from "@/common/hooks/media/useImagePickUpload";
@@ -82,7 +81,7 @@ const ImagePicker: React.FC<ImagePickerProps> = ({
                 className={clsx("text-4xl text-gray-600", error && "text-red-500")}
               />
             )}
-            {isLoading && <Spinner />}
+            {isLoading && <ActivityIndicator size={64} />}
           </TouchableOpacity>
         )}
       </View>
