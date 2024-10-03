@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useQuery } from "react-query";
 import { missionRepository } from "../interface/missionRepository";
-import { MissionViewInput } from "../domain/Mission";
 import { useForm } from "react-hook-form";
 import { ExploreFilters, exploreFiltersSchema } from "../domain/ExploreFilters";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -28,6 +27,12 @@ export const useExploreMissions = () => {
     queryFn: () => missionRepository.exploreMissions({ ...filterValues, ...location }),
   });
 
+  const mission = useMemo(() => missions?.find((m) => m.id === focused), [missions, focused]);
+
+  useEffect(() => {
+    if (!mission && missions) setFocused(missions?.[Math.floor(missions.length - 1)]?.id || 0);
+  }, [missions, mission, focused]);
+
   useEffect(() => {
     getLocation().then((location) => {
       location &&
@@ -38,5 +43,5 @@ export const useExploreMissions = () => {
     });
   }, []);
 
-  return { focused, setFocused, missions, filters };
+  return { focused, setFocused, missions, filters, mission };
 };
