@@ -12,17 +12,17 @@ export const useUserInit = () => {
 
   const fetchUserProfiles = async () => {
     if (session?.user.id && session.user.id !== user?.id) {
-      const [userProfile] = await userProfileRepository.get(["user_id", "eq", session.user.id])
+      const [userProfile] = await userProfileRepository.get(["user_id", "eq", session.user.id]);
 
       if (session?.user.id && !userProfile) {
-        router.push("/onboarding/profiling/name");
+        router.replace("/onboarding/profiling/name");
         return;
       }
 
       const user: User = {
         id: session.user.id,
         email: session.user.email,
-        profile: userProfile
+        profile: userProfile,
       };
 
       setUser(user);

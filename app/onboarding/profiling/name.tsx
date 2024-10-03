@@ -20,14 +20,10 @@ export default function Name() {
   );
 
   return (
-    <Container showBack scroll>
+    <Container scroll>
       <Text className="font-bold text-3xl mb-10">{t(`profiling.titles.name`)}</Text>
       <View>
-        <Input
-          label={t(`profiling.fields.name.label`)}
-          name="name"
-          control={form.control}
-        />
+        <Input label={t(`profiling.fields.name.label`)} name="name" control={form.control} />
         {/* TODO: Investigate the need of a last nam */}
         {/* <Input
           className="mt-2"

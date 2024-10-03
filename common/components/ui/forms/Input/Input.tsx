@@ -79,7 +79,7 @@ const Input: React.FC<InputProps> = ({
         className={clsx(
           "rounded-lg",
           "border border-gray-400",
-          "focus:border-gray-500",
+          "focus:border-gray-500 focus:shadow-sm",
           error && "border-danger",
           "flex-row items-center",
           type === "textarea" && "h-28 items-start max-h-32",
@@ -90,7 +90,7 @@ const Input: React.FC<InputProps> = ({
         {icon && <Icon name={icon as any} className="absolute left-3" />}
         <TextInput
           className={clsx(
-            "font-sans",
+            "font-medium",
             "text-gray-5",
             disabled && "text-gray-2",
             "py-3 px-4",

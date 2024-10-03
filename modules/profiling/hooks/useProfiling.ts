@@ -23,7 +23,8 @@ export const useProfiling = () => {
 
   const onSuccess = (data: UserProfile) => {
     setUser({ profile: data as UserProfile });
-    router.push("/mission/creation");
+    // router.push("/mission/creation");
+    router.push("/(main)");
   };
 
   const { mutate: createProfile } = useMutation(userProfileRepository.create, {
@@ -40,7 +41,7 @@ export const useProfiling = () => {
       verified: false,
       type: (values.ministryType as MinistryType[])[0],
     });
-  }
+  };
 
   return { form, onSubmit };
 };
