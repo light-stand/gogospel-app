@@ -14,10 +14,11 @@ class ConnectionRepository extends Repository<Connection> {
       .select(
         `*, user1:user_profile!user1_id(images, name), user2:user_profile!user2_id(images, name), mission(title), messages:message(text)`
       )
-      .eq('user2_id', userId)
-      .or(`user1_id.eq.${userId},status.neq.${ConnectionStatus.Rejected}`)
+      .or(
+        `and(user1_id.eq.${userId},status.neq.${ConnectionStatus.Rejected}),user2_id.eq.${userId}`
+      )
       .order("created_at", { referencedTable: "message", ascending: false })
-      .limit(1, { foreignTable: "message" })
+      .limit(1, { foreignTable: "message" });
 
     const { data, error } = await query;
 
