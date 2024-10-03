@@ -13,7 +13,7 @@ export default function Explore() {
   const { top } = useSafeAreaInsets();
   const [showFilters, setShowFilters] = useState(false);
   const [mode, setMode] = useState<"list" | "map">("map");
-  const { focused, missions, setFocused, filters } = useExploreMissions();
+  const { focused, missions, setFocused, filters, mission } = useExploreMissions();
 
   const filtersCount = Object.entries(filters.getValues()).filter(
     (filter) => !!filter[1] && (!Array.isArray(filter[1]) || filter[1].length)
@@ -48,7 +48,7 @@ export default function Explore() {
       {mode === "map" && (
         <>
           <MissionMap missions={missions} focused={focused} setFocused={setFocused} />
-          {missions && <MissionSheet mission={missions[focused]} />}
+          {mission && <MissionSheet mission={mission} />}
         </>
       )}
       {mode === "list" && (

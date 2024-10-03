@@ -9,7 +9,7 @@ import { Marker } from "./partials/Marker";
 
 interface MapWithMarkersProps {
   focused: number;
-  setFocused: (index: number) => void;
+  setFocused: (index: string) => void;
   missions?: Mission[];
 }
 
