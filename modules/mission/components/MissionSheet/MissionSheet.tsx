@@ -17,8 +17,9 @@ interface MissionSheetProps {
 }
 
 const WIDTH = Dimensions.get("window").width;
+const HEIGHT = Dimensions.get("window").height;
 
-const SNAP_POINTS = [88, 88 + WIDTH / 2, "100%"];
+const SNAP_POINTS = [88, 88 + WIDTH / 2, HEIGHT];
 
 const MissionSheet: React.FC<MissionSheetProps> = ({ mission, style }) => {
   const { top } = useSafeAreaInsets();
@@ -37,19 +38,22 @@ const MissionSheet: React.FC<MissionSheetProps> = ({ mission, style }) => {
         containerStyle={{ zIndex: 20 }}
         topInset={top}
         onChange={handleSheetAnimates}
-        handleIndicatorStyle={position === 3 && { backgroundColor: "transparent" }}
+        handleIndicatorStyle={position === 2 && { backgroundColor: "transparent" }}
         // handleStyle={{ height: 4 }}
         backdropComponent={(props) => (
           <BottomSheetBackdrop
             {...props}
-            appearsOnIndex={3}
-            disappearsOnIndex={2}
+            appearsOnIndex={2}
+            disappearsOnIndex={1}
             opacity={1}
             style={[props.style, { backgroundColor: "white" }]}
           />
         )}
       >
-        <BottomSheetScrollView className="flex-1 items-center">
+        <BottomSheetScrollView
+          className="flex-1 items-center"
+          contentContainerStyle={{ flexGrow: 1 }}
+        >
           {position >= 2 && (
             <Animated.View entering={FadeIn} exiting={FadeOut} className="absolute right-4 z-10">
               <IconButton
@@ -60,7 +64,7 @@ const MissionSheet: React.FC<MissionSheetProps> = ({ mission, style }) => {
               />
             </Animated.View>
           )}
-          <View className="flex-col flex-1 items-start justify-between px-4">
+          <View className="flex-col flex-1 items-start justify-start px-4">
             <MissionSheetTitle mission={mission} position={position} />
             <MissionSheetCarousel mission={mission} />
             <MissionSheetInfo mission={mission} />
