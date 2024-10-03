@@ -1,15 +1,13 @@
-import React, { useMemo } from "react";
-import { Modal, ScrollView, View } from "react-native";
-import { useRouter } from "expo-router";
+import React, { useCallback, useEffect, useMemo, useRef } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { LinearGradient } from "expo-linear-gradient";
 
-import { Collapsable, Container, IconButton, Slider, Tag, TagCloud, Text } from "@/components";
+import { Collapsable, Slider, TagCloud, Text } from "@/components";
 import { useTranslation } from "react-i18next";
 import { missionTypes } from "@/mission/domain/MissionType";
 import { ministryTypes } from "@/ministry/domain/MinistryType";
 import { UseFormReturn } from "react-hook-form";
 import { ExploreFilters as IExploreFilters } from "@/mission/domain/ExploreFilters";
+import BottomSheet, { BottomSheetBackdrop, BottomSheetScrollView } from "@gorhom/bottom-sheet";
 
 export interface ExploreFiltersProps {
   open: boolean;
@@ -17,9 +15,16 @@ export interface ExploreFiltersProps {
   filters: UseFormReturn<IExploreFilters>;
 }
 
+const SNAP_POINTS = ["66%"];
+
 const ExploreFilters: React.FC<ExploreFiltersProps> = ({ open, onClose, filters }) => {
   const { t } = useTranslation();
   const { top } = useSafeAreaInsets();
+  const bottomSheetRef = useRef<BottomSheet>(null);
+
+  const onSheetChange = useCallback((index: number) => {
+    if (index === -1) onClose();
+  }, []);
 
   const missionTypesOptions = useMemo(
     () =>
@@ -41,16 +46,23 @@ const ExploreFilters: React.FC<ExploreFiltersProps> = ({ open, onClose, filters 
     [t]
   );
 
+  useEffect(() => {
+    open ? bottomSheetRef.current?.expand() : bottomSheetRef.current?.close();
+  }, [open]);
+
   return (
-    <Modal visible={open} animationType="slide">
-      <IconButton
-        icon="close"
-        variant="primary"
-        className="absolute top-4 right-4 z-10 shadow-md"
-        style={[{ marginTop: top }]}
-        onPress={onClose}
-      />
-      <Container showBack={false} scroll>
+    <BottomSheet
+      ref={bottomSheetRef}
+      index={-1}
+      containerStyle={{ zIndex: 50 }}
+      snapPoints={SNAP_POINTS}
+      backdropComponent={(props) => (
+        <BottomSheetBackdrop {...props} disappearsOnIndex={-1} appearsOnIndex={0} />
+      )}
+      enablePanDownToClose
+      onChange={onSheetChange}
+    >
+      <BottomSheetScrollView contentContainerStyle={{ flexGrow: 1, paddingHorizontal: 16 }}>
         <Text className="font-bold text-3xl mb-6">{t("mission.explore.filters.title")}</Text>
         <Collapsable className="mb-4">
           <TagCloud
@@ -81,8 +93,8 @@ const ExploreFilters: React.FC<ExploreFiltersProps> = ({ open, onClose, filters 
             control={filters.control}
           />
         </Collapsable>
-      </Container>
-    </Modal>
+      </BottomSheetScrollView>
+    </BottomSheet>
   );
 };
 export default ExploreFilters;
