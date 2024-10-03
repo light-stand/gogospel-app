@@ -2,14 +2,12 @@ import { pickOrTakePicture } from "@/utils/media";
 import { useFileUpload } from "./useFileUpload";
 import { useActionSheet } from "@expo/react-native-action-sheet";
 import { deleteFile } from "@/utils/s3";
+import { useTranslation } from "react-i18next";
 
-const options = [
-  "profile.photoSelector.launchCamera",
-  "profile.photoSelector.fromGallery",
-  "ui.cancel",
-];
+const options = ["media.launchCamera", "media.fromGallery", "action.cancel"];
 
 export const usePickImageUpload = () => {
+  const { t } = useTranslation();
   const { isLoading, handleUpload } = useFileUpload();
   const { showActionSheetWithOptions } = useActionSheet();
 
@@ -29,8 +27,9 @@ export const usePickImageUpload = () => {
 
   const showActionSheet = () =>
     new Promise<number | null>((ok) => {
-      showActionSheetWithOptions({ options, cancelButtonIndex: 2 }, (i) =>
-        ok(i !== 2 && i !== undefined ? i : null)
+      showActionSheetWithOptions(
+        { options: options.map((opt) => t(opt)), cancelButtonIndex: 2 },
+        (i) => ok(i !== 2 && i !== undefined ? i : null)
       );
     });
 

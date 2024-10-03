@@ -245,6 +245,10 @@
       "done": "Listo",
       "send": "Enviar"
     },
+    "media": {
+      "launchCamera": "Abrir cámara",
+      "fromGallery": "Desde la galería"
+    },
     "error": {
       "unknown": "Error desconocido",
       "notMissionary": "Tienes que ser un misionero para hacer esto",

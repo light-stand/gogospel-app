@@ -245,6 +245,10 @@
       "done": "Done",
       "send": "Send"
     },
+    "media": {
+      "launchCamera": "Launch Camera",
+      "fromGallery": "From Gallery"
+    },
     "error": {
       "unknown": "Unknown Error",
       "notMissionary": "You have to be a missionary to do this",
