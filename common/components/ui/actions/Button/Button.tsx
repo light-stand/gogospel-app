@@ -1,5 +1,5 @@
 import React from "react";
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, ViewProps } from "react-native";
 import { Text } from "../../foundation/Text/Text";
 import Icon, { MaterialIconType } from "../../foundation/Icon/Icon";
 
@@ -13,7 +13,7 @@ export interface ButtonProps {
   label: string | null;
   block?: boolean;
   onPress?: () => void;
-  style?: object[];
+  style?: ViewProps["style"];
   className?: string;
 }
 
@@ -89,7 +89,8 @@ const Button: React.FC<ButtonProps> = ({
             name={icon}
             className={clsx(
               "text-white mr-2 text-xl",
-              variant === "secondary" && "text-indigo-500"
+              variant === "secondary" && "text-indigo-500",
+              variant === "text" && "text-neutral-500"
             )}
           />
         )}
@@ -101,6 +102,7 @@ const Button: React.FC<ButtonProps> = ({
             variant === "secondary" && "text-indigo-500"
           )}
           numberOfLines={1}
+          style={[(style as any[])?.find((e) => e.fontSize || e.color || e.fontFamily)]}
         >
           {label}
         </Text>
