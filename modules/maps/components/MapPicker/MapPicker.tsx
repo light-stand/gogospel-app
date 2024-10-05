@@ -10,6 +10,7 @@ import { Button, IconButton, Text } from "@/components";
 import { reverseGeocode } from "@/maps/interface/mapsApi";
 import { getLocation } from "@/maps/interface/mapsService";
 import { addressToCityCountryString } from "@/maps/utils/formatting";
+import { mapSettings } from "@/mission/components/MissionMap/settings";
 
 export interface MapPickerProps {
   open?: boolean;
@@ -79,7 +80,14 @@ const MapPicker: React.FC<MapPickerProps> = ({ open, onClose, name, control, sty
         onPress={onClose}
       />
       <View style={[style, { paddingBottom: bottom }]} className="flex-1 w-full">
-        <MapView className="flex-1" onPress={onPress} ref={mapRef} showsUserLocation>
+        <MapView
+          className="flex-1"
+          onPress={onPress}
+          ref={mapRef}
+          showsUserLocation
+          provider="google"
+          customMapStyle={mapSettings.customMapStyle}
+        >
           {location && <Marker coordinate={location} />}
         </MapView>
         <View className="z-10 bg-white w-full shadow-2xl p-2">
