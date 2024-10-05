@@ -1,9 +1,17 @@
 {
   "build": {
     "preview": {
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      },
       "ios": {
         "simulator": true
       }
+    },
+    "dev-android": {
+      "developmentClient": true,
+      "distribution": "internal"
     },
     "production": {},
     "development-simulator": {
