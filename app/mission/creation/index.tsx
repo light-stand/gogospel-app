@@ -18,7 +18,7 @@ export default function MissionCreation() {
         resizeMode="contain"
       />
       <Text className="text-neutral-500 font-bold mt-2 mb-auto text-center">
-        {t("mission.creation.helper.start", { ministry: user.ministry?.name })}
+        {t("mission.creation.helper.start", { ministry: user.profile?.name })}
       </Text>
       <Button label={t("action.next")} onPress={onNext} />
     </Container>

@@ -163,6 +163,13 @@
           "distance": "Distancia",
           "unlimited": "Ilimitado"
         }
+      },
+      "list": {
+        "types": {
+          "myMissions": "Mis misiones",
+          "favorites": "Favoritos",
+          "involved": "Involucrado"
+        }
       }
     },
     "ministry": {
@@ -257,7 +264,22 @@
     "screen": {
       "explore": "Inicio",
       "connections": "Conexiones",
-      "profile": "Perfil"
+      "profile": "Perfil",
+      "missions": "Misiones"
+    },
+    "noResults": {
+      "myMissions": {
+        "title": "Aún no has creado misiones",
+        "text": "Crea una misión ahora!"
+      },
+      "favorites": {
+        "title": "Aún no tienes favoritos",
+        "text": "Guarda misiones que te interesen para verlas más tarde"
+      },
+      "involved": {
+        "title": "Aún no te has unido a misiones",
+        "text": "Encuentra misiones que te interesen y únete a ellas"
+      }
     }
   }
 }
