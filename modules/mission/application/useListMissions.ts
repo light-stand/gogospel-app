@@ -2,7 +2,7 @@ import { useUserStore } from "@/user/store/useUserStore";
 import { missionRepository } from "../interface/missionRepository";
 import { useQuery } from "react-query";
 import { useState } from "react";
-import { MissionListTypes } from "../domain/MissionList";
+import { MissionListTypes } from "../domain/MissionListType";
 import { SupabaseFilter } from "@/interface/repository";
 
 export const useListMissions = () => {

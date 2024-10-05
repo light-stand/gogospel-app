@@ -280,6 +280,10 @@
       "involved": {
         "title": "No missions yet",
         "text": "You haven't joined any missions yet. Find one now!"
+      },
+      "connections": {
+        "title": "No connections yet",
+        "text": "You haven't connected with any ministries or volunteers yet. Find one now!"
       }
     }
   }

@@ -280,6 +280,10 @@
       "involved": {
         "title": "Aún no te has unido a misiones",
         "text": "Encuentra misiones que te interesen y únete a ellas"
+      },
+      "connections": {
+        "title": "Aún no tienes conexiones",
+        "text": "Envía solicitudes para unirte a misiones y haz crecer tu red de conexiones"
       }
     }
   }
