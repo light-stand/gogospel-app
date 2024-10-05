@@ -4,7 +4,7 @@ import { useListMissions } from "@/mission/application/useListMissions";
 import { MissionList } from "@/mission/components/MissionList";
 import { View } from "react-native";
 import { NoResults } from "@/components/ui/feedback/NoResults";
-import { missionListTypes } from "@/mission/domain/MissionList";
+import { missionListTypes } from "@/mission/domain/MissionListType";
 import { Link } from "expo-router";
 
 export default function Missions() {

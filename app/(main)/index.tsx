@@ -52,10 +52,11 @@ export default function Explore() {
         </>
       )}
       {mode === "list" && (
-        <>
-          <View className="h-16" />
-          <MissionList missions={missions || []} />
-        </>
+        <MissionList
+          className="flex-1 bg-white"
+          missions={missions || []}
+          contentContainerStyle={{ paddingTop: top + 64, paddingBottom: 64 }}
+        />
       )}
       <ExploreFilters open={showFilters} onClose={() => setShowFilters(false)} filters={filters} />
     </>

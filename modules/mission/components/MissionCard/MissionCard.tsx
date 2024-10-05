@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo } from "react";
 import dayjs from "dayjs";
 import { ScrollView, TouchableOpacity, View } from "react-native";
-import Animated from "react-native-reanimated";
 import { useRouter } from "expo-router";
 import { capitalize, sortBy } from "lodash";
 
@@ -22,18 +21,35 @@ const MissionCard: React.FC<MissionCardProps> = ({ mission, style }) => {
   const router = useRouter();
   const { t } = useTranslation();
 
+  const [distance, setDistance] = React.useState<number | null>(null);
+
   const onCardPress = () => {
     router.push(`/mission/${mission.id}`);
   };
 
+  const getMissionDistance = async () => {
+    const userLocation = await getLocation();
+    if (!userLocation || !mission.lat || !mission.long) return;
+    const distance = haversineDistance(
+      userLocation?.latitude,
+      userLocation?.longitude,
+      mission.lat,
+      mission.long
+    );
+    setDistance(Math.floor(distance));
+  };
+
+  useEffect(() => {
+    getMissionDistance();
+  }, []);
+
   if (!mission.id) return null;
 
-  const { title, categories, duration, images, distance, user_profile } = mission;
+  const { title, categories, duration, images, user_profile } = mission;
 
   return (
     <TouchableOpacity activeOpacity={0.8} onPress={onCardPress} style={style}>
-      {/* <Animated.View className="bg-white rounded-2xl p-3 shadow-md w-full"> */}
-      <Animated.View className="bg-white p-3 w-full border-b border-neutral-300">
+      <View className="bg-white p-3 w-full border-b border-neutral-300">
         <View className="flex-row justify-between w-full gap-x-3">
           <View className="max-h-full aspect-square rounded-2xl overflow-hidden my-auto">
             <Image
@@ -73,7 +89,7 @@ const MissionCard: React.FC<MissionCardProps> = ({ mission, style }) => {
                 </View>
               )} */}
             </View>
-            <ScrollView className="h-11 mt-1" showsVerticalScrollIndicator={false}>
+            <ScrollView className="h-5 mt-1" showsVerticalScrollIndicator={false}>
               <TagCloud
                 compact
                 allSelected
@@ -93,7 +109,7 @@ const MissionCard: React.FC<MissionCardProps> = ({ mission, style }) => {
             </View> */}
           </View>
         </View>
-      </Animated.View>
+      </View>
     </TouchableOpacity>
   );
 };

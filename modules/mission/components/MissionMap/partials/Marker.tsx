@@ -11,7 +11,7 @@ export const Marker = ({
 }: {
   marker: any;
   mission?: Mission;
-  onPress?: (id: string) => void;
+  onPress?: (id: number) => void;
 }) => {
   const key = marker.properties.id || marker.geometry.coordinates[0];
 
