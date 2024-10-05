@@ -77,7 +77,8 @@ const Button: React.FC<ButtonProps> = ({
       className={clsx(
         containedStyling,
         containedPaddingStyling,
-        "rounded-lg shadow-lg",
+        variant !== "text" && variant !== "secondary" && "shadow-lg",
+        "rounded-lg",
         "flex justify-center flex-row items-center",
         block && label ? "self-stretch" : "self-center"
       )}
