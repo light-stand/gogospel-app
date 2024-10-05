@@ -104,7 +104,9 @@
         }
       },
       "actions": {
-        "join": "Join"
+        "join": "Join",
+        "favorite": "Favorite",
+        "give": "Give"
       },
       "type": {
         "categories": {
@@ -284,6 +286,12 @@
       "connections": {
         "title": "No connections yet",
         "text": "You haven't connected with any ministries or volunteers yet. Find one now!"
+      }
+    },
+    "alerts": {
+      "comingSoon": {
+        "title": "Coming soon!",
+        "text": "This feature is not available yet. Stay tuned for updates!"
       }
     }
   }

@@ -21,7 +21,7 @@ export type Mission = {
   location_name?: string;
   active?: boolean;
   approved?: boolean;
-  favorite?: Favorite[];
+  favorite?: Favorite | Favorite[];
 };
 
 export type MissionViewInput = {

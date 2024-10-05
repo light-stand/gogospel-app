@@ -17,6 +17,7 @@ export const useFavoriteActions = () => {
           : data?.favorite?.filter((f: Favorite) => f.user_id !== user?.id),
     }));
     queryClient.invalidateQueries(["favoriteMissions"]);
+    queryClient.invalidateQueries(["missions"]); // TODO URGENT: Fix this
   };
 
   const addFavoriteMutation = useMutation({

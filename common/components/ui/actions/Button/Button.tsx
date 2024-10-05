@@ -10,7 +10,7 @@ export interface ButtonProps {
   size?: "medium" | "small" | "large";
   disabled?: boolean;
   icon?: MaterialIconType | null;
-  label: string | null;
+  label: string | React.ReactNode | null;
   block?: boolean;
   onPress?: () => void;
   style?: ViewProps["style"];
@@ -89,24 +89,27 @@ const Button: React.FC<ButtonProps> = ({
           <Icon
             name={icon}
             className={clsx(
-              "text-white mr-2 text-xl",
+              "text-white text-xl",
               variant === "secondary" && "text-indigo-500",
               variant === "text" && "text-neutral-500"
             )}
+            style={[(style as any[])?.find((e) => e.fontSize || e.color || e.fontFamily)]}
           />
         )}
-        <Text
-          className={clsx(
-            "text-base text-white font-bold",
-            variant === "text" && "text-neutral-500",
-            size === "large" && "text-lg",
-            variant === "secondary" && "text-indigo-500"
-          )}
-          numberOfLines={1}
-          style={[(style as any[])?.find((e) => e.fontSize || e.color || e.fontFamily)]}
-        >
-          {label}
-        </Text>
+        {label && (
+          <Text
+            className={clsx(
+              "text-base text-white font-bold ml-2",
+              variant === "text" && "text-neutral-500",
+              size === "large" && "text-lg",
+              variant === "secondary" && "text-indigo-500"
+            )}
+            numberOfLines={1}
+            style={[(style as any[])?.find((e) => e.fontSize || e.color || e.fontFamily)]}
+          >
+            {label}
+          </Text>
+        )}
       </>
     </TouchableOpacity>
   );

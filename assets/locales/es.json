@@ -104,7 +104,9 @@
         }
       },
       "actions": {
-        "join": "Apuntarme"
+        "join": "Apuntarme",
+        "favorite": "Favorito",
+        "give": "Donar"
       },
       "types": {
         "categories": {
@@ -284,6 +286,12 @@
       "connections": {
         "title": "Aún no tienes conexiones",
         "text": "Envía solicitudes para unirte a misiones y haz crecer tu red de conexiones"
+      }
+    },
+    "alerts": {
+      "comingSoon": {
+        "title": "Próximamente",
+        "text": "Esta función estará disponible en futuras actualizaciones"
       }
     }
   }
