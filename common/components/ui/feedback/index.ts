@@ -1,2 +1,2 @@
 export * from "./UserStatus";
-export * from "./Spinner";
+export * from "./NoResults";
