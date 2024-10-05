@@ -1,24 +1,28 @@
 import MissionCard from "../MissionCard/MissionCard";
 import { Mission } from "@/mission/domain/Mission";
 import { Container } from "@/components";
-import { View } from "react-native";
+import { ActivityIndicator, FlatList, ScrollView, View } from "react-native";
+import { NoResults } from "@/components/ui/feedback/NoResults";
 
 interface MissionListProps {
   missions: Mission[];
+  isLoading?: boolean;
   style?: object;
+  NoResultsComponent: () => JSX.Element;
   className?: string;
   onPlanSelected?: (index: number) => void;
 }
 
-const MissionList: React.FC<MissionListProps> = ({ missions, style }) => {
-  if (missions.length === 0) return;
-
+const MissionList: React.FC<MissionListProps> = ({ missions, isLoading, NoResultsComponent }) => {
   return (
-    <Container scroll className="bg-neutral-100">
-      {missions.map((item) => (
-        <MissionCard className="mb-2" mission={item as Mission} key={item.id} />
-      ))}
-    </Container>
+    <FlatList
+      className="pt-4 flex-1"
+      data={missions}
+      renderItem={({ item }) => <MissionCard mission={item as Mission} key={item.id} />}
+      ListEmptyComponent={
+        isLoading ? <ActivityIndicator animating={true} /> : <NoResultsComponent />
+      }
+    />
   );
 };
 

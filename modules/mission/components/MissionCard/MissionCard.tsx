@@ -28,14 +28,18 @@ const MissionCard: React.FC<MissionCardProps> = ({ mission, style }) => {
 
   if (!mission.id) return null;
 
-  const { start_date, end_date, title, categories, duration, images, distance, user_profile } = mission;
+  const { title, categories, duration, images, distance, user_profile } = mission;
 
   return (
     <TouchableOpacity activeOpacity={0.8} onPress={onCardPress} style={style}>
-      <Animated.View className="bg-white rounded-2xl p-3 shadow-md w-full">
+      {/* <Animated.View className="bg-white rounded-2xl p-3 shadow-md w-full"> */}
+      <Animated.View className="bg-white p-3 w-full border-b border-neutral-300">
         <View className="flex-row justify-between w-full gap-x-3">
           <View className="max-h-full aspect-square rounded-2xl overflow-hidden my-auto">
-            <Image source={{ uri: images ? images[0] : user_profile?.images[0] }} className="flex-1" />
+            <Image
+              source={{ uri: images ? images[0] : user_profile?.images[0] }}
+              className="flex-1"
+            />
           </View>
           <View className="flex-col flex-1 items-start justify-between">
             <Text className="text-lg font-extrabold" numberOfLines={1}>
