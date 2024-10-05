@@ -13,7 +13,7 @@ export default function TabLayout() {
   const router = useRouter();
   const { openModal: openAuthModal } = useAuthModal();
 
-  const handleNavigation = (route: "" | "connections" | "my-profile") => {
+  const handleNavigation = (route: "" | "connections" | "my-profile" | "missions") => {
     if (!user.id) return openAuthModal();
     router.push(`/(main)/${route}`);
   };
@@ -45,7 +45,19 @@ export default function TabLayout() {
             <TouchableOpacity {...props} onPress={() => handleNavigation("connections")} />
           ),
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? "chatbubbles" : "chatbubbles-outline"} color={color} />
+            <TabBarIcon name={focused ? "chat" : "chat-outline"} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="missions"
+        options={{
+          title: t("screen.missions"),
+          tabBarButton: (props) => (
+            <TouchableOpacity {...props} onPress={() => handleNavigation("missions")} />
+          ),
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name={focused ? "handshake" : "handshake-outline"} color={color} />
           ),
         }}
       />
@@ -57,7 +69,7 @@ export default function TabLayout() {
             <TouchableOpacity {...props} onPress={() => handleNavigation("my-profile")} />
           ),
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? "person" : "person-outline"} color={color} />
+            <TabBarIcon name={focused ? "account" : "account-outline"} color={color} />
           ),
         }}
       />
