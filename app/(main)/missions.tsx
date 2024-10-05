@@ -5,6 +5,7 @@ import { MissionList } from "@/mission/components/MissionList";
 import { View } from "react-native";
 import { NoResults } from "@/components/ui/feedback/NoResults";
 import { missionListTypes } from "@/mission/domain/MissionList";
+import { Link } from "expo-router";
 
 export default function Missions() {
   const { t } = useTranslation();
@@ -42,6 +43,16 @@ export default function Missions() {
         isLoading={isFetching}
         NoResultsComponent={() => <NoResults type={mode} />}
       />
+      {mode === "myMissions" && (
+        <Link href="/mission/creation" asChild>
+          <IconButton
+            className="absolute bottom-4 right-4"
+            variant="primary"
+            size="medium"
+            icon="plus"
+          />
+        </Link>
+      )}
     </Container>
   );
 }

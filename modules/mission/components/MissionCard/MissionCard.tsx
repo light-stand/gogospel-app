@@ -42,7 +42,7 @@ const MissionCard: React.FC<MissionCardProps> = ({ mission, style }) => {
             />
           </View>
           <View className="flex-col flex-1 items-start justify-between">
-            <Text className="text-lg font-extrabold" numberOfLines={1}>
+            <Text className="text-lg font-bold" numberOfLines={1}>
               {title}
             </Text>
             <View className="flex w-full">

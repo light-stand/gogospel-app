@@ -1,6 +1,7 @@
 import { View, ViewProps } from "react-native";
-import { Image, Text } from "@/components";
+import { Button, Image, Text } from "@/components";
 import { useTranslation } from "react-i18next";
+import { Href, Link } from "expo-router";
 
 type NoResultsType = "myMissions" | "favorites" | "involved";
 
@@ -12,6 +13,10 @@ const noResultsIllustration = {
   myMissions: require("@/assets/images/illustration/fitting.png"),
   favorites: require("@/assets/images/illustration/favorite.png"),
   involved: require("@/assets/images/illustration/collab.png"),
+};
+
+const noResultsLinks: Partial<Record<NoResultsType, Href>> = {
+  myMissions: "/mission/creation",
 };
 
 export const NoResults = ({ type, ...props }: NoResultsProps) => {
@@ -30,6 +35,13 @@ export const NoResults = ({ type, ...props }: NoResultsProps) => {
       <Text className="text-neutral-500 font-bold mt-2 mb-auto text-center">
         {t(`noResults.${type}.text`)}
       </Text>
+      {noResultsLinks[type] && (
+        <View className="px-4 mt-4">
+          <Link href={noResultsLinks[type]} asChild>
+            <Button label={t(`noResults.${type}.button`)} block={false} />
+          </Link>
+        </View>
+      )}
     </View>
   );
 };

@@ -8,7 +8,7 @@ export default function MissionCreation() {
   const { form, onNext } = useMissionCreationStep("index");
   const { user } = useUserStore();
   return (
-    <Container>
+    <Container showBack>
       <Text className="font-bold text-3xl mb-4 text-center">
         {t("mission.creation.titles.start")}
       </Text>

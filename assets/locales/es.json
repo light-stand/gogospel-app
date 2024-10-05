@@ -270,7 +270,8 @@
     "noResults": {
       "myMissions": {
         "title": "Aún no has creado misiones",
-        "text": "Crea una misión ahora!"
+        "text": "Crea una misión ahora!",
+        "button": "Crear una misión"
       },
       "favorites": {
         "title": "Aún no tienes favoritos",
