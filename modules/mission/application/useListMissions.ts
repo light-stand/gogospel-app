@@ -10,12 +10,8 @@ export const useListMissions = () => {
   const [mode, setMode] = useState<MissionListTypes>("favorites");
 
   const listMissionFilters = {
-    myMissions: [["created_by", "eq", user?.id]],
-    favorites: [
-      ["approved", "eq", true],
-      ["active", "eq", true],
-      ["favorite.user_id", "eq", user?.id],
-    ],
+    myMissions: ["created_by", "eq", user?.id],
+    favorites: ["favorite.user_id", "eq", user?.id],
     involved: [
       ["approved", "eq", true],
       ["active", "eq", true],
@@ -23,13 +19,14 @@ export const useListMissions = () => {
     ],
   }[mode];
 
+  const select = `*, user_profile!created_by(name, images),${
+    mode === "involved" ? "connection!inner(*)" : "connection(*)"
+  }, ${mode === "favorites" ? "favorite!inner(*)" : "favorite(*)"}`;
+
   const query = useQuery({
-    queryKey: ["listMissions", listMissionFilters],
+    queryKey: ["listMissions", listMissionFilters, select],
     queryFn: () =>
-      missionRepository.get(
-        listMissionFilters as SupabaseFilter | SupabaseFilter[],
-        "*, user_profile!created_by(name, images), favorite!inner(*), connection(*)"
-      ),
+      missionRepository.get(listMissionFilters as SupabaseFilter | SupabaseFilter[], select),
   });
 
   return { query, mode, setMode };
