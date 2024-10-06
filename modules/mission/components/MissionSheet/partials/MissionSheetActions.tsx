@@ -41,7 +41,7 @@ export const MissionSheetActions = ({ mission }: MissionSheetActionsProps) => {
       <View className="flex-row gap-x-2">
         <Button
           className={clsx(
-            "flex-1 border-2 border-rose-500",
+            "flex-1 border border-rose-500 py-2",
             isFavorite ? "bg-rose-500" : "bg-white",
             isFavorite ? "text-white" : "text-rose-500"
           )}
@@ -50,7 +50,7 @@ export const MissionSheetActions = ({ mission }: MissionSheetActionsProps) => {
           onPress={toggleFavorite}
         />
         <Button
-          className="flex-1 bg-green-500 opacity-50"
+          className="flex-1 bg-green-500 opacity-50 py-2"
           icon="currency-usd"
           variant="success"
           label={t("mission.actions.give")}

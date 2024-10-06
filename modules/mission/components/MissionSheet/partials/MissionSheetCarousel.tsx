@@ -12,7 +12,7 @@ const width = Dimensions.get("window").width;
 export const MissionSheetCarousel = ({ mission }: MissionSheetCarouselProps) => {
   const { images, user_profile } = mission;
   return (
-    <View className="w-full">
+    <View className="w-full" style={{ height: width / 2 }}>
       <Carousel
         data={(images && images.length ? images : user_profile?.images[0]) as string[]}
         width={width}
