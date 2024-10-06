@@ -1,16 +1,17 @@
 import { useTranslation } from "react-i18next";
-import { Button, Container, Icon, IconButton, Text } from "@/components";
+import { Button, Container, IconButton, Text } from "@/components";
 import { useListMissions } from "@/mission/application/useListMissions";
 import { MissionList } from "@/mission/components/MissionList";
 import { View } from "react-native";
 import { NoResults } from "@/components/ui/feedback/NoResults";
 import { missionListTypes } from "@/mission/domain/MissionListType";
-import { Link } from "expo-router";
+import { useRouter } from "expo-router";
 
 export default function Missions() {
   const { t } = useTranslation();
+  const router = useRouter();
   const {
-    query: { data: missions, isFetching },
+    query: { data: missions, isFetching, refetch },
     setMode,
     mode,
   } = useListMissions();
@@ -39,19 +40,19 @@ export default function Missions() {
         ))}
       </View>
       <MissionList
+        onRefresh={refetch}
         missions={missions || []}
         isLoading={isFetching}
         NoResultsComponent={() => <NoResults type={mode} />}
       />
       {mode === "myMissions" && (
-        <Link href="/mission/creation" asChild>
-          <IconButton
-            className="absolute bottom-4 right-4"
-            variant="primary"
-            size="medium"
-            icon="plus"
-          />
-        </Link>
+        <IconButton
+          className="absolute bottom-4 right-4"
+          variant="primary"
+          size="medium"
+          icon="plus"
+          onPress={() => router.push("/mission/creation")}
+        />
       )}
     </Container>
   );

@@ -1,7 +1,7 @@
 import { View, ViewProps } from "react-native";
 import { Button, Image, Text } from "@/components";
 import { useTranslation } from "react-i18next";
-import { Href, Link } from "expo-router";
+import { Href, Link, useRouter } from "expo-router";
 
 type NoResultsType = "myMissions" | "favorites" | "involved" | "connections";
 
@@ -22,6 +22,7 @@ const noResultsLinks: Partial<Record<NoResultsType, Href>> = {
 
 export const NoResults = ({ type, ...props }: NoResultsProps) => {
   const { t } = useTranslation();
+  const router = useRouter();
 
   return (
     <View className="px-2" {...props}>
@@ -39,9 +40,11 @@ export const NoResults = ({ type, ...props }: NoResultsProps) => {
         </Text>
         {noResultsLinks[type] && (
           <View className="px-4 mt-4">
-            <Link href={noResultsLinks[type]} asChild>
-              <Button label={t(`noResults.${type}.button`)} block={false} />
-            </Link>
+            <Button
+              label={t(`noResults.${type}.button`)}
+              block={false}
+              onPress={() => router.push(noResultsLinks[type] as Href)}
+            />
           </View>
         )}
       </View>
