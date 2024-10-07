@@ -26,7 +26,7 @@ export type MapPickerValue = LatLng & { locationName: string };
 const MapPicker: React.FC<MapPickerProps> = ({ open, onClose, name, control, style }) => {
   const { t } = useTranslation();
   const mapRef = useRef<MapView>(null);
-  const { bottom } = useSafeAreaInsets();
+  const { top, bottom } = useSafeAreaInsets();
   const { field } = control ? useController({ control, name }) : { field: null };
   const location = field?.value as MapPickerValue;
   const error = null;
@@ -76,6 +76,7 @@ const MapPicker: React.FC<MapPickerProps> = ({ open, onClose, name, control, sty
       <IconButton
         icon="close"
         className="absolute right-6 top-6 z-10"
+        style={[{ marginTop: top }]}
         variant="primary"
         onPress={onClose}
       />

@@ -67,7 +67,7 @@ const IconButton: React.FC<IconButtonProps> = ({
         containedPaddingStyling,
         "rounded-full aspect-square",
         "flex justify-center flex-row items-center self-center",
-        variant !== "transparent" && variant !== "secondary" && "shadow-lg"
+        variant !== "transparent" && variant !== "secondary" && "shadow-sm"
       )}
       style={style}
     >

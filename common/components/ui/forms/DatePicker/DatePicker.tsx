@@ -24,7 +24,7 @@ interface DatePickerProps {
 }
 
 const DatePicker = ({
-  date: propDate = new Date(),
+  date: propDate,
   onChange,
   label,
   inline,
