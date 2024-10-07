@@ -39,6 +39,9 @@ export const mapSettings: MapSettings = {
         {
           color: "#818cf8",
         },
+        {
+          saturation: -50,
+        },
       ],
     },
     {
@@ -47,6 +50,9 @@ export const mapSettings: MapSettings = {
       stylers: [
         {
           visibility: "off",
+        },
+        {
+          saturation: -50,
         },
       ],
     },
@@ -68,6 +74,9 @@ export const mapSettings: MapSettings = {
         {
           visibility: "on",
         },
+        {
+          saturation: -50,
+        },
       ],
     },
     {
@@ -79,6 +88,9 @@ export const mapSettings: MapSettings = {
         },
         {
           weight: 1.5,
+        },
+        {
+          saturation: -50,
         },
       ],
     },

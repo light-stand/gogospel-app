@@ -1,22 +1,9 @@
-import React from "react";
-import { StyleSheet, View, Text } from "react-native";
-
-const Style = StyleSheet.create({
-  container: {
-    flexDirection: "column",
-    alignSelf: "flex-start",
-  },
-  count: {
-    color: "#fff",
-    fontSize: 13,
-  },
-});
+import { View } from "react-native";
+import { Text } from "@/components";
 
 const ClusterMarker = ({ count }: { count: number }) => (
-  <View style={Style.container}>
-    <View className="bg-red-500 p-2 rounded-full">
-      <Text style={Style.count}>{count}</Text>
-    </View>
+  <View className="bg-stone-500 p-[12px] rounded-full aspect-square items-center">
+    <Text className="text-white font-bold">{count}</Text>
   </View>
 );
 
