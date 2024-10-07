@@ -103,6 +103,9 @@
           "months": "Months"
         }
       },
+      "edit": {
+        "title": "Edit Mission"
+      },
       "actions": {
         "join": "Join",
         "favorite": "Favorite",

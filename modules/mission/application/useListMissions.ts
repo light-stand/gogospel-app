@@ -7,7 +7,7 @@ import { SupabaseFilter } from "@/interface/repository";
 
 export const useListMissions = () => {
   const { user } = useUserStore();
-  const [mode, setMode] = useState<MissionListTypes>("favorites");
+  const [mode, setMode] = useState<MissionListTypes>("myMissions");
 
   const listMissionFilters = {
     myMissions: ["created_by", "eq", user?.id],
