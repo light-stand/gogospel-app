@@ -26,7 +26,7 @@ export default function MyProfile() {
   const { name, images, created_at, verified } = profile as UserProfile;
 
   return (
-    <Container scroll>
+    <Container scroll className="flex-1">
       {/*=UserInfo+Buttons=*/}
       <View className="items-start justify-between gap-y-4 px-4">
         {/*=Image=*/}
@@ -39,16 +39,15 @@ export default function MyProfile() {
         </View>
         {/*=Name=*/}
         <View className="flex-row items-center">
-          <Text numberOfLines={1} className="my-2 mr-1">
-            <Text className="font-bold text-3xl">{name?.split(" ")[0]}</Text>
-            {name?.split(" ")[1] && (
+          <Text numberOfLines={2} ellipsizeMode="middle" className="font-bold text-3xl my-2 mr-1">
+            {name}
+            {is_verified && (
               <>
                 {" "}
-                <Text className="font-bold text-3xl text-neutral-400">{name?.split(" ")[1]}</Text>
+                <Icon name="check-decagram" className="text-amber-400 ml-2" />
               </>
             )}
           </Text>
-          {verified && <Icon name="check-decagram" className="text-indigo-500" />}
         </View>
         {/*=Buttons=*/}
         <View className="flex-row justify-evenly w-full my-4">

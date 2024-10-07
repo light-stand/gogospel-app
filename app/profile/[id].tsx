@@ -11,22 +11,21 @@ export default function Profile() {
   const { t } = useTranslation();
   const { form, profileData, isOwn } = useUserProfile();
 
-  const { name, description, verified, interests } = profileData;
+  const { name, description, is_verified, interests } = profileData;
 
   return (
     <Container showBack scroll>
       <ImagePicker control={form.control} name="image" disabled={!isOwn} icon="pencil" />
-      <View className="flex-row items-center">
-        <Text numberOfLines={1} className="mt-4 text-center w-full">
-          <Text className="font-bold text-3xl">{name?.split(" ")[0]}</Text>
-          {name?.split(" ")[1] && (
+      <View className="flex-row items-center mt-4 justify-center">
+        <Text numberOfLines={2} className="font-bold text-3xl text-center" ellipsizeMode="middle">
+          {name}
+          {is_verified && (
             <>
               {" "}
-              <Text className="font-bold text-3xl text-neutral-400">{name?.split(" ")[1]}</Text>
+              <Icon name="check-decagram" className="text-amber-400 ml-2" />
             </>
           )}
         </Text>
-        {verified && <Icon name="check-decagram" className="text-indigo-500" />}
       </View>
       {/* <TagCloud
         compact
