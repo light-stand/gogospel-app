@@ -247,6 +247,17 @@
           "verificationCode": "Verification code",
           "logout": "Logout"
         }
+      },
+      "verificationCode": {
+        "title": "Verification Code",
+        "text": "Enter the code you received from GoGospel to verify your ministry",
+        "label": "Code",
+        "errors": {
+          "required": "The code is required",
+          "invalid": "The code is invalid"
+        },
+        "success": "Congrats! Your ministry has been verified!",
+        "successText": "Now you can enjoy the benefits of being a verified ministry, such as the badge and the possibility of creating missions without waiting for verification."
       }
     },
     "action": {

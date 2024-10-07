@@ -1,6 +1,7 @@
 import { ProfileOptions } from "../components/ProfileOptions";
+import { UserProfile } from "./User";
 
-export const profileOptions: ProfileOptions = [
+export const getProfileOptions = (user?: UserProfile): ProfileOptions => [
   {
     label: "user.profile.options.missions",
     items: [
@@ -24,17 +25,17 @@ export const profileOptions: ProfileOptions = [
         label: "user.profile.options.notification",
         href: "/settings",
       },
-      {
+      !user?.is_verified && {
         icon: "lock-check-outline",
         label: "user.profile.options.verificationCode",
-        href: "/settings",
+        action: "openVerificationCode",
       },
       {
         icon: "logout",
         label: "user.profile.options.logout",
         action: "logout",
       },
-    ],
+    ].filter(Boolean) as ProfileOptions[number]["items"],
   },
 ];
 
@@ -51,7 +52,7 @@ export const publicProfileOptions: ProfileOptions = [
         label: "user.profile.myMissions",
         href: "/settings",
       },
-      ...profileOptions[0].items,
+      ...getProfileOptions()[0].items,
     ],
   },
 ];

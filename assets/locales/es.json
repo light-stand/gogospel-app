@@ -247,6 +247,17 @@
           "verificationCode": "Código de verificación",
           "logout": "Cerrar sesión"
         }
+      },
+      "verificationCode": {
+        "title": "Añadir código de verificación",
+        "text": "Introduce el código que te ha proporcionado GoGospel para verificar tu ministerio.",
+        "label": "Código",
+        "errors": {
+          "required": "El código es requerido",
+          "invalid": "El código es inválido"
+        },
+        "success": "¡Felicidades! Ahora eres un ministerio verificado",
+        "successText": "Ahora puedes disfrutar de las ventajas de ser un ministerio verificado, como el sello y la posibilidad de crear misiones sin la espera de la verificación."
       }
     },
     "action": {

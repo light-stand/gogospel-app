@@ -1,3 +1,4 @@
+import { useState } from "react";
 import dayjs from "dayjs";
 import { View } from "react-native";
 import { Redirect, useRouter } from "expo-router";
@@ -6,13 +7,15 @@ import { useTranslation } from "react-i18next";
 import { Container, Icon, IconButton, Text } from "@/components";
 import { UserPhoto } from "@/components/ui/structure/UserPhoto";
 import { useUserStore } from "@/user/store/useUserStore";
-import { profileOptions } from "@/user/domain/profileOptions";
+import { getProfileOptions } from "@/user/domain/profileOptions";
 import { useLogout } from "@/auth/application/useLogout";
 import { ProfileOptions } from "@/user/components/ProfileOptions";
 import { UserProfile } from "@/user/domain/User";
+import VerifyCodeSheet from "@/user/components/VerifyCodeSheet";
 
 export default function MyProfile() {
   const router = useRouter();
+  const [verifyCodeOpen, setVerifyCodeOpen] = useState(false);
   const { t } = useTranslation();
   const { user } = useUserStore();
   const logout = useLogout();
@@ -21,6 +24,7 @@ export default function MyProfile() {
 
   const actions = {
     logout,
+    openVerificationCode: () => setVerifyCodeOpen(true),
   };
 
   const { name, images, created_at, is_verified } = profile as UserProfile;
@@ -74,7 +78,8 @@ export default function MyProfile() {
         </View>
       </View>
       {/*=Options=*/}
-      <ProfileOptions options={profileOptions} actions={actions} />
+      <ProfileOptions options={getProfileOptions(user.profile)} actions={actions} />
+      <VerifyCodeSheet open={verifyCodeOpen} onClose={() => setVerifyCodeOpen(false)} />
     </Container>
   );
 }
