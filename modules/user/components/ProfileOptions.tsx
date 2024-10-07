@@ -13,7 +13,7 @@ export type ProfileOptions = {
     icon: MaterialIconType;
     label: string;
     href?: string;
-    action?: "logout";
+    action?: "logout" | "openVerificationCode";
     disabled?: boolean;
   }[];
 }[];
