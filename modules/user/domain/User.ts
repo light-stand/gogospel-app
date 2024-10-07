@@ -11,9 +11,9 @@ export type UserProfile = {
   description: string;
   lat?: number;
   lng?: number;
-  verified: boolean;
+  is_verified: boolean;
   type: string;
   images: string[];
   created_at: string;
   updated_at: string;
-}
+};

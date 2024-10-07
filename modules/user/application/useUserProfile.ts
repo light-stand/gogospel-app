@@ -24,9 +24,9 @@ export const useUserProfile = () => {
     name: profile?.name || "",
     created_at: profile?.created_at,
     description: profile?.description,
-    verified: profile?.verified,
+    is_verified: profile?.is_verified,
     interests: [],
-  }
+  };
 
   const { images } = data;
 

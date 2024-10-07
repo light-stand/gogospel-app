@@ -23,7 +23,7 @@ export default function MyProfile() {
     logout,
   };
 
-  const { name, images, created_at, verified } = profile as UserProfile;
+  const { name, images, created_at, is_verified } = profile as UserProfile;
 
   return (
     <Container scroll className="flex-1">
