@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { Fragment } from "react";
 import { TouchableOpacity, View, ViewProps } from "react-native";
-import { useRouter } from "expo-router";
+import { Href, useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
 
 import { Icon, Text } from "@/components";
@@ -23,11 +23,7 @@ interface ProfileOptionsProps extends ViewProps {
   actions?: Record<string, VoidFunction>;
 }
 
-export const ProfileOptions = ({
-  options,
-  actions = {},
-  style,
-}: ProfileOptionsProps) => {
+export const ProfileOptions = ({ options, actions = {}, style }: ProfileOptionsProps) => {
   const router = useRouter();
   const { t } = useTranslation();
 
@@ -36,12 +32,13 @@ export const ProfileOptions = ({
       {options.map((option, index) => (
         <Fragment key={index}>
           {option.label && <Text className="font-bold my-2">{t(option.label)}</Text>}
-          {option.items.map(
-            ({ icon, label, href, action, disabled }) =>
-            (<TouchableOpacity
+          {option.items.map(({ icon, label, href, action, disabled }) => (
+            <TouchableOpacity
               key={label}
               disabled={disabled}
-              onPress={href ? () => router.push(href) : action ? actions[action] : undefined}
+              onPress={
+                href ? () => router.push(href as Href) : action ? actions[action] : undefined
+              }
               className={clsx(disabled && "opacity-50")}
             >
               <View className="flex-row items-center py-4 px-2">
@@ -50,8 +47,7 @@ export const ProfileOptions = ({
                 <Icon className="ml-auto" name="chevron-right" />
               </View>
             </TouchableOpacity>
-            )
-          )}
+          ))}
         </Fragment>
       ))}
     </View>
