@@ -4,3 +4,4 @@ export * from "./Skeleton";
 export * from "./Modal";
 export * from "./UserPhoto";
 export * from "./Collapsable";
+export * from "./Spinner";
