@@ -61,7 +61,7 @@ export default function MyProfile() {
               size="medium"
               variant="primary"
               className="mb-1"
-              onPress={() => router.push(`/profile/${user?.id}`)}
+              onPress={() => router.push("/profile/edit")}
             />
             <Text className="mt-1 font-bold text-neutral-500">{t("user.profile.edit")}</Text>
           </View>

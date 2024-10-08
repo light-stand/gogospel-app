@@ -36,14 +36,15 @@
           "error": "El nombre tiene que tener al menos 3 caracteres"
         },
         "ministryType": {
-          "label": "Tipo de ministerio",
+          "label": "Selecciona la categoría que mejor describe tu actividad",
           "error": "El tipo de ministerio es requerido"
         },
         "image": {
           "error": "Este campo es requerido"
         },
         "interests": {
-          "error": "Este campo es requerido"
+          "label": "Mis intereses",
+          "error": "Selecciona entre 4 y 10 intereses"
         },
         "type": {}
       },
@@ -52,7 +53,8 @@
         "name": "Soy...",
         "bio": "Un poco más sobre ti",
         "image": "Una foto",
-        "interests": "Mis intereses"
+        "interests": "Mis intereses",
+        "edit": "Editar perfil"
       }
     },
     "mission": {

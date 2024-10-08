@@ -36,14 +36,15 @@
           "error": "The name must be at least 3 characters long"
         },
         "ministryType": {
-          "label": "Ministry type",
+          "label": "Select the category that best describes your activity",
           "error": "The ministry type is required"
         },
         "image": {
           "error": "This field is required"
         },
         "interests": {
-          "error": "This field is required"
+          "label": "My Interests",
+          "error": "Select between 4 and 10 interests"
         },
         "type": {}
       },
@@ -52,7 +53,8 @@
         "name": "I am...",
         "bio": "More information about me",
         "image": "A Photo",
-        "interests": "My Interests"
+        "interests": "My Interests",
+        "edit": "Edit Profile"
       }
     },
     "mission": {
