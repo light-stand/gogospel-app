@@ -1,21 +1,21 @@
 import { View } from "react-native";
 import { useTranslation } from "react-i18next";
 
-import { Container, Icon, ImagePicker, TagCloud, Text } from "@/components";
+import { Container, Icon, ImagePicker, TagCloud, Text, UserPhoto } from "@/components";
 import { ProfileOptions } from "@/user/components/ProfileOptions";
 import { publicProfileOptions } from "@/user/domain/profileOptions";
 import { missionTypes } from "@/mission/domain/MissionType";
 import { useUserProfile } from "@/user/application/useUserProfile";
+import { useLocalSearchParams } from "expo-router";
 
 export default function Profile() {
   const { t } = useTranslation();
-  const { form, profileData, isOwn } = useUserProfile();
-
-  const { name, description, is_verified, interests } = profileData;
+  const id = useLocalSearchParams().id as string;
+  const { name, is_verified, images, description } = useUserProfile(id);
 
   return (
     <Container showBack scroll>
-      <ImagePicker control={form.control} name="image" disabled={!isOwn} icon="pencil" />
+      <UserPhoto source={{ uri: images[0] }} disabled className="w-1/2 mx-auto" />
       <View className="flex-row items-center mt-4 justify-center">
         <Text numberOfLines={2} className="font-bold text-3xl text-center" ellipsizeMode="middle">
           {name}
