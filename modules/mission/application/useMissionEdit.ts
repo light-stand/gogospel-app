@@ -56,7 +56,7 @@ export const useMissionEdit = () => {
         start_date: mission.startDate,
         duration: mission.duration * mission.durationMultiplier,
         categories: mission.categories,
-        location: `POINT(${mission.location.latitude} ${mission.location.longitude})`,
+        location: `POINT(${mission.location.longitude} ${mission.location.latitude})`,
         location_name: mission.location.locationName,
         ...(mission.image && { images: [mission.image] }),
       });
