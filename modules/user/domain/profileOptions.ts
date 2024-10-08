@@ -57,7 +57,16 @@ export const publicProfileOptions: ProfileOptions = [
         label: "user.profile.myMissions",
         href: "/settings",
       },
-      ...getProfileOptions()[0].items,
+      {
+        icon: "hand-heart",
+        label: "user.profile.options.connectedVolunteers",
+        href: "/settings",
+      },
+      {
+        icon: "comment-check-outline",
+        label: "user.profile.options.testimonies",
+        href: "/settings",
+      },
     ],
   },
 ];
