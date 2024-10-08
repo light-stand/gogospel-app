@@ -1,4 +1,3 @@
-import { View } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -21,7 +20,13 @@ export default function EventDetails() {
   const { created_by } = mission;
 
   return (
-    <Container className="flex-1" showBack scroll>
+    <>
+      <Container showBack scroll>
+        <MissionSheetTitle mission={mission} position={3} />
+        <MissionSheetCarousel mission={mission} />
+        <MissionSheetInfo mission={mission} />
+        <MissionSheetActions mission={mission} />
+      </Container>
       {created_by === user.id && (
         <IconButton
           className="absolute bottom-4 right-4"
@@ -32,10 +37,6 @@ export default function EventDetails() {
           onPress={() => router.push(`/mission/edit/${mission.id}`)}
         />
       )}
-      <MissionSheetTitle mission={mission} position={3} />
-      <MissionSheetCarousel mission={mission} />
-      <MissionSheetInfo mission={mission} />
-      <MissionSheetActions mission={mission} />
-    </Container>
+    </>
   );
 }

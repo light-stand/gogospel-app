@@ -1,9 +1,9 @@
+import { TouchableOpacity } from "react-native";
 import { Tabs, useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
 import { indigo } from "tailwindcss/colors";
 
 import { TabBarIcon } from "@/components/navigation/TabBarIcon";
-import { TouchableOpacity } from "react-native";
 import { useUserStore } from "@/user/store/useUserStore";
 import { useAuthModal } from "@/auth/context/AuthModalContext";
 
@@ -35,6 +35,7 @@ export default function TabLayout() {
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon name={focused ? "compass" : "compass-outline"} color={color} />
           ),
+          tabBarLabelStyle: { marginBottom: 3 },
         }}
       />
       <Tabs.Screen
@@ -47,6 +48,7 @@ export default function TabLayout() {
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon name={focused ? "chat" : "chat-outline"} color={color} />
           ),
+          tabBarLabelStyle: { marginBottom: 3 },
         }}
       />
       <Tabs.Screen
@@ -59,6 +61,7 @@ export default function TabLayout() {
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon name={focused ? "handshake" : "handshake-outline"} color={color} />
           ),
+          tabBarLabelStyle: { marginBottom: 3 },
         }}
       />
       <Tabs.Screen
@@ -71,6 +74,7 @@ export default function TabLayout() {
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon name={focused ? "account" : "account-outline"} color={color} />
           ),
+          tabBarLabelStyle: { marginBottom: 3 },
         }}
       />
     </Tabs>

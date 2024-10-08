@@ -1,11 +1,12 @@
+import { View } from "react-native";
 import { useTranslation } from "react-i18next";
+import { useRouter } from "expo-router";
+
 import { Button, Container, IconButton, Text } from "@/components";
 import { useListMissions } from "@/mission/application/useListMissions";
 import { MissionList } from "@/mission/components/MissionList";
-import { View } from "react-native";
 import { NoResults } from "@/components/ui/feedback/NoResults";
 import { missionListTypes } from "@/mission/domain/MissionListType";
-import { useRouter } from "expo-router";
 
 export default function Missions() {
   const { t } = useTranslation();
@@ -29,7 +30,7 @@ export default function Missions() {
         {missionListTypes.map((type) => (
           <Button
             key={type}
-            className="text-xs flex-1 py-1"
+            className="text-xs flex-1 py-1 px-1"
             label={t(`mission.list.types.${type}`)}
             size="small"
             icon={listTypesIcons[type]}
