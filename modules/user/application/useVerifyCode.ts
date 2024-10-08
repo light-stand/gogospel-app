@@ -24,7 +24,7 @@ export const useVerifyCode = (onValidationSuccess: VoidFunction) => {
   const { mutate } = useMutation(verifyCodeApi, { onError, onSuccess });
 
   const onSubmit = form.handleSubmit(({ code }) => {
-    mutate({ userId: user?.id, code });
+    mutate({ userId: user.id as string, code });
   });
 
   return { form, onSubmit };

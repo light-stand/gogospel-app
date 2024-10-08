@@ -30,7 +30,7 @@ export default function MyProfile() {
   const { name, images, created_at, is_verified } = profile;
 
   return (
-    <Container scroll className="flex-1">
+    <Container scroll>
       {/*=UserInfo+Buttons=*/}
       <View className="items-start justify-between gap-y-4 px-4">
         {/*=Image=*/}

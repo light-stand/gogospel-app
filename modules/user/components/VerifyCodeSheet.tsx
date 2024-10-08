@@ -6,6 +6,8 @@ import BottomSheet, { BottomSheetBackdrop, BottomSheetView } from "@gorhom/botto
 
 import { Button, Input, Text } from "@/components";
 import { useVerifyCode } from "../application/useVerifyCode";
+import { useQueryClient } from "react-query";
+import { useUserStore } from "../store/useUserStore";
 
 interface VerifyCodeSheetProps extends ViewProps {
   open: boolean;
@@ -13,8 +15,9 @@ interface VerifyCodeSheetProps extends ViewProps {
 }
 
 export const VerifyCodeSheet = ({ open, onClose }: VerifyCodeSheetProps) => {
-  const router = useRouter();
   const { t } = useTranslation();
+  const queryClient = useQueryClient();
+  const { user } = useUserStore();
   const bottomSheetRef = useRef<BottomSheet>(null);
   const onSheetChange = useCallback((index: number) => {
     if (index === -1) onClose();
@@ -22,6 +25,7 @@ export const VerifyCodeSheet = ({ open, onClose }: VerifyCodeSheetProps) => {
 
   const onValidationSuccess = () => {
     Alert.alert(t("user.verificationCode.success"), t("user.verificationCode.successText"));
+    queryClient.invalidateQueries(["profile", user.id]);
     onClose();
   };
 
