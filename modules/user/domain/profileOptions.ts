@@ -3,8 +3,13 @@ import { UserProfile } from "./User";
 
 export const getProfileOptions = (user?: UserProfile): ProfileOptions => [
   {
-    label: "user.profile.options.missions",
+    label: "user.profile.options.profile",
     items: [
+      {
+        icon: "pencil",
+        label: "user.profile.edit",
+        href: "/profile/edit",
+      },
       {
         icon: "hand-heart",
         label: "user.profile.options.connectedVolunteers",

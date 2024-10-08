@@ -42,7 +42,7 @@ export default function MyProfile() {
           </View>
         </View>
         {/*=Name=*/}
-        <View className="flex-row items-center">
+        <View className="flex-row items-center mb-4">
           <Text numberOfLines={2} ellipsizeMode="middle" className="font-bold text-3xl my-2 mr-1">
             {name}
             {is_verified && (
@@ -52,29 +52,6 @@ export default function MyProfile() {
               </>
             )}
           </Text>
-        </View>
-        {/*=Buttons=*/}
-        <View className="flex-row justify-evenly w-full my-4">
-          <View className="items-center">
-            <IconButton
-              icon="pencil"
-              size="medium"
-              variant="primary"
-              className="mb-1"
-              onPress={() => router.push("/profile/edit")}
-            />
-            <Text className="mt-1 font-bold text-neutral-500">{t("user.profile.edit")}</Text>
-          </View>
-          <View className="items-center">
-            <IconButton
-              icon="heart"
-              size="medium"
-              variant="primary"
-              className="mb-1"
-              onPress={() => router.push("/mission/favorites")}
-            />
-            <Text className="mt-1 font-bold text-neutral-500">{t("user.profile.favorites")}</Text>
-          </View>
         </View>
       </View>
       {/*=Options=*/}
