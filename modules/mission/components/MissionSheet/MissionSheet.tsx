@@ -19,7 +19,7 @@ interface MissionSheetProps {
 const WIDTH = Dimensions.get("window").width;
 const HEIGHT = Dimensions.get("window").height;
 
-const SNAP_POINTS = [88, 88 + WIDTH / 2, HEIGHT];
+const SNAP_POINTS = [96, 96 + WIDTH / 2, HEIGHT];
 
 const MissionSheet: React.FC<MissionSheetProps> = ({ mission, style }) => {
   const { top } = useSafeAreaInsets();

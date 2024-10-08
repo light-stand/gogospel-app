@@ -22,7 +22,7 @@ export const MissionSheetTitle = ({ mission, position }: MissionSheetTitleProps)
       <Text className="text-2xl font-bold mb-1" numberOfLines={1}>
         {title}
       </Text>
-      <View className="flex-row items-center w-full mb-2 overflow-hidden">
+      <View className="flex-row items-center w-full mb-3 overflow-hidden">
         <TouchableOpacity onPress={() => router.push(`/profile/${user_profile?.user_id}`)}>
           <View className="flex flex-row items-center w-full overflow-hidden ">
             <UserPhoto source={{ uri: user_profile?.images[0] }} className="h-6 w-6 mr-2" />
