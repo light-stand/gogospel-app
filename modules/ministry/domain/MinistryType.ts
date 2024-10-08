@@ -2,6 +2,7 @@ import { MaterialIconType } from "@/components/ui/foundation/Icon/Icon";
 import colors from "tailwindcss/colors";
 
 type CategoryValues =
+  | "individual"
   | "mission-spiritual"
   | "organization-community"
   | "health-wellness"
@@ -18,6 +19,9 @@ export type MissionTypeData = {
 };
 
 export const ministryTypes = {
+  volunteer: { icon: "account", color: "green", category: "individual" },
+  missionary: { icon: "earth", color: "cyan", category: "individual" },
+  evangelist: { icon: "bullhorn", color: "red", category: "individual" },
   church: { icon: "church", color: "blue", category: "mission-spiritual" },
   association: { icon: "account-group", color: "green", category: "organization-community" },
   foundation: { icon: "domain", color: "teal", category: "organization-community" },

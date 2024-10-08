@@ -181,6 +181,9 @@
     },
     "ministry": {
       "types": {
+        "volunteer": "Volunteer",
+        "missionary": "Missionary",
+        "evangelist": "Evangelist",
         "church": "Church",
         "association": "Association",
         "foundation": "Foundation",
