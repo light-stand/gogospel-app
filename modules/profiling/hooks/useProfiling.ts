@@ -40,7 +40,8 @@ export const useProfiling = () => {
       description: values.bio,
       images: [values.picture],
       is_verified: false,
-      type: (values.ministryType as MinistryType[])[0],
+      type: values.ministryType[0] as MinistryType,
+      interests: values.interests as MissionType[],
     });
   };
 

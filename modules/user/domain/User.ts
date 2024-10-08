@@ -1,3 +1,6 @@
+import { MinistryType } from "@/ministry/domain/MinistryType";
+import { MissionType } from "@/mission/domain/MissionType";
+
 export type User = {
   id?: string;
   email?: string;
@@ -11,8 +14,9 @@ export type UserProfile = {
   lat?: number;
   lng?: number;
   is_verified: boolean;
-  type: string;
+  type: MinistryType;
   images: string[];
+  interests: MissionType[];
   created_at: string;
   updated_at: string;
 };

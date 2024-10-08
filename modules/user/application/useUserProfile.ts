@@ -9,8 +9,9 @@ const emptyProfile: UserProfile = {
   name: "",
   description: "",
   is_verified: false,
-  type: "",
+  type: "ministry",
   images: [],
+  interests: [],
   created_at: "",
   updated_at: "",
 };
