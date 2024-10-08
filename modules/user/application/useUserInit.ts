@@ -10,6 +10,7 @@ export const useUserInit = () => {
   const { session } = useAuthStore();
   const { setUser, user } = useUserStore();
 
+  // TEMP: This is a temporary solution to redirect users to the onboarding process
   const fetchUserProfiles = async () => {
     if (session?.user.id && session.user.id !== user?.id) {
       const [userProfile] = await userProfileRepository.get(["user_id", "eq", session.user.id]);
@@ -22,7 +23,6 @@ export const useUserInit = () => {
       const user: User = {
         id: session.user.id,
         email: session.user.email,
-        profile: userProfile,
       };
 
       setUser(user);

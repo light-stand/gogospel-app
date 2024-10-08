@@ -1,6 +1,6 @@
 import { useRouter } from "expo-router";
 import { useForm } from "react-hook-form";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ProfilingFields, profilingSchema } from "@/profiling/domain/ProfilingForm";
 import { useAuthStore } from "@/auth/store/useAuthStore";
@@ -12,8 +12,10 @@ import { UserProfile } from "@/user/domain/User";
 
 export const useProfiling = () => {
   const router = useRouter();
-  const { setUser } = useUserStore();
+  const { user } = useUserStore();
   const { session } = useAuthStore();
+  const queryClient = useQueryClient();
+
   const form = useForm<ProfilingFields>({
     resolver: zodResolver(profilingSchema),
     mode: "onBlur",
@@ -22,8 +24,7 @@ export const useProfiling = () => {
   const { getValues } = form;
 
   const onSuccess = (data: UserProfile) => {
-    setUser({ profile: data as UserProfile });
-    // router.push("/mission/creation");
+    queryClient.invalidateQueries(["profile", user.id]);
     router.push("/(main)");
   };
 
@@ -38,7 +39,7 @@ export const useProfiling = () => {
       name: values.name,
       description: values.bio,
       images: [values.picture],
-      verified: false,
+      is_verified: false,
       type: (values.ministryType as MinistryType[])[0],
     });
   };

@@ -1,7 +1,6 @@
 export type User = {
   id?: string;
   email?: string;
-  profile?: UserProfile;
 };
 
 export type UserProfile = {
