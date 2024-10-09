@@ -6,7 +6,7 @@ import { ProfilingFields, profilingSchema } from "@/profiling/domain/ProfilingFo
 import { useAuthStore } from "@/auth/store/useAuthStore";
 import { useUserStore } from "@/user/store/useUserStore";
 import { MissionType } from "@/mission/domain/MissionType";
-import { MinistryType } from "@/ministry/domain/MinistryType";
+import { MinistryType } from "@/user/domain/MinistryType";
 import { userProfileRepository } from "@/user/interface/userProfileRepository";
 import { UserProfile } from "@/user/domain/User";
 

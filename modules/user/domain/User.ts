@@ -1,4 +1,4 @@
-import { MinistryType } from "@/ministry/domain/MinistryType";
+import { MinistryType } from "@/user/domain/MinistryType";
 import { MissionType } from "@/mission/domain/MissionType";
 
 export type User = {

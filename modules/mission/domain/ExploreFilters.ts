@@ -1,6 +1,6 @@
 import * as z from "zod";
 import { MissionType, missionTypes } from "./MissionType";
-import { MinistryType, ministryTypes } from "@/ministry/domain/MinistryType";
+import { MinistryType, ministryTypes } from "@/user/domain/MinistryType";
 
 export const exploreFiltersSchema = z.object({
   interests: z

@@ -4,7 +4,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Collapsable, Slider, TagCloud, Text } from "@/components";
 import { useTranslation } from "react-i18next";
 import { missionTypes } from "@/mission/domain/MissionType";
-import { ministryTypes } from "@/ministry/domain/MinistryType";
+import { ministryTypes } from "@/user/domain/MinistryType";
 import { UseFormReturn } from "react-hook-form";
 import { ExploreFilters as IExploreFilters } from "@/mission/domain/ExploreFilters";
 import BottomSheet, { BottomSheetBackdrop, BottomSheetScrollView } from "@gorhom/bottom-sheet";

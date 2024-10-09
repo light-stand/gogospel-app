@@ -3,7 +3,7 @@ import { View } from "react-native";
 import { useTranslation } from "react-i18next";
 import { Button, Container, Input, TagCloud, Text } from "@/components";
 import { useProfilingStep } from "@/profiling/hooks/useProfilingStep";
-import { ministryTypes } from "@/ministry/domain/MinistryType";
+import { ministryTypes } from "@/user/domain/MinistryType";
 
 export default function Name() {
   const { form, onNext } = useProfilingStep("name");

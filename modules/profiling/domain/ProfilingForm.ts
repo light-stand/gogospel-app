@@ -1,7 +1,7 @@
 import * as z from "zod";
 import { t } from "i18next";
 import { MissionType, missionTypes } from "@/mission/domain/MissionType";
-import { ministryTypes, MinistryType } from "@/ministry/domain/MinistryType";
+import { ministryTypes, MinistryType } from "@/user/domain/MinistryType";
 
 export const profilingSchema = z.object({
   name: z.string().min(3, t("profiling.fields.firstName.error")),

@@ -6,7 +6,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Button, Collapsable, Container, ImagePicker, Input, TagCloud, Text } from "@/components";
 import { missionTypes } from "@/mission/domain/MissionType";
 import { useEditProfile } from "@/user/application/useEditProfile";
-import { ministryTypes } from "@/ministry/domain/MinistryType";
+import { ministryTypes } from "@/user/domain/MinistryType";
 
 export default function EditProfile() {
   const { t } = useTranslation();
