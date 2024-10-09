@@ -4,7 +4,7 @@ import { View, ViewProps } from "react-native";
 import { MaterialIconType } from "../../foundation/Icon/Icon";
 import Button from "../Button/Button";
 
-type ButtonBarOption<T extends string> = {
+export type ButtonBarOption<T extends string> = {
   label: string;
   value: T;
   icon: MaterialIconType;
