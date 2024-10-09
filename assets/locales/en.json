@@ -265,6 +265,15 @@
         "successText": "Now you can enjoy the benefits of being a verified ministry, such as the badge and the possibility of creating missions without waiting for verification."
       }
     },
+    "testimony": {
+      "titles": {
+        "list": "Testimonies"
+      },
+      "modes": {
+        "received": "Received",
+        "given": "Given"
+      }
+    },
     "action": {
       "next": "Continue",
       "cancel": "Cancel",

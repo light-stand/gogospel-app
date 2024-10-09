@@ -18,7 +18,7 @@ export const getProfileOptions = (user?: UserProfile): ProfileOptions => [
       {
         icon: "comment-check-outline",
         label: "user.profile.options.testimonies",
-        href: "/settings",
+        href: `/testimonies/${user?.user_id}`,
       },
     ],
   },

@@ -265,6 +265,15 @@
         "successText": "Ahora puedes disfrutar de las ventajas de ser un ministerio verificado, como el sello y la posibilidad de crear misiones sin la espera de la verificación."
       }
     },
+    "testimony": {
+      "titles": {
+        "list": "Testimonios"
+      },
+      "modes": {
+        "received": "Recibidos",
+        "given": "Enviados"
+      }
+    },
     "action": {
       "next": "Continuar",
       "cancel": "Cancelar",
