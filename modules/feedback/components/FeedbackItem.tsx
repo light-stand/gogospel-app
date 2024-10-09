@@ -1,17 +1,17 @@
 import { TouchableOpacity, View } from "react-native";
 
-import { ListTestimonyModes, Testimony } from "../domain/Testimony";
-import { Icon, Text, UserPhoto } from "@/components";
+import { ListFeedbackModes, Feedback } from "../domain/Feedback";
+import { Text, UserPhoto } from "@/components";
 
-type TestimonyListProps = {
-  testimony: Testimony;
-  mode: ListTestimonyModes;
+type FeedbackListProps = {
+  feedback: Feedback;
+  mode: ListFeedbackModes;
 };
 
-export const TestimonyItem = ({ testimony, mode }: TestimonyListProps) => {
-  const { title, description, mission } = testimony;
+export const FeedbackItem = ({ feedback, mode }: FeedbackListProps) => {
+  const { title, description, mission } = feedback;
 
-  const userData = mode === "received" ? testimony.user : testimony.target_user;
+  const userData = mode === "received" ? feedback.user : feedback.target_user;
 
   return (
     <TouchableOpacity activeOpacity={0.8} onPress={() => {}}>

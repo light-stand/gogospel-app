@@ -1,7 +1,7 @@
 import { Mission } from "@/mission/domain/Mission";
 import { UserProfile } from "@/user/domain/User";
 
-export type Testimony = {
+export type Feedback = {
   id: number;
   user_id: string;
   target_user_id: string;
@@ -15,4 +15,4 @@ export type Testimony = {
   created_at: Date;
 };
 
-export type ListTestimonyModes = "received" | "given";
+export type ListFeedbackModes = "received" | "given";

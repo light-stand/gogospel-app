@@ -245,7 +245,7 @@
         "options": {
           "profile": "Profile",
           "done": "Completed missions",
-          "testimonies": "Testimonies",
+          "feedback": "Testimonials",
           "connectedVolunteers": "Connected volunteers",
           "settings": "Settings",
           "notification": "Notifications",
@@ -265,7 +265,7 @@
         "successText": "Now you can enjoy the benefits of being a verified ministry, such as the badge and the possibility of creating missions without waiting for verification."
       }
     },
-    "testimony": {
+    "feedback": {
       "titles": {
         "list": "Testimonies"
       },

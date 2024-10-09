@@ -245,7 +245,7 @@
         "options": {
           "profile": "Perfil",
           "done": "Misiones completadas",
-          "testimonies": "Testimonios",
+          "feedback": "Feedback",
           "connectedVolunteers": "Volunatarios conectados",
           "settings": "Ajustes",
           "notification": "Notificaciones",
@@ -265,9 +265,9 @@
         "successText": "Ahora puedes disfrutar de las ventajas de ser un ministerio verificado, como el sello y la posibilidad de crear misiones sin la espera de la verificación."
       }
     },
-    "testimony": {
+    "feedback": {
       "titles": {
-        "list": "Testimonios"
+        "list": "Feedback"
       },
       "modes": {
         "received": "Recibidos",
