@@ -1,3 +1,4 @@
+import { Mission } from "@/mission/domain/Mission";
 import { UserProfile } from "@/user/domain/User";
 
 export type Testimony = {
@@ -8,6 +9,7 @@ export type Testimony = {
   title: string;
   description: string;
   rating?: number;
+  mission?: Mission;
   user?: UserProfile;
   target_user?: UserProfile;
   created_at: Date;

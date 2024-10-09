@@ -26,7 +26,7 @@ export default function Testimonies() {
     <Container showBack>
       <Text className="font-bold text-3xl mb-4">{t("testimony.titles.list")}</Text>
       <ButtonBar options={modeOptions} selected={mode} onPress={setMode} />
-      <TestimonyList testimonies={testimonies || []} />
+      <TestimonyList testimonies={testimonies || []} mode={mode} />
     </Container>
   );
 }

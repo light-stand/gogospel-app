@@ -17,8 +17,8 @@ export const useListTestimonies = (userId?: string) => {
     "*",
     "user:user_profile!testimony_user_id_fkey(name, images)",
     "target_user:user_profile!testimony_target_user_id_fkey(name, images)",
-    "mission(*)",
-  ].join(", ");
+    "mission(title)",
+  ].join(",");
 
   return {
     query: useQuery({
