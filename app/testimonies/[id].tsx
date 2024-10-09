@@ -2,10 +2,10 @@ import { useLocalSearchParams } from "expo-router";
 import { useTranslation } from "react-i18next";
 
 import { ButtonBar, Container, Text } from "@/components";
-import { ListTestimonyModes, useListTestimonies } from "@/testimony/application/useListTestimonies";
+import { useListTestimonies } from "@/testimony/application/useListTestimonies";
 import { TestimonyList } from "@/testimony/components/TestimonyList";
-
 import { ButtonBarOption } from "@/components/ui/actions/ButtonBar/ButtonBar";
+import { ListTestimonyModes } from "@/testimony/domain/Testimony";
 
 export default function Testimonies() {
   const { t } = useTranslation();

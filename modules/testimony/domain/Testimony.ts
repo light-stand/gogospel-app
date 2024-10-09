@@ -12,3 +12,5 @@ export type Testimony = {
   target_user?: UserProfile;
   created_at: Date;
 };
+
+export type ListTestimonyModes = "received" | "given";

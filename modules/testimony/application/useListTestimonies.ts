@@ -1,11 +1,10 @@
+import { useState } from "react";
 import { useQuery } from "react-query";
 
 import { useUserStore } from "@/user/store/useUserStore";
 import { testimonyRepository } from "../interface/testimonyRepository";
 import { SupabaseFilter } from "@/interface/repository";
-import { useState } from "react";
-
-export type ListTestimonyModes = "received" | "given";
+import { ListTestimonyModes } from "../domain/Testimony";
 
 export const useListTestimonies = (userId?: string) => {
   const { user } = useUserStore();
