@@ -21,6 +21,7 @@ const ButtonBar = <T extends string>({ selected, options, onPress, style }: Butt
     <View className="flex-row justify-around w-full gap-2" style={style}>
       {options.map(({ label, icon, value }: ButtonBarOption<T>) => (
         <Button
+          key={value}
           className="text-xs flex-1 py-1 px-1"
           label={label}
           size="small"
