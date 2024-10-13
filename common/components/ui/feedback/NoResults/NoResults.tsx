@@ -3,7 +3,13 @@ import { Button, Image, Text } from "@/components";
 import { useTranslation } from "react-i18next";
 import { Href, Link, useRouter } from "expo-router";
 
-type NoResultsType = "myMissions" | "favorites" | "involved" | "connections";
+type NoResultsType =
+  | "myMissions"
+  | "favorites"
+  | "involved"
+  | "connections"
+  | "feedbackReceived"
+  | "feedbackGiven";
 
 type NoResultsProps = ViewProps & {
   type: NoResultsType;
@@ -14,6 +20,8 @@ const noResultsIllustration = {
   favorites: require("@/assets/images/illustration/favorite.png"),
   involved: require("@/assets/images/illustration/collab.png"),
   connections: require("@/assets/images/illustration/chatting.png"),
+  feedbackReceived: require("@/assets/images/illustration/feedback.png"),
+  feedbackGiven: require("@/assets/images/illustration/feedback2.png"),
 };
 
 const noResultsLinks: Partial<Record<NoResultsType, Href>> = {

@@ -314,6 +314,14 @@
       "connections": {
         "title": "No connections yet",
         "text": "You haven't connected with any ministries or volunteers yet. Find one now!"
+      },
+      "feedbackReceived": {
+        "title": "No feedback yet",
+        "text": "Once the user recieves feedback, it will appear here"
+      },
+      "feedbackGiven": {
+        "title": "No feedback yet",
+        "text": "Once the user gives feedback, it will appear here"
       }
     },
     "alerts": {

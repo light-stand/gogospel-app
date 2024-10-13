@@ -12,7 +12,7 @@ export default function Feedback() {
   const id = useLocalSearchParams().id as string;
 
   const {
-    query: { data },
+    query: { data, isFetching },
     mode,
     setMode,
   } = useListFeedback(id);
@@ -26,7 +26,7 @@ export default function Feedback() {
     <Container showBack>
       <Text className="font-bold text-3xl mb-4">{t("feedback.titles.list")}</Text>
       <ButtonBar options={modeOptions} selected={mode} onPress={setMode} />
-      <FeedbackList data={data || []} mode={mode} />
+      <FeedbackList data={data || []} mode={mode} isFetching={isFetching} />
     </Container>
   );
 }

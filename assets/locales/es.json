@@ -314,6 +314,14 @@
       "connections": {
         "title": "Aún no tienes conexiones",
         "text": "Envía solicitudes para unirte a misiones y haz crecer tu red de conexiones"
+      },
+      "feedbackReceived": {
+        "title": "Este usuario aún no ha recibido feedback",
+        "text": "Una vez que reciba feedback, aparecerá aquí"
+      },
+      "feedbackGiven": {
+        "title": "Este usuario aún no ha dado feedback",
+        "text": "Una vez que de feedback, aparecerá aquí"
       }
     },
     "alerts": {
