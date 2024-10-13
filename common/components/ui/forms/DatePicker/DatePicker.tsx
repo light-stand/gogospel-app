@@ -35,7 +35,11 @@ const DatePicker = ({
   style,
 }: DatePickerProps) => {
   const { t } = useTranslation();
-  const { field, fieldState } = useController({ control, name, defaultValue: propDate });
+  const { field, fieldState } = useController({
+    control,
+    name,
+    defaultValue: propDate || new Date(),
+  });
   //only for IOS
   const [modalOpen, setModalOpen] = useState(false);
 

@@ -46,6 +46,7 @@ export const Marker = ({
         latitude: marker.geometry.coordinates[1],
         longitude: marker.geometry.coordinates[0],
       }}
+      anchor={{ x: 0.5, y: 0.5 }}
     >
       <View
         style={{
