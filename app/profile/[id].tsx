@@ -3,15 +3,15 @@ import { useTranslation } from "react-i18next";
 
 import { Container, Icon, ImagePicker, TagCloud, Text, UserPhoto } from "@/components";
 import { ProfileOptions } from "@/user/components/ProfileOptions";
-import { publicProfileOptions } from "@/user/domain/profileOptions";
-import { missionTypes } from "@/mission/domain/MissionType";
+import { getPublicProfileOptions } from "@/user/domain/profileOptions";
 import { useUserProfile } from "@/user/application/useUserProfile";
 import { useLocalSearchParams } from "expo-router";
 
 export default function Profile() {
   const { t } = useTranslation();
   const id = useLocalSearchParams().id as string;
-  const { name, is_verified, images, description } = useUserProfile(id);
+  const user = useUserProfile(id);
+  const { name, is_verified, images, description } = user;
 
   return (
     <Container showBack scroll>
@@ -39,7 +39,7 @@ export default function Profile() {
         className="mt-4"
       /> */}
       <Text className="mt-4 px-2 text-center text-neutral-500">{description}</Text>
-      <ProfileOptions options={publicProfileOptions} className="mt-4" />
+      <ProfileOptions options={getPublicProfileOptions(user)} className="mt-4" />
     </Container>
   );
 }

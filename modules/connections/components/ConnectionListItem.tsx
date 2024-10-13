@@ -16,8 +16,8 @@ export const ConnectionListItem = ({ connection }: { connection: Connection }) =
   const { onSubmissionManage } = useManageSubmission(id);
 
   const data = {
-    image: user.id === user1 ? user2?.images[0] : user1?.images[0],
-    user: user.id === user1 ? user2?.name : user1?.name,
+    image: user.id === user1_id ? user2?.images[0] : user1?.images[0],
+    user: user.id === user1_id ? user2?.name : user1?.name,
     title: mission?.title,
     lastMessage: messages && messages[0] && messages[0].text,
   };
@@ -37,6 +37,7 @@ export const ConnectionListItem = ({ connection }: { connection: Connection }) =
       <View className="border-b border-neutral-300 py-3 px-4 flex-row items-center">
         <UserPhoto
           source={{ uri: data.image }}
+          onPress={() => router.push(`/profile/${user.id === user1_id ? user2_id : user1_id}`)}
           className={clsx("h-12 w-12 mr-3", status === ConnectionStatus.Rejected && "opacity-50")}
         />
         <View className={clsx("flex-1", status === ConnectionStatus.Rejected && "opacity-50")}>

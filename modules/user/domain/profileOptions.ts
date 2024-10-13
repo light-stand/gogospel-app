@@ -10,11 +10,11 @@ export const getProfileOptions = (user?: UserProfile): ProfileOptions => [
         label: "user.profile.edit",
         href: "/profile/edit",
       },
-      {
-        icon: "hand-heart",
-        label: "user.profile.options.connectedVolunteers",
-        href: "/settings",
-      },
+      // {
+      //   icon: "hand-heart",
+      //   label: "user.profile.options.connectedVolunteers",
+      //   href: "/settings",
+      // },
       {
         icon: "comment-check-outline",
         label: "user.profile.options.feedback",
@@ -44,7 +44,7 @@ export const getProfileOptions = (user?: UserProfile): ProfileOptions => [
   },
 ];
 
-export const publicProfileOptions: ProfileOptions = [
+export const getPublicProfileOptions = (user?: UserProfile): ProfileOptions => [
   {
     items: [
       {
@@ -57,15 +57,15 @@ export const publicProfileOptions: ProfileOptions = [
         label: "user.profile.myMissions",
         href: "/settings",
       },
-      {
-        icon: "hand-heart",
-        label: "user.profile.options.connectedVolunteers",
-        href: "/settings",
-      },
+      // {
+      //   icon: "hand-heart",
+      //   label: "user.profile.options.connectedVolunteers",
+      //   href: "/settings",
+      // },
       {
         icon: "comment-check-outline",
         label: "user.profile.options.feedback",
-        href: "/settings",
+        href: `/feedback/${user?.user_id}`,
       },
     ],
   },
