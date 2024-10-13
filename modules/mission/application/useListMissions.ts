@@ -24,7 +24,7 @@ export const useListMissions = () => {
   }, ${mode === "favorites" ? "favorite!inner(*)" : "favorite(*)"}`;
 
   const query = useQuery({
-    queryKey: ["listMissions", listMissionFilters, select],
+    queryKey: ["listMissions", mode],
     queryFn: () =>
       missionRepository.get(listMissionFilters as SupabaseFilter | SupabaseFilter[], select),
   });

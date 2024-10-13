@@ -10,6 +10,7 @@ import { MissionSheetTitle } from "./partials/MissionSheetTitle";
 import { MissionSheetCarousel } from "./partials/MissionSheetCarousel";
 import { MissionSheetInfo } from "./partials/MissionSheetInfo";
 import { MissionSheetActions } from "./partials/MissionSheetActions";
+import { useUserStore } from "@/user/store/useUserStore";
 
 interface MissionSheetProps {
   mission: Mission;
@@ -23,6 +24,7 @@ const SNAP_POINTS = [96, 96 + WIDTH / 2, HEIGHT];
 
 const MissionSheet: React.FC<MissionSheetProps> = ({ mission, style }) => {
   const { top } = useSafeAreaInsets();
+  const { user } = useUserStore();
   const [position, setPosition] = useState(0);
   const bottomSheetRef = useRef<BottomSheet>(null);
 
@@ -68,7 +70,7 @@ const MissionSheet: React.FC<MissionSheetProps> = ({ mission, style }) => {
             <MissionSheetTitle mission={mission} position={position} />
             <MissionSheetCarousel mission={mission} />
             <MissionSheetInfo mission={mission} />
-            <MissionSheetActions mission={mission} />
+            {mission.created_by !== user.id && <MissionSheetActions mission={mission} />}
           </View>
         </BottomSheetScrollView>
       </BottomSheet>
