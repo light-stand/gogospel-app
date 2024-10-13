@@ -14,7 +14,7 @@ export const MissionSheetCarousel = ({ mission }: MissionSheetCarouselProps) => 
   return (
     <View className="w-full" style={{ height: width / 2 }}>
       <Carousel
-        data={(images && images.length ? images : user_profile?.images[0]) as string[]}
+        data={(images && images.length ? images : user_profile?.images) as string[]}
         width={width}
         height={width / 2}
         style={{ marginLeft: -16, maxHeight: width / 2 }}
