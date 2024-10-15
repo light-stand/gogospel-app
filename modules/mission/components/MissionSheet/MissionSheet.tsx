@@ -14,6 +14,7 @@ import { useUserStore } from "@/user/store/useUserStore";
 
 interface MissionSheetProps {
   mission: Mission;
+  className?: string;
   style?: ViewStyle;
 }
 
@@ -42,6 +43,7 @@ const MissionSheet: React.FC<MissionSheetProps> = ({ mission, style }) => {
         onChange={handleSheetAnimates}
         handleIndicatorStyle={position === 2 && { backgroundColor: "transparent" }}
         // handleStyle={{ height: 4 }}
+        style={style}
         backdropComponent={(props) => (
           <BottomSheetBackdrop
             {...props}
