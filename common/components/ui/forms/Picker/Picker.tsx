@@ -3,6 +3,7 @@ import { View } from "react-native";
 import clsx from "clsx";
 import RNPickerSelect, { Item } from "react-native-picker-select";
 import { Control, useController } from "react-hook-form";
+import colors from "tailwindcss/colors";
 
 import Text from "../../foundation/Text/Text";
 import Icon, { MaterialIconType } from "../../foundation/Icon/Icon";
@@ -71,14 +72,15 @@ const Picker: React.FC<PickerProps> = ({
       <View
         className={clsx(
           "bg-gray-1",
-          disabled && "bg-background",
           "rounded-lg",
-          "border border-gray-400",
+          "border",
+          disabled ? "border-gray-200" : "border-gray-400",
           "focus:border-gray-500",
           error && "border-danger",
           "flex-row items-center",
           valid && "border-green-600",
-          error && "border-red-500"
+          error && "border-red-500",
+          disabled && "bg-gray-200"
         )}
       >
         <RNPickerSelect
@@ -88,7 +90,7 @@ const Picker: React.FC<PickerProps> = ({
               fontSize: 14,
               paddingVertical: 20,
               paddingHorizontal: 16,
-              color: "#000",
+              color: disabled ? colors.gray["500"] : "#000",
               flex: 1,
             },
             inputAndroid: {
@@ -96,10 +98,11 @@ const Picker: React.FC<PickerProps> = ({
               fontSize: 14,
               paddingVertical: 20,
               paddingHorizontal: 16,
-              color: "#000",
+              color: disabled ? colors.gray["500"] : "#000",
               flex: 1,
             },
           }}
+          disabled={disabled}
           onValueChange={(value) => field.onChange(value)}
           items={items}
           value={field.value}
