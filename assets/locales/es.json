@@ -80,7 +80,9 @@
           "title": "Título",
           "description": "Descripción",
           "startDate": "Fecha de inicio",
-          "duration": "Duración"
+          "duration": "Duración",
+          "noDuration": "No hay un duración determinada, o es flexible",
+          "noStartDate": "No hay un fecha determinada, o es flexible"
         },
         "location": {
           "pick": "Selecciona una ubicación"

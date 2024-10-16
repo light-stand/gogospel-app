@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useRouter } from "expo-router";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "react-query";
@@ -19,6 +20,8 @@ export const useMissionCreation = () => {
   });
 
   const { getValues } = form;
+  const { noDuration, noStartDate } = getValues();
+  form.watch(["noDuration", "noStartDate"]);
 
   const onSuccess = () => {
     queryClient.invalidateQueries(["listMissions", "myMissions"]);
@@ -33,14 +36,26 @@ export const useMissionCreation = () => {
       created_by: user?.id,
       title: values.title,
       description: values.description,
-      start_date: values.startDate,
-      duration: values.duration * values.durationMultiplier,
+      start_date: values.noStartDate ? null : values.startDate,
+      duration:
+        values.noDuration || !values.duration ? null : values.duration * values.durationMultiplier,
       categories: values.categories,
       location: `POINT(${values.location.longitude} ${values.location.latitude})`,
       location_name: values.location.locationName,
       ...(values.image && { images: [values.image] }),
     });
   };
+
+  useEffect(() => {
+    if (!noDuration) return;
+    form.setValue("duration", 1);
+    form.setValue("durationMultiplier", 7);
+  }, [noDuration]);
+
+  useEffect(() => {
+    if (!noStartDate) return;
+    form.setValue("startDate", new Date());
+  }, [noStartDate]);
 
   return { form, onSubmit };
 };
