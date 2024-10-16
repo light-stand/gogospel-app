@@ -24,7 +24,7 @@ export const Switchs = ({ name, control, label, style }: SwitchProps) => {
         onValueChange={onChange}
         value={value}
       />
-      {label && <Text>{label}</Text>}
+      {label && <Text className="flex-1">{label}</Text>}
     </View>
   );
 };
