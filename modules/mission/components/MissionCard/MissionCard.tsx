@@ -68,18 +68,21 @@ const MissionCard: React.FC<MissionCardProps> = ({ mission, style }) => {
                   {user_profile?.name}
                 </Text>
               </View>
-              {duration && (
-                <View className="flex flex-row items-center">
-                  <Icon name="clock" className="mr-1 text-neutral-500 text-base" />
-                  <Text className="text-md text-neutral-500 font-bold">
-                    {capitalize(dayjs.duration(duration, "days").humanize())}
-                  </Text>
-                  <Icon name="map-marker" className="mx-1 text-neutral-500 text-base" />
-                  <Text className="text-md text-neutral-500 font-bold">
-                    {t("maps.distance", { distance })}
-                  </Text>
-                </View>
-              )}
+
+              <View className="flex flex-row items-center">
+                {duration && (
+                  <>
+                    <Icon name="clock" className="mr-1 text-neutral-500 text-base" />
+                    <Text className="text-md text-neutral-500 font-bold">
+                      {capitalize(dayjs.duration(duration, "days").humanize())}
+                    </Text>
+                  </>
+                )}
+                <Icon name="map-marker" className="mx-1 text-neutral-500 text-base" />
+                <Text className="text-md text-neutral-500 font-bold">
+                  {t("maps.distance", { distance })}
+                </Text>
+              </View>
               {/* {start_date && end_date && (
                 <View className="flex flex-row items-center">
                   <Icon name="clock" className="mr-2 text-neutral-500 text-base" />

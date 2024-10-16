@@ -68,6 +68,10 @@ const DatePicker = ({
 
   const openIOSPicker = () => setModalOpen(true);
 
+  useEffect(() => {
+    if (field.value) setDate(field.value);
+  }, [field.value]);
+
   let content;
 
   if (inline) {
