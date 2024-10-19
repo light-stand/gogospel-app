@@ -233,7 +233,7 @@
     },
     "maps": {
       "picker": {
-        "helper": "Long press to select location",
+        "helper": "Search for the location of your mission",
         "confirm": "Confim"
       },
       "distance": "{{distance}} km from you"
