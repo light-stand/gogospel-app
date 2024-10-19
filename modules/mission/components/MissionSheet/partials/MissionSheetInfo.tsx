@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { Icon, TagCloud, Text } from "@/components";
 import { Mission } from "@/mission/domain/Mission";
 import { missionTypes } from "@/mission/domain/MissionType";
+import { MaterialIconType } from "@/components/ui/foundation/Icon/Icon";
 
 type MissionSheetInfoProps = {
   mission: Mission;
@@ -17,14 +18,14 @@ export const MissionSheetInfo = ({ mission }: MissionSheetInfoProps) => {
   const { start_date, categories, duration, distance, location_name } = mission;
 
   const info = [
-    { icon: "calendar", text: dayjs(start_date as Date).format("DD/MM/YYYY") },
-    {
+    start_date && { icon: "calendar", text: dayjs(start_date as Date).format("DD/MM/YYYY") },
+    duration && {
       icon: "clock-time-eight-outline",
       text: capitalize(dayjs.duration(duration as number, "days").humanize()),
     },
     { icon: "map-marker", text: location_name },
     { icon: "map-marker-distance", text: t("maps.distance", { distance }) },
-  ] as const;
+  ].filter(Boolean) as { icon: MaterialIconType; text: string }[];
 
   return (
     <>

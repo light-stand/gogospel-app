@@ -9,9 +9,9 @@ export interface TextProps extends RNTextProps {
   style?: object;
 }
 
-export const Text: React.FC<TextProps> = ({ bold, children, style, ...props }) => {
+export const Text: React.FC<TextProps> = ({ bold, children, style, className, ...props }) => {
   return (
-    <RNText className={clsx("text-neutral-700 font-medium")} style={style} {...props}>
+    <RNText className={clsx("text-neutral-700 font-medium", className)} style={style} {...props}>
       {children}
     </RNText>
   );

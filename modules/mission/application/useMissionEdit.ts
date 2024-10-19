@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
@@ -30,8 +31,13 @@ export const useMissionEdit = () => {
         longitude: mission.long || 0,
         locationName: mission.location_name || "",
       },
+      noDuration: !mission.duration,
+      noStartDate: !mission.start_date,
     },
   });
+
+  const { noDuration, noStartDate } = form.getValues();
+  form.watch(["noDuration", "noStartDate"]);
 
   const onSuccess = () => {
     queryClient.invalidateQueries(["mission", id]);
@@ -53,8 +59,11 @@ export const useMissionEdit = () => {
         created_by: user?.id,
         title: mission.title,
         description: mission.description,
-        start_date: mission.startDate,
-        duration: mission.duration * mission.durationMultiplier,
+        start_date: mission.noStartDate ? null : mission.startDate,
+        duration:
+          mission.noDuration || !mission.duration
+            ? null
+            : mission.duration * mission.durationMultiplier,
         categories: mission.categories,
         location: `POINT(${mission.location.longitude} ${mission.location.latitude})`,
         location_name: mission.location.locationName,
@@ -62,6 +71,17 @@ export const useMissionEdit = () => {
       });
     }
   };
+
+  useEffect(() => {
+    if (!noDuration) return;
+    form.setValue("duration", 1);
+    form.setValue("durationMultiplier", 7);
+  }, [noDuration]);
+
+  useEffect(() => {
+    if (!noStartDate) return;
+    form.setValue("startDate", new Date());
+  }, [noStartDate]);
 
   return { form, onSubmit, isLoading };
 };

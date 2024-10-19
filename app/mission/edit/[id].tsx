@@ -12,6 +12,7 @@ import {
   Input,
   Picker,
   Spinner,
+  Switch,
   TagCloud,
   Text,
 } from "@/components";
@@ -26,7 +27,7 @@ export default function MissionEdit() {
 
   const { form, onSubmit, isLoading } = useMissionEdit();
 
-  const location = form.getValues("location");
+  const { location, noDuration, noStartDate } = form.getValues();
 
   const { data: address } = useQuery({
     queryKey: ["geocode", location?.latitude, location?.longitude],
@@ -71,16 +72,24 @@ export default function MissionEdit() {
         control={form.control}
         label={t("mission.creation.fields.startDate")}
         className="mb-2"
+        disabled={noStartDate}
+      />
+      <Switch
+        className="my-4"
+        name="noStartDate"
+        control={form.control}
+        label={t("mission.creation.fields.noStartDate")}
       />
       <View className="flex flex-row gap-x-2">
         <Input
           name="duration"
           control={form.control}
           label={t("mission.creation.fields.duration")}
-          className="flex-[1.5]"
+          className="flex-1"
           inputMode="numeric"
           keyboardType="numeric"
           maxLength={2}
+          disabled={noDuration}
         />
         <Picker
           name="durationMultiplier"
@@ -92,8 +101,15 @@ export default function MissionEdit() {
           ]}
           control={form.control}
           className="flex-1"
+          disabled={noDuration}
         />
       </View>
+      <Switch
+        className="mt-4"
+        name="noDuration"
+        control={form.control}
+        label={t("mission.creation.fields.noDuration")}
+      />
       <View className="h-[1px] bg-neutral-300 w-[80%] my-8 mx-auto" />
       <Text className="font-bold text-neutral-500 mb-4">
         {t("mission.creation.helper.categories")}

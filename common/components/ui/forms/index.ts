@@ -6,3 +6,4 @@ export * from "./TagCloud";
 export * from "./Picker";
 export * from "./DatePicker";
 export * from "./Slider";
+export * from "./Switch";

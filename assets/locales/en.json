@@ -80,7 +80,9 @@
           "title": "Title",
           "description": "Description",
           "startDate": "Start Date",
-          "duration": "Duration"
+          "duration": "Duration",
+          "noDuration": "No duration, or is flexible",
+          "noStartDate": "No start date, or is flexible"
         },
         "location": {
           "pick": "Pick a location"

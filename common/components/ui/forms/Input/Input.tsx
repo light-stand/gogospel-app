@@ -78,13 +78,15 @@ const Input: React.FC<InputProps> = ({
       <View
         className={clsx(
           "rounded-lg",
-          "border border-gray-400",
+          "border",
+          disabled ? "border-gray-200" : "border-gray-400",
           "focus:border-gray-500 focus:shadow-sm",
           error && "border-danger",
           "flex-row items-center",
           type === "textarea" && "h-28 items-start max-h-32",
           valid && "border-green-600",
-          error && "border-red-500"
+          error && "border-red-500",
+          disabled && "bg-gray-200"
         )}
       >
         {icon && <Icon name={icon as any} className="absolute left-3" />}
@@ -98,7 +100,8 @@ const Input: React.FC<InputProps> = ({
             "w-full",
             type === "textarea" && "h-full",
             valid && "text-green-600",
-            error && "text-red-600"
+            error && "text-red-600",
+            disabled && "text-gray-500"
           )}
           onChangeText={onChangeText}
           value={`${field.value}`}

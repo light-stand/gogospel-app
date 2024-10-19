@@ -18,6 +18,7 @@ interface DatePickerProps {
   inline?: boolean;
   helperText?: string | null;
   control: Control<any, any>;
+  disabled?: boolean;
   className?: string;
   error?: boolean | null;
   style?: object[];
@@ -30,6 +31,7 @@ const DatePicker = ({
   inline,
   error: globalError,
   helperText,
+  disabled,
   control,
   name,
   style,
@@ -66,6 +68,10 @@ const DatePicker = ({
 
   const openIOSPicker = () => setModalOpen(true);
 
+  useEffect(() => {
+    if (field.value) setDate(field.value);
+  }, [field.value]);
+
   let content;
 
   if (inline) {
@@ -76,6 +82,7 @@ const DatePicker = ({
             locale="pt-BR"
             value={new Date(date)}
             mode="date"
+            disabled={disabled}
             display="spinner"
             onChange={onDateChange}
             textColor="white"
@@ -94,15 +101,24 @@ const DatePicker = ({
           className={clsx(
             "bg-gray-1",
             "rounded-lg",
-            "border border-gray-400",
+            "border",
+            disabled ? "border-gray-200" : "border-gray-400",
             "focus:border-gray-500",
             error && "border-danger",
             "flex-row items-center",
-            error && "border-red-500"
+            error && "border-red-500",
+            disabled && "bg-gray-200"
           )}
+          disabled={disabled}
           onPress={isIOS ? openIOSPicker : openAndroidPicker}
         >
-          <Text className={clsx("font-sans text-gray-5 py-3 px-4 w-full", error && "text-red-500")}>
+          <Text
+            className={clsx(
+              "font-sans text-gray-5 py-3 px-4 w-full",
+              error && "text-red-500",
+              disabled && "text-gray-500"
+            )}
+          >
             {dateString}
           </Text>
         </TouchableOpacity>
@@ -115,6 +131,7 @@ const DatePicker = ({
             <View className={clsx("rounded-lg bg-white", "p-4")}>
               <DateTimePicker
                 // locale="pt-BR"
+                disabled={disabled}
                 value={new Date(date)}
                 mode="date"
                 display="spinner"
@@ -126,6 +143,7 @@ const DatePicker = ({
                 label={t("action.done")}
                 className="mt-4"
                 size="small"
+                disabled={disabled}
               />
             </View>
           </Modal>
