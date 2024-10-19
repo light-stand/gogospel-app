@@ -233,7 +233,7 @@
     },
     "maps": {
       "picker": {
-        "helper": "Mantén presionado para seleccionar la ubicación",
+        "helper": "Busca la ubicación de tu misión",
         "confirm": "Confirmar"
       },
       "distance": "A {{distance}} km de ti"

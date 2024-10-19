@@ -18,6 +18,7 @@ export type Mission = {
   lat?: number;
   long?: number;
   location_name?: string;
+  country?: string;
   active?: boolean;
   approved?: boolean;
   favorite?: Favorite | Favorite[];

@@ -1,10 +1,10 @@
+import { useEffect } from "react";
 import { useQuery } from "react-query";
 
 import { getLocation } from "@/maps/interface/mapsService";
 import { haversineDistance } from "@/maps/utils/distance";
 import { missionRepository } from "@/mission/interface/missionRepository";
 import { useUserStore } from "@/user/store/useUserStore";
-import { useEffect, useState } from "react";
 import { queryClient } from "@/interface/queryClient";
 
 export const useMissionDetails = (id: number) => {

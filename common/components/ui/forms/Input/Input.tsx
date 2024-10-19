@@ -10,7 +10,7 @@ export type InputProps = Omit<TextInputProps, "onChange"> & {
   type?: "text" | "textarea";
   label?: string;
   value?: string;
-  name: string;
+  name?: string;
   onChange?: (text: string | number) => void;
   placeholder?: string | null;
   maxLength?: number;
@@ -23,7 +23,7 @@ export type InputProps = Omit<TextInputProps, "onChange"> & {
   onBlur?: () => void;
   isValid?: boolean;
   error?: boolean;
-  control: Control<any, any>;
+  control?: Control<any, any>;
   className?: string;
   style?: object[];
 };
@@ -45,11 +45,18 @@ const Input: React.FC<InputProps> = ({
 }) => {
   const [textInputHeight, setTextInputHeight] = useState(0);
 
-  const { field, fieldState, formState } = useController({
-    control,
-    defaultValue: "",
-    name,
-  });
+  const { field, fieldState, formState } =
+    control && name
+      ? useController({
+          control,
+          defaultValue: "",
+          name,
+        })
+      : {
+          field: { value, onChange: onChange as (text: string | number) => void, onBlur: () => {} },
+          fieldState: {},
+          formState: {},
+        };
 
   const { error: fieldError, isDirty, invalid, isTouched } = fieldState;
   const error = fieldError?.message || globalError;
@@ -86,7 +93,7 @@ const Input: React.FC<InputProps> = ({
           type === "textarea" && "h-28 items-start max-h-32",
           valid && "border-green-600",
           error && "border-red-500",
-          disabled && "bg-gray-200"
+          disabled ? "bg-gray-200" : "bg-white"
         )}
       >
         {icon && <Icon name={icon as any} className="absolute left-3" />}

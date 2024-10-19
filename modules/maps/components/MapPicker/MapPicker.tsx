@@ -1,15 +1,14 @@
-import React, { useEffect, useRef } from "react";
-import { Modal, View } from "react-native";
+import React, { useEffect, useRef, useState } from "react";
+import { Dimensions, Modal, ScrollView, TouchableOpacity, View } from "react-native";
+import clsx from "clsx";
 import { Control, useController } from "react-hook-form";
 import MapView, { LatLng, MapPressEvent, Marker } from "react-native-maps";
 import { useQuery } from "react-query";
 import { useTranslation } from "react-i18next";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import { Button, IconButton, Text } from "@/components";
-import { reverseGeocode } from "@/maps/interface/mapsApi";
-import { getLocation } from "@/maps/interface/mapsService";
-import { addressToCityCountryString } from "@/maps/utils/formatting";
+import { Button, Container, Icon, IconButton, Input, Text } from "@/components";
+import { autoComplete, AutoCompleteResult, getPlaceDetails } from "@/maps/interface/mapsApi";
 import { mapSettings } from "@/mission/components/MissionMap/settings";
 
 export interface MapPickerProps {
@@ -28,84 +27,109 @@ const MapPicker: React.FC<MapPickerProps> = ({ open, onClose, name, control, sty
   const mapRef = useRef<MapView>(null);
   const { top, bottom } = useSafeAreaInsets();
   const { field } = control ? useController({ control, name }) : { field: null };
+  const [searchValue, setSearchValue] = useState("");
   const location = field?.value as MapPickerValue;
-  const error = null;
 
-  const locationName = location?.locationName || "";
-
-  const { data: locationInfo } = useQuery({
-    queryKey: ["geocode", location?.latitude, location?.longitude],
-    queryFn: () => reverseGeocode(location),
-    onSuccess: (data) => {
-      field?.onChange({ ...location, locationName: addressToCityCountryString(data) });
-    },
+  const { data: autoCompleteOptions, refetch: triggerAutoCompleteFetch } = useQuery({
+    queryKey: ["autoComplete", searchValue],
+    queryFn: () => autoComplete(searchValue, location),
+    enabled: false,
   });
 
-  const onPress = async (event: MapPressEvent) => {
-    field?.onChange(event.nativeEvent.coordinate);
+  const onLocationPress = async ({ place_id, description }: AutoCompleteResult) => {
+    const placeInfo = await getPlaceDetails(place_id);
+    const coords = placeInfo.geometry.location;
+    field?.onChange({
+      latitude: coords.lat,
+      longitude: coords.lng,
+      locationName: description,
+      country:
+        placeInfo.address_components?.find(
+          (c: { long_name: string; short_name: string; types: string[] }) =>
+            c.types.includes("country")
+        )?.short_name || "",
+    });
+    setSearchValue("");
   };
 
-  const onCurrentLocationPress = async () => {
-    const location = await getLocation();
-    if (!location) return;
-    field?.onChange({ ...location, locationName });
-    if (location) {
-      mapRef.current?.animateToRegion({
-        latitude: location.latitude,
-        longitude: location.longitude,
-        latitudeDelta: 0.005,
-        longitudeDelta: 0.005,
-      });
-    }
-  };
+  // Debounce the search value
+  useEffect(() => {
+    const timeout = setTimeout(triggerAutoCompleteFetch, 500);
+    return () => clearTimeout(timeout);
+  }, [searchValue]);
 
   useEffect(() => {
     if (open && location) {
-      const map = mapRef.current as MapView;
-      map.animateToRegion({
-        latitude: location.latitude,
-        longitude: location.longitude,
-        latitudeDelta: 0.005,
-        longitudeDelta: 0.005,
+      mapRef.current?.setCamera({
+        center: location,
+        zoom: 15,
       });
     }
-  }, [open]);
+  }, [open, location]);
+
+  // Avoid items overflow
+  const maxHeight = Dimensions.get("window").height - 256 - 240 - top - bottom;
 
   return (
     <Modal animationType="slide" visible={open}>
-      <IconButton
-        icon="close"
-        className="absolute right-6 top-6 z-10"
-        style={[{ marginTop: top }]}
-        variant="primary"
-        onPress={onClose}
-      />
-      <View style={[style, { paddingBottom: bottom }]} className="flex-1 w-full">
-        <MapView
-          className="flex-1"
-          onPress={onPress}
-          ref={mapRef}
-          showsUserLocation
-          provider="google"
-          customMapStyle={mapSettings.customMapStyle}
-        >
-          {location && <Marker coordinate={location} />}
-        </MapView>
-        <View className="z-10 bg-white w-full shadow-2xl p-2">
-          <IconButton
-            icon="crosshairs-gps"
-            className="absolute right-6 -top-16 z-10"
-            variant="primary"
-            onPress={onCurrentLocationPress}
-          />
-          <Text className="text-center mb-3 mt-1" numberOfLines={1}>
-            {locationInfo?.formatted_address || t("maps.picker.helper")}
-          </Text>
-          <Button label={t("maps.picker.confirm")} onPress={onClose} />
+      <Container
+        className="bg-white flex-1"
+        keyboardAware
+        scroll
+        style={[{ marginTop: top, marginBottom: bottom }]}
+      >
+        <IconButton
+          icon="close"
+          className="absolute right-4 top-4 z-10"
+          variant="primary"
+          onPress={onClose}
+        />
+        <View className="flex-1">
+          <Text className="font-bold text-3xl mb-10">{t(`profiling.titles.name`)}</Text>
+          <View className="rounded-2xl overflow-hidden">
+            <MapView
+              className="h-64"
+              ref={mapRef}
+              showsUserLocation
+              provider="google"
+              customMapStyle={mapSettings.customMapStyle}
+            >
+              {location && <Marker coordinate={location} />}
+            </MapView>
+          </View>
+          <View className="mt-4 z-10">
+            <View className="flex-row justify-center gap-x-1">
+              <Icon name="map-marker-check" className="text-neutral-600" />
+              <Text className="text-center mb-3 text-base font-semibold" numberOfLines={1}>
+                {location?.locationName || t("maps.picker.helper")}
+              </Text>
+            </View>
+            <Input onChangeText={setSearchValue} value={searchValue} placeholder="Buscar..." />
+            <View className="mt-2">
+              {!!autoCompleteOptions?.length && (
+                <ScrollView
+                  className="rounded-lg bg-white px-4 border border-neutral-300 absolute w-full"
+                  style={{ maxHeight }}
+                >
+                  {autoCompleteOptions?.map((option, index) => (
+                    <TouchableOpacity
+                      className={clsx(
+                        "py-3",
+                        index < autoCompleteOptions.length - 1 && "border-b border-neutral-200"
+                      )}
+                      key={index}
+                      onPress={() => onLocationPress(option)}
+                    >
+                      <Text>{option.description}</Text>
+                    </TouchableOpacity>
+                  ))}
+                </ScrollView>
+              )}
+            </View>
+          </View>
+          <Button label={t("maps.picker.confirm")} className="mt-auto" onPress={onClose} />
         </View>
-
-        {error && <Text className="text-sm mt-1 text-center text-red-500">{error}</Text>}
-      </View>
+      </Container>
     </Modal>
   );
 };

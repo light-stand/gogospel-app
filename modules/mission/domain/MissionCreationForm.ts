@@ -56,6 +56,7 @@ export const missionCreationSchema = z
         latitude: z.number(),
         longitude: z.number(),
         locationName: z.string(),
+        country: z.string(),
       },
       { message: t(`${langPrefix}.location`) }
     ),

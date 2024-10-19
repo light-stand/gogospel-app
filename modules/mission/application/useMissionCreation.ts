@@ -42,6 +42,7 @@ export const useMissionCreation = () => {
       categories: values.categories,
       location: `POINT(${values.location.longitude} ${values.location.latitude})`,
       location_name: values.location.locationName,
+      country: values.location.country,
       ...(values.image && { images: [values.image] }),
     });
   };
