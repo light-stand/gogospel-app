@@ -1,6 +1,5 @@
 import { useMemo, useState } from "react";
-import { View } from "react-native";
-import { useQuery } from "react-query";
+import { Alert, View } from "react-native";
 import { useTranslation } from "react-i18next";
 
 import {
@@ -16,16 +15,17 @@ import {
   TagCloud,
   Text,
 } from "@/components";
-import { useMissionEdit } from "@/mission/application/useMissionEdit";
 import { missionTypes } from "@/mission/domain/MissionType";
-import { reverseGeocode } from "@/maps/interface/mapsApi";
+import { useMissionEdit } from "@/mission/application/useMissionEdit";
 import { MapPicker } from "@/maps/components/MapPicker";
+import { useMissionDelete } from "@/mission/application/useMissionDelete";
 
 export default function MissionEdit() {
   const { t } = useTranslation();
   const [mapOpen, setMapOpen] = useState(false);
 
   const { form, onSubmit, isLoading } = useMissionEdit();
+  const { onDelete, isLoading: isDeleteLoading } = useMissionDelete();
 
   const { location, noDuration, noStartDate } = form.getValues();
 
@@ -38,6 +38,13 @@ export default function MissionEdit() {
       })),
     [t]
   );
+
+  const handleDeletePress = () => {
+    Alert.alert(t("mission.delete.title"), t("mission.delete.text"), [
+      { text: t("action.cancel"), style: "cancel" },
+      { text: t("action.delete"), style: "destructive", onPress: onDelete },
+    ]);
+  };
 
   return (
     <Container showBack scroll className="pb-12">
@@ -128,8 +135,14 @@ export default function MissionEdit() {
         name="location"
         control={form.control}
       />
-      <Button onPress={onSubmit} label={t("action.save")} className="mb-4 mt-16" />
-      <Spinner visible={isLoading} />
+      <Button
+        onPress={handleDeletePress}
+        label={t("mission.delete.title")}
+        variant="text"
+        className="text-red-400 mt-6"
+      />
+      <Button onPress={onSubmit} label={t("action.save")} className="my-4" />
+      <Spinner visible={isLoading || isDeleteLoading} />
     </Container>
   );
 }

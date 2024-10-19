@@ -108,7 +108,12 @@
         }
       },
       "edit": {
-        "title": "Edit Mission"
+        "title": "Edit mission"
+      },
+      "delete": {
+        "title": "Delete mission",
+        "text": "Are you sure you want to delete this mission?",
+        "confirm": "Delete"
       },
       "actions": {
         "join": "Join",
@@ -282,7 +287,8 @@
       "save": "Save",
       "later": "Later",
       "done": "Done",
-      "send": "Send"
+      "send": "Send",
+      "delete": "Delete"
     },
     "media": {
       "launchCamera": "Launch Camera",
