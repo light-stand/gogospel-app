@@ -1,8 +1,8 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect } from "react";
 import dayjs from "dayjs";
 import { ScrollView, TouchableOpacity, View } from "react-native";
 import { useRouter } from "expo-router";
-import { capitalize, sortBy } from "lodash";
+import { capitalize } from "lodash";
 
 import { Icon, Text, Button, Image, TagCloud } from "@/components";
 import { Mission } from "@/mission/domain/Mission";
@@ -45,7 +45,7 @@ const MissionCard: React.FC<MissionCardProps> = ({ mission, style }) => {
 
   if (!mission.id) return null;
 
-  const { title, categories, duration, images, user_profile } = mission;
+  const { title, categories, duration, images, user_profile, approved } = mission;
 
   return (
     <TouchableOpacity activeOpacity={0.8} onPress={onCardPress} style={style}>
@@ -110,6 +110,12 @@ const MissionCard: React.FC<MissionCardProps> = ({ mission, style }) => {
                 {dayjs(start_date).format("D MMM")} - {dayjs(end_date).format("D MMM")}
               </Text>
             </View> */}
+            {!approved && (
+              <Icon
+                name="clock-outline"
+                className="absolute right-0 top-1/2 -mt-4 text-3xl text-neutral-400"
+              />
+            )}
           </View>
         </View>
       </View>
