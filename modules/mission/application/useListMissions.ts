@@ -10,8 +10,15 @@ export const useListMissions = () => {
   const [mode, setMode] = useState<MissionListTypes>("myMissions");
 
   const listMissionFilters = {
-    myMissions: ["created_by", "eq", user?.id],
-    favorites: ["favorite.user_id", "eq", user?.id],
+    myMissions: [
+      ["active", "eq", true],
+      ["created_by", "eq", user?.id],
+    ],
+    favorites: [
+      ["approved", "eq", true],
+      ["active", "eq", true],
+      ["favorite.user_id", "eq", user?.id],
+    ],
     involved: [
       ["approved", "eq", true],
       ["active", "eq", true],

@@ -110,6 +110,11 @@
       "edit": {
         "title": "Editar misión"
       },
+      "delete": {
+        "title": "Eliminar misión",
+        "text": "¿Estás seguro de que quieres eliminar esta misión?",
+        "confirm": "Eliminar"
+      },
       "actions": {
         "join": "Apuntarme",
         "favorite": "Favorito",
@@ -282,7 +287,8 @@
       "save": "Guardar",
       "later": "Más tarde",
       "done": "Listo",
-      "send": "Enviar"
+      "send": "Enviar",
+      "delete": "Eliminar"
     },
     "media": {
       "launchCamera": "Abrir cámara",
