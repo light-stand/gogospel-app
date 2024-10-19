@@ -30,6 +30,7 @@ export const useMissionEdit = () => {
         latitude: mission.lat || 0,
         longitude: mission.long || 0,
         locationName: mission.location_name || "",
+        country: mission.country || "",
       },
       noDuration: !mission.duration,
       noStartDate: !mission.start_date,
@@ -42,7 +43,6 @@ export const useMissionEdit = () => {
   const onSuccess = () => {
     queryClient.invalidateQueries(["mission", id]);
     router.push("/missions");
-    form.reset();
   };
 
   const { mutateAsync: updateMission, isLoading } = useMutation(missionRepository.update, {
@@ -67,6 +67,7 @@ export const useMissionEdit = () => {
         categories: mission.categories,
         location: `POINT(${mission.location.longitude} ${mission.location.latitude})`,
         location_name: mission.location.locationName,
+        country: mission.location.country,
         ...(mission.image && { images: [mission.image] }),
       });
     }

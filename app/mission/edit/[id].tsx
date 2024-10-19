@@ -29,11 +29,6 @@ export default function MissionEdit() {
 
   const { location, noDuration, noStartDate } = form.getValues();
 
-  const { data: address } = useQuery({
-    queryKey: ["geocode", location?.latitude, location?.longitude],
-    queryFn: () => reverseGeocode(location),
-  });
-
   const types = useMemo(
     () =>
       Object.entries(missionTypes).map(([key, value]) => ({
@@ -124,7 +119,7 @@ export default function MissionEdit() {
       <Button
         icon="map-marker"
         variant="secondary"
-        label={address?.formatted_address || t("mission.creation.location.pick")}
+        label={location.locationName || t("mission.creation.location.pick")}
         onPress={() => setMapOpen((p) => !p)}
       />
       <MapPicker
