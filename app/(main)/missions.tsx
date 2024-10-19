@@ -23,8 +23,8 @@ export default function Missions() {
   } as const;
 
   return (
-    <Container className="p-0">
-      <Text className="font-bold text-3xl m-4 mb-0">{t("screen.missions")}</Text>
+    <Container className="p-0" edges={["top"]}>
+      <Text className="font-bold text-3xl m-4 b-0">{t("screen.missions")}</Text>
       <ButtonBar
         className="p-2 px-4"
         options={missionListTypes.map((type) => ({

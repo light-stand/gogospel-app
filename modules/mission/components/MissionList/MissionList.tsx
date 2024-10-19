@@ -1,6 +1,7 @@
+import { ActivityIndicator, FlatList, FlatListProps } from "react-native";
+
 import MissionCard from "../MissionCard/MissionCard";
 import { Mission } from "@/mission/domain/Mission";
-import { ActivityIndicator, FlatList, FlatListProps } from "react-native";
 
 interface MissionListProps extends Omit<FlatListProps<Mission>, "data" | "renderItem"> {
   missions: Mission[];
@@ -18,7 +19,7 @@ const MissionList: React.FC<MissionListProps> = ({
   return (
     <FlatList
       refreshing={isLoading}
-      className="pt-4 flex-1"
+      contentContainerStyle={{ paddingBottom: 32 }}
       data={missions}
       renderItem={({ item }) => <MissionCard mission={item as Mission} key={item.id} />}
       ListEmptyComponent={
